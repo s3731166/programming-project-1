@@ -11,16 +11,19 @@ class User < ApplicationRecord
     # Makes sure password is present
     validates :password, presence: true
 
+    # Creates digest for keeping a user logged in
     def remember
         self.remember_token = User.new_token
         update_attribute(:remember_digest, User.digest(remember_token))
     end
 
+    # Returns true if given remember token matches decrypted remember digest
     def authenticated?(remember_token)
         return false if remember_digest.nil?
         BCrypt::Password.new(remember_digest).is_password?(remember_token)
     end
 
+    # Removes remember digest from user
     def forget
         update_attribute(:remember_digest, nil)
     end

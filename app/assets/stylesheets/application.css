@@ -66,6 +66,12 @@
      border: 1px dashed indianred;
  }
 
+ form {
+     margin-left: auto;
+     margin-right: auto;
+     display: table;
+ }
+
  .logged-in-notice {
      border-bottom: 1px dashed indianred;
      padding-bottom: 2px;
@@ -91,4 +97,9 @@
  .alert-danger {
      color:maroon;
      background-color: salmon;
+ }
+
+ .field_with_errors {
+     margin-left: auto;
+     margin-right: auto;
  }
