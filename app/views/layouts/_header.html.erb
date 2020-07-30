@@ -1,0 +1,4 @@
+<header><h1><%= link_to "Plant Monitor", root_path %></h1></header>
+<% if logged_in? %>
+    <p>You are logged in as <%= link_to current_user.name, current_user %>. <%= link_to "Log out", 'logout', method: :delete %></p>
+<% end %>
