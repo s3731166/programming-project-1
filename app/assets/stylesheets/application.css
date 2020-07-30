@@ -27,7 +27,7 @@
      margin-right: auto;
      max-width: 1198px;
      text-align: center;
-     border: 1px dashed black;
+     border: 1px dashed indianred;
      padding: 1px;
  }
 
@@ -52,8 +52,8 @@
 
  nav {
      margin-top: 1px;
-     border-top: 1px dashed;
-     border-bottom: 1px dashed;
+     border-top: 1px dashed indianred;
+     border-bottom: 1px dashed indianred;
      padding-bottom: 2px;
  }
 
@@ -63,11 +63,11 @@
  }
 
  table, td, th {
-     border: 1px dashed;
+     border: 1px dashed indianred;
  }
 
  .logged-in-notice {
-     border-bottom: 1px dashed;
+     border-bottom: 1px dashed indianred;
      padding-bottom: 2px;
  }
 
