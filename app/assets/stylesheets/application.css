@@ -50,6 +50,13 @@
      background: inherit;
  }
 
+ nav {
+     margin-top: 1px;
+     border-top: 1px dashed;
+     border-bottom: 1px dashed;
+     padding-bottom: 2px;
+ }
+
  table {
      margin-left:auto;
      margin-right:auto;
@@ -57,4 +64,31 @@
 
  table, td, th {
      border: 1px dashed;
+ }
+
+ .logged-in-notice {
+     border-bottom: 1px dashed;
+     padding-bottom: 2px;
+ }
+
+ .alert {
+     margin-top: 18px;
+     border:2px solid;
+     margin-left: auto;
+     margin-right: auto;
+     padding:8px;
+     font-weight: bold;
+     border-radius:2px;
+     font-size: 1.2em;
+     display:ruby-base !important;
+ }
+
+ .alert-success {
+     color:green;
+     background-color: lightgreen;
+ }
+
+ .alert-danger {
+     color:maroon;
+     background-color: salmon;
  }
