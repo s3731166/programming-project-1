@@ -33,7 +33,7 @@
 
  header {
      background-color: indianred;
-     display: block ruby;
+     display: flow-root;
  }
 
  header a {
