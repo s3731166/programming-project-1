@@ -24,6 +24,8 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
+  # Code based on Michael Hartl's Rails Tutorial, Chapter 7
+  # https://3rd-edition.railstutorial.org/book/sign_up#code-signup_flash
   def create
     @user = User.new(user_params)
 
@@ -41,6 +43,8 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
+  # Code based on Michael Hartl's Rails Tutorial, Chapter 9
+  # https://3rd-edition.railstutorial.org/book/updating_and_deleting_users#code-user_update_action
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -55,6 +59,8 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   # DELETE /users/1.json
+  # Code based on Michael Hartl's Rails Tutorial, Chapter 9
+  # https://3rd-edition.railstutorial.org/book/updating_and_deleting_users#code-destroy_action
   def destroy
     if (@user == current_user)
       log_out_no_redirect

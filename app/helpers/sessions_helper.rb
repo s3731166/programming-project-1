@@ -1,11 +1,15 @@
 module SessionsHelper
     
     # Logs in a user.
+    # Code based on Michael Hartl's Rails Tutorial, Chapter 8
+    # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-log_in_function
     def log_in(user)
        session[:user_id] = user.id
     end
     
     # Keeps a persistent session for a user.
+    # Code based on Michael Hartl's Rails Tutorial, Chapter 8
+    # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-remember_method
     def remember(user)
        user.remember
        cookies.permanent.signed[:user_id] = user.id
@@ -13,6 +17,8 @@ module SessionsHelper
     end
 
     # Returns the user currently logged in.
+    # Code based on Michael Hartl's Rails Tutorial, Chapter 8
+    # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-branch_raise
     def current_user
        if (user_id = session[:user_id])
           @current_user ||= User.find_by(id: user_id)
@@ -31,6 +37,8 @@ module SessionsHelper
     end
  
     # Deletes a persistent session for a user.
+    # Code based on Michael Hartl's Rails Tutorial, Chapter 8
+    # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-log_out_with_forget
     def forget(user)
        user.forget
        cookies.delete(:user_id)
@@ -38,6 +46,8 @@ module SessionsHelper
     end
  
     # Logs out the current user.
+    # Code based on Michael Hartl's Rails Tutorial, Chapter 8
+    # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-log_out_with_forget
     def log_out
        forget(current_user)
        session.delete(:user_id)
@@ -46,6 +56,8 @@ module SessionsHelper
     end
 
     # Logs out the current user without redirecting.
+    # Code based on Michael Hartl's Rails Tutorial, Chapter 8
+    # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-log_out_with_forget
     def log_out_no_redirect
         forget(current_user)
         session.delete(:user_id)
