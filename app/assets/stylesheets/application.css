@@ -89,6 +89,11 @@
      display:ruby-base !important;
  }
 
+ .alert-notice {
+    color: darkslateblue;
+    background-color: lightskyblue;
+ }
+
  .alert-success {
      color:green;
      background-color: lightgreen;
