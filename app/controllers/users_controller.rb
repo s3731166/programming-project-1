@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   # GET /users
   # GET /users.json
+  # Redirect to home page with a danger message if user is not logged in or is not an administrator
   def index
     unless logged_in? && current_user.admin
       redirect_to root_path
@@ -14,6 +15,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+  # Redirect to home page with a danger message if user is not logged in, not the specified user or is not an administrator
   def show
     if !(logged_in?)
       redirect_to root_path
@@ -34,6 +36,7 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
+  # Redirect to home page with a danger message if user is not logged in, not the specified user or is not an administrator
   def edit
     if !(logged_in?)
       redirect_to root_path
@@ -55,6 +58,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    # If administrator boolean is not set, set it to false
+    # This will happen when a user signs up and there is already an admin, since the admin checkbox will not show
     if (@user.admin.nil?)
       @user.admin = false
     end
@@ -91,6 +96,8 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   # Code based on Michael Hartl's Rails Tutorial, Chapter 9
   # https://3rd-edition.railstutorial.org/book/updating_and_deleting_users#code-destroy_action
+  # Redirect to home page with a danger message if user is not logged in, not the specified user or is not an administrator
+  # Or else destroy user
   def destroy
     if !(logged_in?)
       redirect_to root_path
@@ -103,6 +110,7 @@ class UsersController < ApplicationController
         flash[:danger] = 'You do not have the power to destroy another user.'
       end
     else
+      # Log user out if they are logged in and to be destroyed
       if (@user == current_user)
         log_out_no_redirect
       end

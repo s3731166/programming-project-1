@@ -48,7 +48,7 @@ class User < ApplicationRecord
         SecureRandom.urlsafe_base64
     end
 
-    # Generates a <span> tagged user name with added style if user is admin
+    # Generates a user name with styled <span> tags if user is admin
     def get_styled_name
         if (admin)
             name_span = "<span class=\"admin\">" << name << "</span>"

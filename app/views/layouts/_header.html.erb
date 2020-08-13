@@ -1,5 +1,12 @@
 <header><h1><%= link_to "Plant Monitor", root_path %></h1></header>
-<nav><%= link_to "Users", users_path %> | <%= link_to "Plants", plants_path %></nav>
+<nav>
+    <% # Link to users page if logged-in user is admin %>
+    <% if logged_in? && current_user.admin %>
+    <%= link_to "Users", users_path %> 
+    |
+    <% end %>
+    <%= link_to "Plants", plants_path %></nav>
+<% # Add logged-in notice bar if user is logged in %>
 <% if logged_in? %>
     <div class="logged-in-notice">You are logged in as <%= link_to current_user.get_styled_name, current_user %>. <%= link_to "Log out", logout_path, method: :delete %></div>
 <% end %>
