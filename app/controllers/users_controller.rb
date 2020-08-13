@@ -5,12 +5,27 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    unless logged_in? && current_user.admin
+      redirect_to root_path
+      flash[:danger] = 'Only administrators can view the list of users'
+    end
     @users = User.all
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    if !(logged_in?)
+      redirect_to root_path
+      flash[:danger] = 'You must be logged in to view a user.'
+    elsif !(current_user.admin || current_user == @user)
+      redirect_to root_path
+      if (@user.admin)
+        flash[:danger] = 'You do not have the power to see an admin.'
+      else
+        flash[:danger] = 'You do not have the power to see another user.'
+      end
+    end
   end
 
   # GET /users/new
