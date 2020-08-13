@@ -72,6 +72,11 @@
      display: table;
  }
 
+ .admin {
+     font-weight: bold;
+     color: orangered;
+ }
+
  .logged-in-notice {
      border-bottom: 1px dashed indianred;
      padding-bottom: 2px;

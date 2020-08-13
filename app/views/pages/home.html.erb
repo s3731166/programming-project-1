@@ -1,1 +1,1 @@
-<%= if logged_in? then render 'pages/home_loggedin' else render 'pages/home_loggedout' end %>
+<%= if User.where(admin: true).length == 0 then render 'pages/home_noadmin' elsif logged_in? then render 'pages/home_loggedin' else render 'pages/home_loggedout' end %>

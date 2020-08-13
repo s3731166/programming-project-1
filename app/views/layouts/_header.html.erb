@@ -1,5 +1,5 @@
 <header><h1><%= link_to "Plant Monitor", root_path %></h1></header>
-<nav><%= link_to "Users", users_path %></nav>
+<nav><%= link_to "Users", users_path %> | <%= link_to "Plants", plants_path %></nav>
 <% if logged_in? %>
-    <div class="logged-in-notice">You are logged in as <%= link_to current_user.name, current_user %>. <%= link_to "Log out", logout_path, method: :delete %></div>
+    <div class="logged-in-notice">You are logged in as <%= link_to current_user.get_styled_name, current_user %>. <%= link_to "Log out", logout_path, method: :delete %></div>
 <% end %>

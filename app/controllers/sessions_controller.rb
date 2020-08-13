@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     if user && user.password == params[:session][:password]
       log_in(user)
       remember(user)
-      flash[:success] = "Successfully logged in. Welcome, #{user.name}."
+      flash[:success] = "Successfully logged in. Welcome, #{user.get_styled_name}.".html_safe
       redirect_to root_path
     else
       flash[:danger] = 'Email or password is invalid.' 

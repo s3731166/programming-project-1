@@ -1,6 +1,10 @@
+<% if @user.admin %>
+  <h2 class="admin">This user has access to administrative privileges</h2>
+<% end %>
+
 <p>
   <strong>Name:</strong>
-  <%= @user.name %>
+  <%= @user.get_styled_name %>
 </p>
 
 <p>

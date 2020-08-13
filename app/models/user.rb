@@ -47,4 +47,14 @@ class User < ApplicationRecord
     def User.new_token
         SecureRandom.urlsafe_base64
     end
+
+    # Generates a <span> tagged user name with added style if user is admin
+    def get_styled_name
+        if (admin)
+            name_span = "<span class=\"admin\">" << name << "</span>"
+        else
+            name_span = name
+        end
+        name_span.html_safe
+    end
 end
