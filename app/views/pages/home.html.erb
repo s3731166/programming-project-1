@@ -2,3 +2,4 @@
    # After that, if user is logged in, then load the _loggedin page, or else load the _loggedout page 
 %>
 <%= if User.where(admin: true).length == 0 then render 'pages/home_noadmin' elsif logged_in? then render 'pages/home_loggedin' else render 'pages/home_loggedout' end %>
+<%# <%= render 'weather_summary' %> 

@@ -12,6 +12,8 @@ class SessionsController < ApplicationController
     if user && user.password == params[:session][:password]
       log_in(user)
       remember(user)
+      # isactive(user) where isactive is user.setActiveTime to now 
+
       flash[:success] = "Successfully logged in. Welcome, #{user.get_styled_name}.".html_safe
       redirect_to root_path
     else

@@ -26,6 +26,18 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
 
+
+
+# Nokogiri gem is used to parse the XML format into the rails application
+gem 'nokogiri'
+
+# Json gem is used to parse the json format into the rails application
+gem 'json'
+
+
+gem 'jquery-rails'
+
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

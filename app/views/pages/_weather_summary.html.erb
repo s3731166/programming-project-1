@@ -1,0 +1,167 @@
+<div class="tabs">
+    <div class="tabber">
+
+     <div class="tabbertab">
+	   <h2>Observe</h2>
+	  
+	  
+	  
+	    <div style="float:left; width:70%; height:auto">
+		
+      <table width="50%" class="table table-striped">
+      <tbody>
+        <tr>
+         
+          <th>City</th>
+          <td><%= @json["data"]["request"][0]["query"] %></td>
+        </tr>
+        <tr>
+          <th>Observation Time</th>
+          <td><%= @json["data"]["current_condition"][0]["observation_time"] %></td>
+        </tr>
+        <tr>
+          <th>Temperature Celsius</th>
+          <td><%= @json["data"]["current_condition"][0]["temp_C"] %> C</td>
+        </tr>
+        <tr>
+          <th>Temperature Farenheit</th>
+          <td><%= @json["data"]["current_condition"][0]["temp_F"] %> F</td>
+        </tr>
+        <tr>
+          <th>Weather Code</th>
+          <td><%= @json["data"]["current_condition"][0]["weatherCode"] %></td>
+        </tr>
+        
+        <tr>
+          <th>Description</th>
+          <td><%= @json["data"]["current_condition"][0]["weatherDesc"][0]["value"] %></td>
+        </tr>
+        <tr>
+          <th>Windspeed Miles</th>
+          <td><%= @json["data"]["current_condition"][0]["windspeedMiles"] %></td>
+        </tr>
+        <tr>
+          <th>Windspeed Kmph</th>
+          <td><%= @json["data"]["current_condition"][0]["windspeedKmph"] %></td>
+        </tr>
+        <tr>
+          <th>Winddir Degree</th>
+          <td><%= @json["data"]["current_condition"][0]["winddirDegree"] %></td>
+        </tr>
+        <tr>
+          <th>Winddir 16Point</th>
+          <td><%= @json["data"]["current_condition"][0]["winddir16Point"] %></td>
+        </tr>
+        <tr>
+          <th>Precip MM</th>
+          <td><%= @json["data"]["current_condition"][0]["precipMM"] %></td>
+        </tr>
+        <tr>
+          <th>Humidity</th>
+          <td><%= @json["data"]["current_condition"][0]["humidity"] %> </td>
+        </tr>
+        <tr>
+          <th>Visibility</th>
+          <td><%= @json["data"]["current_condition"][0]["visibility"] %></td>
+        </tr>
+        <tr>
+          <th>Pressure</th>
+          <td><%= @json["data"]["current_condition"][0]["pressure"] %></td>
+        </tr>
+        <tr>
+          <th>cloudcover</th>
+          <td><%= @json["data"]["current_condition"][0]["cloudcover"] %></td>
+        </tr>
+       
+      </tbody>
+</table>
+
+</div>
+</div>
+
+
+<% @a ||= [] %>
+<% @json["data"]["weather"].each do |p| %>
+<% @a << p %>
+<% end %>
+
+
+
+
+
+<% @a.each do |i| %>
+ <div class="tabbertab">
+<h2><%= i["date"]%></h2>
+
+
+  <div style="float:left; height:auto">
+  <table class="table table-striped">
+          
+          <tbody>
+            <tr>
+              <th>Maximum Temperature Celsius</th>
+              <td><%= i["tempMaxC"]%> C</td>
+            </tr>
+            <tr>
+              <th>Minimum Temperature Celsius</th>
+              <td><%= i["tempMinC"]%> C</td>
+            </tr>
+            <tr>
+              <th>Maximum Temperature Farenheit</th>
+              <td><%= i["tempMaxF"]%> F</td>
+            </tr>
+            <tr>
+              <th>Minimum Temperature Farenheit</th>
+              <td><%= i["tempMinF"]%> F</td>
+            </tr>
+            <tr>
+              <th>windspeedMiles</th>
+              <td><%= i["windspeedMiles"]%></td>
+            </tr>
+            <tr>
+              <th>windspeedKmph</th>
+              <td><%= i["windspeedKmph"]%></td>
+            </tr>
+            <tr>
+              <th>winddirection</th>
+              <td><%= i["winddirection"]%></td>
+            </tr>
+            <tr>
+              <th>winddir16Point</th>
+              <td><%= i["winddir16Point"]%></td>
+            </tr>
+            <tr>
+              <th>winddirDegree</th>
+              <td><%= i["winddirDegree"]%></td>
+            </tr>
+            
+             <tr>
+                <th>WeatherIconUrl</th>
+                <td><%= image_tag i["weatherIconUrl"][0]["value"] %> </td>
+              </tr>
+              <tr>
+                <th>weatherDesc</th>
+                <td><%= i["weatherDesc"][0]["value"]%></td>
+              </tr>
+              <tr>
+                <th>precipMM</th>
+                <td><%= i["precipMM"]%></td>
+              </tr>
+            
+          </tbody>
+    </table>
+    
+    
+
+</div>
+ </div>
+
+ <% end %>
+ 
+
+
+
+</div>
+      
+       <div class="clear"></div>       
+</div>
