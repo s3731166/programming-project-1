@@ -17,7 +17,7 @@
       <tr>
         <td><%= user.get_styled_name %></td>
         <td><%= user.email %></td>
-        <td><%= user.last_active %></td>
+        <td><%= user.last_active_in_words_or_never %></td>
         <td><%= user.admin %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>

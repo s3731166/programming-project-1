@@ -62,5 +62,11 @@ module SessionsHelper
         forget(current_user)
         session.delete(:user_id)
         @current_user = nil
-     end
+    end
+
+    # Sets the date and time for the current user to now
+    def update_last_active
+      current_user.last_active = DateTime.now
+      current_user.save
+    end
  end

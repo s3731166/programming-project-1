@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    include ActionView::Helpers::DateHelper
+
     attr_accessor :remember_token
     # Case insensitivity for email
     before_save { self.email = email.downcase }
@@ -56,5 +58,14 @@ class User < ApplicationRecord
             name_span = name
         end
         name_span.html_safe
+    end
+
+    # Returns last time active in words (e.g. 1 minute ago) or "Never" if there is no last_active
+    def last_active_in_words_or_never
+        last_active
+        if !last_active.nil?
+            time_ago_in_words(last_active) << " ago"
+        else "Never"
+        end
     end
 end
