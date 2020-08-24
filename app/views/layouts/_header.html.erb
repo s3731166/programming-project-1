@@ -16,7 +16,9 @@
 
             <% if current_user%>
                 <%= link_to current_user.get_styled_name, current_user %>
-                    <p>ADMIN</p>
+                    <% if current_user.admin %>
+                        <p>ADMIN</p>
+                    <% end %>
                 <%= if current_user.admin then link_to "View Users", users_path end %> 
                 <%= link_to "Log out", logout_path, method: :delete %>
 
