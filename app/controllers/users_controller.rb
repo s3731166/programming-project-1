@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   include SessionsHelper
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:new, :create]
+
 
   # GET /users
   # GET /users.json

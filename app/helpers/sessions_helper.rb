@@ -5,6 +5,7 @@ module SessionsHelper
     # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-log_in_function
     def log_in(user)
        session[:user_id] = user.id
+       update_last_active
     end
     
     # Keeps a persistent session for a user.
@@ -49,9 +50,8 @@ module SessionsHelper
     # Code based on Michael Hartl's Rails Tutorial, Chapter 8
     # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-log_out_with_forget
     def log_out
-       forget(current_user)
-       session.delete(:user_id)
-       @current_user = nil
+       update_last_active
+       log_out_no_redirect
        redirect_to root_path
     end
 
