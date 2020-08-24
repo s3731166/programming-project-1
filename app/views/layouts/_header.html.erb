@@ -9,20 +9,20 @@
 
         <%# OPEN RIGHT DIV %>
         <div class="user-info">
-            <div class="date-box">
-                <div class="day"><%= Date.today.strftime("%d") %></div>
-                <div class="month"><%= Date.today.strftime("%b").upcase %></div>
-            </div>
-
-            <% if current_user%>
+             <% if current_user%>
                 <%= link_to current_user.get_styled_name, current_user %>
                     <% if current_user.admin %>
                         <p>ADMIN</p>
                     <% end %>
                 <%= if current_user.admin then link_to "View Users", users_path end %> 
-                <%= link_to "Log out", logout_path, method: :delete %>
-
             <% end %>
+
+            <div class="date-box">
+                <div class="day"><%= Date.today.strftime("%d") %></div>
+                <div class="month"><%= Date.today.strftime("%b").upcase %></div>
+            </div>
+
+       
         </div> 
         <%# END RIGHT DIV %>
 
