@@ -2,26 +2,28 @@
 <nav>
     <div class="wrapper">
         <% # Link to users page if logged-in user is admin %>
-        <%= link_to image_tag("big-logo.png", width: "140px") %>
+        <%= link_to image_tag("big-logo.png", width: "140px"), root_path, class: "title-link" %>
         <%# ADD THE 2 BUTTONS %>
         <%= link_to "Dashboard", root_path%>
         <%= link_to "Plant Management", plants_path%>
 
         <%# OPEN RIGHT DIV %>
-        <div>
+        <div class="user-info">
             <div class="date-box">
                 <div class="day"><%= Date.today.strftime("%d") %></div>
                 <div class="month"><%= Date.today.strftime("%b").upcase %></div>
             </div>
 
-            <%= link_to current_user.get_styled_name, current_user %>
-            <% if current_user.admin %>
+            <% if current_user%>
+                <%= link_to current_user.get_styled_name, current_user %>
+
                 <p>ADMIN</p>
-                <%= link_to "View Users", users_path %> 
+                <%= if current_user.admin then link_to "View Users", users_path end %> 
+                <%= link_to "Log out", logout_path, method: :delete %>
+
             <% end %>
         </div> 
         <%# END RIGHT DIV %>
 
-        <%= link_to "Log out", logout_path, method: :delete %>
     </div>
 </nav>
