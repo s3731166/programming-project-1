@@ -49,7 +49,7 @@ class PlantsController < ApplicationController
 
     respond_to do |format|
       if @plant.save
-        format.html { redirect_to @plant, notice: 'Plant was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Plant was successfully created.' }
         format.json { render :show, status: :created, location: @plant }
         @plant.user.notify("Plant '"+@plant.name+"' was successfully created")
       else
