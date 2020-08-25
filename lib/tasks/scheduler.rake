@@ -1,4 +1,4 @@
-task :daily_update => :envioment do
+task :daily_update => :environment  do
     User.each do |user|
         if user
             message="Plant summary for: "+ user.name
@@ -30,7 +30,7 @@ task :daily_update => :envioment do
     end
 end
 
-task :rest_dailies => :enviroment do
+task :rest_dailies => :environment  do
     User.each do |user|
         if user&&Time.beginning_of_week() <= user.last_active
             user.plants.each do |plant|
