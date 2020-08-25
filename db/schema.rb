@@ -23,11 +23,9 @@ ActiveRecord::Schema.define(version: 2020_08_25_081937) do
     t.string "variety"
     t.integer "user_id"
     t.string "species"
-    t.boolean "watered"
-    t.boolean "sunlight"
     t.boolean "trimmed"
     t.decimal "water_level"
-    t.decimal "sun_level
+    t.decimal "sun_time"
   end
 
   create_table "users", force: :cascade do |t|
