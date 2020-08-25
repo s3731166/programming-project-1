@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + "/../app/models/user"
+
 task :daily_update => :environment  do
     @users = User.all
     @users.each do |user|
