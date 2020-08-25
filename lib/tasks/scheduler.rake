@@ -1,9 +1,9 @@
 task :daily_update => :envioment do
-    @users.each do |user|
-        message="Plant summary for: "+user.name
-        if @user
-            @plants.each do |plant|
-                if @plant
+    User.each do |user|
+        if user
+            message="Plant summary for: "+ user.name
+            user.plants.each do |plant|
+                if plant
                     message+="\n"
                     message+="Plant: "+plant.name
                     message+="\n"
@@ -24,18 +24,22 @@ task :daily_update => :envioment do
                     end
                 end
             end
-            @user.notify(message)
+            user.notify(message)
             message=""
         end
     end
 end
 
 task :rest_dailies => :enviroment do
-    @users.each do |user|
-        if @user&&Time.beginning_of_week() < @user.last_active
-            @plant.watered = false
-            @plant.sunlight = false
-            @plant.trimmed = false
+    User.each do |user|
+        if user&&Time.beginning_of_week() <= user.last_active
+            user.plants.each do |plant|
+                if plant
+                    plant.watered = false
+                    plant.sunlight = false
+                    plant.trimmed = false
+                end
+            end
         end
     end
 end
