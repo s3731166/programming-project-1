@@ -97,6 +97,6 @@ class PlantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def plant_params
-      params.require(:plant).permit(:name, :location, :species, :water_level, :sun_time, :watered, :sunlight, :trimmed)
+      params.require(:plant).permit(:name, :location, :species, :watered, :sunlight, :trimmed)
     end
 end

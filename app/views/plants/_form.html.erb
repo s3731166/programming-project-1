@@ -26,16 +26,6 @@
     <%= form.text_field :species %>
   </div>
 
-  <div class="field">
-    <%= form.label :water_level, "Water Level (Ml per day)" %> 
-    <%= form.number_field(:water_level, in:0.0..1000.0, step: 0.5) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sun_time, "Sun Time (Hours per day)" %>
-    <%= form.number_field(:sun_time, in:0.0..23.59, step: 0.5) %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>
