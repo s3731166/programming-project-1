@@ -34,6 +34,7 @@ task :daily_update => :environment  do
 end
 
 task :rest_dailies => :environment  do
+    @users = User.all
     @users.each do |user|
         if user&&Time.beginning_of_week() <= user.last_active
             user.plants.each do |plant|
