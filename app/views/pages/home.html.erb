@@ -14,7 +14,7 @@
    <% end %>
 <% end %>
 <% link_to 'New Plant', plants_path%>
-<%= collection_select(:plant, :plant_id, @plants.all, :id, :name, { prompt: true }, { onchange: "change_plant(this)" }) %>
+<%= collection_select(:plant, :plant_id, @plants.all, :id, :name, { prompt: true } , { onchange: "change_plant(this)", :selected => @plants[0] }) %>
 <% @plants.all.each do |current_plant| %>
    <%= render "checklist", plant: current_plant %>
 <% end %>
