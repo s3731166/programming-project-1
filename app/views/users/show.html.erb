@@ -17,7 +17,7 @@
 
 <p>
 <strong>Phone:</strong>
-<%="+61"<<@user.phone[1..-1] if @user.phone%>
+<%= @user.phone if @user.phone%>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
