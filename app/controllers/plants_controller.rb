@@ -48,6 +48,7 @@ class PlantsController < ApplicationController
       if @plant.save
         format.html { redirect_to @plant, notice: 'Plant was successfully created.' }
         format.json { render :show, status: :created, location: @plant }
+        @plant.user.notify("Plant '"+@plant.name+"' was successfully created")
       else
         format.html { render :new }
         format.json { render json: @plant.errors, status: :unprocessable_entity }

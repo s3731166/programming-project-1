@@ -26,7 +26,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
 
-
+# Messaging functionality
+gem 'twilio-ruby', '~> 5.40.0'
 
 # Nokogiri gem is used to parse the XML format into the rails application
 gem 'nokogiri'

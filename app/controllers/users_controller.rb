@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
   include SessionsHelper
   include ActionView::Helpers::DateHelper
@@ -72,6 +73,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user
                       flash[:success] = 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
+        @user.notify("Sign up successfull!")
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -135,4 +137,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :phone, :password, :admin)
     end
+
 end

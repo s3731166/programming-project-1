@@ -1,16 +1,11 @@
 <% # Until an admin account is made, load the _noadmin page
    # After that, if user is logged in, then load the _loggedin page, or else load the _loggedout page 
 %>
-<% if current_user.admin %>
-   <h1>Welcome to your new plant monitor web server</h1>
-   <h2 class="admin">No administrator account has been found</h2>
-   <p>An administrator account is required to access advanced features of the plant monitor application.</p>
-   <p><%= link_to "Click here", signup_path %> to sign up with an administrator account.</p>
-<% else%>
    <h1>You are logged in to the plant monitor web server</h1>
    <h2>Welcome back, <%= current_user.get_styled_name %></h2>
-
-<% end %>
+   <% if current_user.admin %>
+      <h3 class="admin">Administrative privileges enabled.</h3>
+   <% end %>
 <% if @plants%>
    <% @plants.order('created_at desc').each do |plant| %>
       <%= link_to plant.name, plant %>

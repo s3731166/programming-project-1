@@ -77,6 +77,9 @@
  table {
      margin-left:auto;
      margin-right:auto;
+     table-layout:fixed;
+     max-width:100%;
+     word-break:break-all;
  }
 
  table, td, th {
@@ -173,4 +176,7 @@
 .nav-links{
     width:60%;
     float:left;
+}
+.checklist form {
+    width:100%;
 }
