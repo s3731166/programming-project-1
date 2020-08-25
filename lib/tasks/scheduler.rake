@@ -10,19 +10,19 @@ task :daily_update => :environment  do
                     message+="\n"
                     message+="Plant: "+plant.name
                     message+="\n"
-                    if plant.watered
+                    if plant.watered?
                         message+="Has been watered."
                     else 
                         message+="Needs to be watered\!"
                     end
                     message+="\n"
-                    if plant.sunlight
+                    if plant.sunlight?
                         message+="Has been put in sunlight."
                     else
                         message+="Needs to be put in sunlight\!"
                     end
                     message+="\n"
-                    if plant.trimmed
+                    if plant.trimmed?
                         message+="Has been trimmed."
                     end
                 end
