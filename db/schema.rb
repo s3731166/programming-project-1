@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_08_25_081937) do
     t.boolean "sunlight"
     t.boolean "trimmed"
     t.decimal "water_level"
-    t.decimal "sun_time"
+    t.decimal "sun_level
   end
 
   create_table "users", force: :cascade do |t|

@@ -87,6 +87,6 @@ class User < ApplicationRecord
         to: to,
         body: message
         })
-        rescue
+        rescue 
     end
 end
