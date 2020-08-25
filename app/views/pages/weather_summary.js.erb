@@ -1,0 +1,15 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://community-open-weather-map.p.rapidapi.com/weather?q=melbourne&units=metric",
+  "method": "GET",
+  "headers": {
+    "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
+    "x-rapidapi-key": "9b732f988a82cb5ec7499a0d0e6416ff"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+  document.getElementById("weather-temperature").setInnerHTML(<h1>response.[1].temp</h1>);
+});

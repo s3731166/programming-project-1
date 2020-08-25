@@ -11,4 +11,18 @@
    <h2>Welcome back, <%= current_user.get_styled_name %></h2>
 
 <% end %>
-<%# <%= render 'weather_summary' %> 
+<% if @plants%>
+   <% @plants.order('created_at desc').each do |plant| %>
+      <%= link_to plant.name, plant %>
+      <%= time_ago_in_words(plant.created_at) %>
+      <hr>
+   <% end %>
+<% end %>
+<% link_to 'New Plant', plants_path%>
+<%= collection_select(:plant, :plant_id, @plants.all, :id, :name, { prompt: true }, { onchange: "change_plant(this)" }) %>
+<% @plants.all.each do |current_plant| %>
+   <%= render "checklist", plant: current_plant %>
+<% end %>
+<%# <%= render weather_summary%> 
+
+

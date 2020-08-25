@@ -8,6 +8,8 @@ class PagesController < ApplicationController
   require 'open-uri'
 
   def home 
+    @plants = current_user.plants if current_user
+
   end
   
   # local weather API Json
@@ -15,6 +17,4 @@ class PagesController < ApplicationController
     # @json = ActiveSupport::JSON.decode(open('http://api.worldweatheronline.com/premium/v2/weather.ashx?q=Melbourne&format=json&num_of_days=5&key=543f0a44942a4081ace10734202108').read)
     @json = ActiveSupport::JSON.decode(open('http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=9b732f988a82cb5ec7499a0d0e6416ff').read)
   end
-
-  
 end

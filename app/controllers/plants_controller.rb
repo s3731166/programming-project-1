@@ -5,7 +5,12 @@ class PlantsController < ApplicationController
   # GET /plants
   # GET /plants.json
   def index
-    @plants = Plant.all
+    if current_user.admin
+      @plants = Plant.all
+    else
+      @plants = current_user.plants
+    end
+
   end
 
   # GET /plants/1
@@ -37,6 +42,7 @@ class PlantsController < ApplicationController
   # POST /plants.json
   def create
     @plant = Plant.new(plant_params)
+    @plant.user = current_user
 
     respond_to do |format|
       if @plant.save
@@ -54,7 +60,7 @@ class PlantsController < ApplicationController
   def update
     respond_to do |format|
       if @plant.update(plant_params)
-        format.html { redirect_to @plant, notice: 'Plant was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Plant was successfully updated.' }
         format.json { render :show, status: :ok, location: @plant }
       else
         format.html { render :edit }
@@ -87,6 +93,6 @@ class PlantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def plant_params
-      params.require(:plant).permit(:name)
+      params.require(:plant).permit(:name, :location, :species, :water_level, :sun_time, :watered, :sunlight, :trimmed)
     end
 end

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include SessionsHelper
+  include ActionView::Helpers::DateHelper
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:new, :create]
 
@@ -132,6 +133,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :admin)
+      params.require(:user).permit(:name, :email, :phone, :password, :admin)
     end
 end

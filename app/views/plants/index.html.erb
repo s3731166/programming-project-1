@@ -5,6 +5,12 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Owner</th>
+      <th>Watered Today?</th>
+      <th>Moved today?</th>
+      <th>Trimmed Today?</th>
+      <th>Sun Time</th>
+      <th>Water Level</th>
       <th colspan="3">Actions</th>
     </tr>
   </thead>
@@ -13,6 +19,12 @@
     <% @plants.each do |plant| %>
       <tr>
         <td><%= plant.name %></td>
+        <td><%= link_to plant.user.name, plant.user %></td>
+        <td><%= plant.watered %></td>
+        <td><%= plant.sunlight %></td>
+        <td><%= plant.trimmed %></td>
+        <td><%= plant.sun_time %></td>
+        <td><%= plant.water_level %></td>
         <td><%= link_to 'Show', plant %></td>
         <td><%= link_to 'Edit', edit_plant_path(plant) %></td>
         <td><%= link_to 'Destroy', plant, method: :delete, data: { confirm: 'Are you sure?' } %></td>

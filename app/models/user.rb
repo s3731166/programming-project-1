@@ -1,7 +1,9 @@
 class User < ApplicationRecord
     include ActionView::Helpers::DateHelper
-
     attr_accessor :remember_token
+
+    has_many :plants
+
     # Case insensitivity for email
     before_save { self.email = email.downcase }
     # Makes sure user name is present
@@ -9,6 +11,8 @@ class User < ApplicationRecord
     # Makes sure email is present and valid
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
+    # Ensures phone number fits correct format (+110000000000)
+    validates :phone, length: { is: 10 }, format: { with: /04\d{8}/, message: "number must be a correctly formatted Victorian number (10 digits, 04...)" }
     
     # Makes sure password is present
     validates :password, presence: true

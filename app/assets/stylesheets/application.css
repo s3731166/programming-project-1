@@ -59,6 +59,16 @@
      width:100%;
 
  }
+
+ hr {
+     border:none;
+     border-top:1px dashed indianred;
+ }
+
+ .hide {
+     display:none;
+ }
+
  .wrapper{
     text-align: center;
 
@@ -77,6 +87,10 @@
      margin-left: auto;
      margin-right: auto;
      display: table;
+ }
+
+ .clear-floats {
+    clear:both;
  }
 
  .admin {
@@ -126,11 +140,37 @@
      display: inline-block;
      padding-left:0.4em;
      padding-right:0.4em;
+     vertical-align:top;
+     margin-left:8px;
+     margin-right:8px;
  }
 .title-link {
     float:left;
+    width:20%;
+    text-align:left;
+}
+.title-link img {
+    max-width:100%;
 }
 .user-info {
-    display:inline-block;
-    float: right;
+    display:block;
+    float:right;
+    max-width:20%;
+    overflow-x:hidden;
+}
+.name-and-date {
+    padding:2px;
+}
+.name-and-title {
+    text-align:left;
+    float:right;
+    padding-left:2px;
+    padding-right:2px;
+}
+.name-and-title p {
+    margin:0;
+}
+.nav-links{
+    width:60%;
+    float:left;
 }
