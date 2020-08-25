@@ -42,6 +42,9 @@ class PlantsController < ApplicationController
   # POST /plants.json
   def create
     @plant = Plant.new(plant_params)
+    @plant.watered = false
+    @plant.sunlight = false
+    @plant.trimmed = false
     @plant.user = current_user
 
     respond_to do |format|

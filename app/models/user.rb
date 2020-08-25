@@ -80,6 +80,7 @@ class User < ApplicationRecord
         auth_token = '4f1f5ec1a70f846ded523643f8ebb106'
         client = Twilio::REST::Client.new(account_sid, auth_token)
         from = '+61488856462' # Your Twilio number
+
         to = "+61" + phone # Your mobile phone number ------ "+" + user.phone = "+04,d{8}"
         client.messages.create({
         from: from,
@@ -87,5 +88,4 @@ class User < ApplicationRecord
         body: message
         })
     end
-
 end
