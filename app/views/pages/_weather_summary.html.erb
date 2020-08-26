@@ -1,3 +1,27 @@
 <%# WORK HERE WITH WEATHER SUMMARY  %>
 
-<div id ="weather-temperature"> this will be where the weather is if it works </div>
+<%# {"coord":{"lon":-80.61,"lat":28.08},
+        "weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03d"}],
+        "base":"stations",
+        "main":{"temp":302.64,"feels_like":308.05,"temp_min":302.04,"temp_max":303.15,"pressure":1015,"humidity":81},
+        "visibility":10000,
+        "wind":{"speed":2.24,"deg":70,"gust":5.36},
+        "clouds":{"all":37},"dt":1598398715,
+        "sys":{"type":3,"id":2010199,
+        "country":"AU","sunrise":1598353080,"sunset":1598399472},
+        "timezone":-14400,
+        "id":4163971,
+        "name":"Melbourne",
+        "cod":200} %>
+
+    <hr>
+    <div id="weather-Dashboard">
+    Weather Temp:
+    <div id ="Weather-temperature"><%= @json["main"]["temp"] %>&deg;C</div>
+    <div id ="Weather-desc"><%= @json["weather"][0]["description"] %></div>
+    <div id = "Weather-image"><img src="https://openweathermap.org/img/wn/<%= @json["weather"][0]["icon"] %>.png"></div> 
+    Tempature Maximum:
+    <div id = "Max-temp"><%= @json["main"]["temp_max"] %>&deg;C</div>
+    Tempature Minimum:
+    <div id = "Min-temp"><%= @json["main"]["temp_min"] %>&deg;C</div>
+</div>

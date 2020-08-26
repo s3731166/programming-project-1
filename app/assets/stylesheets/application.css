@@ -180,3 +180,11 @@
 .checklist form {
     width:100%;
 }
+
+#Weather-image {
+    background:cadetblue;
+    display: table;
+    margin-left: auto;
+    margin-right: auto; 
+    border:4px inset cadetblue;
+}
