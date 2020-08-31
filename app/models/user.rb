@@ -78,7 +78,7 @@ class User < ApplicationRecord
         #Notification constants
         begin
             account_sid = 'AC1f9a60a66869c95de7e80492d52f3dd3'
-            auth_token = '4f1f5ec1a70f846ded523643f8ebb106' 
+            auth_token = 'f16320d8ade46640cde7b0cab1bb0562' 
             client = Twilio::REST::Client.new(account_sid, auth_token)
             from = '+61488856462' # Your Twilio number
 
@@ -93,4 +93,40 @@ class User < ApplicationRecord
             puts exception.message
         end 
     end
+
+    def  User.daily_notify
+        @users = User.all
+        @users.each do |user|
+            if user
+                message="Plant summary for: "+ user.name
+                user.plants.each do |plant|
+                    if plant
+                        message+="\n"
+                        message+="Plant: "+plant.name
+                        message+="\n"
+                        if plant.watered?
+                            message+="Has been watered."
+                        else 
+                            message+="Needs to be watered\!"
+                        end
+                        message+="\n"
+                        if plant.sunlight?
+                            message+="Has been put in sunlight."
+                        else
+                            message+="Needs to be put in sunlight\!"
+                        end
+                        message+="\n"
+                        if plant.trimmed?
+                            message+="Has been trimmed."
+                        end
+                    end
+                end
+                user.notify(message)
+                message=""
+            end
+        end
+    end
+
+
+
 end
