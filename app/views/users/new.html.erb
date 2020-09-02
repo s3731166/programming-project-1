@@ -1,8 +1,12 @@
-<%= content_for :title, "New User" %>
-<h1>New User</h1>
+<div class="user-login">
 
-<%= render 'form', user: @user %>
+    <%= content_for :title, "New User" %>
+    <h1>New User</h1>
 
-<%= link_to 'Back', root_path %>
-<%= link_to 'Sign In',login_path %>
+    <%= render 'form', user: @user %>
+
+    <%= link_to 'Back', root_path %>
+    <%= link_to 'Sign In',login_path %>
+
+</div>
 

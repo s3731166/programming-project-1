@@ -2,14 +2,21 @@
     <%= form_with(model: plant, local: true) do |form| %>
         <hr>
         <h4><%= plant.name %> Checklist</h4>
-            
-        <%= form.label :watered %> <%= form.check_box :watered, { disabled: plant.watered } %><br>
-        <%= form.label :sunlight %> <%= form.check_box :sunlight, { disabled: plant.sunlight }%><br>
-        <%= form.label :trimmed %> <%= form.check_box :trimmed, { disabled: plant.trimmed } %>
 
-        <div class="actions">
-            <%= form.submit "Update Plant", { disabled: plant.watered&&plant.sunlight&&plant.trimmed } %>
+        <div id="plant-checklist">
+            <div class="check-content">
+                <%= form.label :watered %> <%= form.check_box :watered, { disabled: plant.watered } %><br>
+            </div>
+            <div class="check-content">
+                <%= form.label :sunlight %> <%= form.check_box :sunlight, { disabled: plant.sunlight }%><br>
+            </div>
+            <div class="check-content">
+                <%= form.label :trimmed %> <%= form.check_box :trimmed, { disabled: plant.trimmed } %>
+            </div>
+            <div class="actions">
+                <%= form.submit "Update Plant", { disabled: plant.watered&&plant.sunlight&&plant.trimmed } %>
+            </div>
         </div>
-        
+
     <% end %>
 </div>
