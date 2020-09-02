@@ -45,9 +45,8 @@ class PlantsController < ApplicationController
   def create
 
     @plant = Plant.new(plant_params)
-    #MAKE API CALL AND VERIFY :location = return
-
-    searchResults = Geocoder.search(:location)
+    #MAKE API CALL AND VERIFY :location = sean
+    searchResults = Geocoder.search(@plant.location)
     @plant.location = searchResults.first.coordinates
     @plant.watered = false
     @plant.sunlight = false
@@ -70,10 +69,13 @@ class PlantsController < ApplicationController
   # PATCH/PUT /plants/1
   # PATCH/PUT /plants/1.json
   def update
-    
-
     respond_to do |format|
       if @plant.update(plant_params)
+        searchResults = Geocoder.search(@plant.location)
+        if searchResults
+          @plant.location = searchResults.first.coordinates
+          @plant.save
+        end
         format.html { redirect_to root_path, notice: 'Plant was successfully updated.' }
         format.json { render :show, status: :ok, location: @plant }
       else
@@ -99,8 +101,6 @@ class PlantsController < ApplicationController
     end
   end
 
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plant
@@ -109,8 +109,6 @@ class PlantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def plant_params
-      searchResults = Geocoder.search(:location)
-      @plant.location = searchResults.first.coordinates
       params.require(:plant).permit(:name, :location, :species, :watered, :sunlight, :trimmed)
     end
 

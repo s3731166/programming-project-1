@@ -1,7 +1,8 @@
 <%= content_for :title, "Plants" %>
 <h1>Plants</h1>
-<%= link_to 'New Plant', new_plant_path %>
+<p><%= link_to 'New Plant', new_plant_path %></p>
 <% if @plants%>
+<div class="table-holder">  
   <table>
     <thead>
       <tr>
@@ -17,7 +18,7 @@
       <% @plants.each do |plant| %>
         <tr>
           <td><%= plant.name %></td>
-          <td><%= link_to plant.user.name, plant.user %></td>
+          <td><%= link_to plant.user.name, plant.user, {class: plant.user.get_styled_class } %></td>
           <td><%= plant.watered %></td>
           <td><%= plant.sunlight %></td>
           <td><%= plant.trimmed %></td>
@@ -28,7 +29,5 @@
       <% end %>
     </tbody>
   </table>
+</div>
 <%end%>    <%# Plants Must Exist %>
-
-
-<br>

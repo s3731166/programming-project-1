@@ -68,6 +68,13 @@ class User < ApplicationRecord
         name_span.html_safe
     end
 
+    # Generates a user name with styled <span> tags if user is admin
+    def get_styled_class
+        if (admin)
+            "admin"
+        end
+    end
+
     # Returns last time active in words (e.g. 1 minute ago) or "Never" if there is no last_active
     def last_active_in_words_or_never
         last_active

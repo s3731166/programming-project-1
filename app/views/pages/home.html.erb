@@ -10,10 +10,12 @@
    <% end %>
 <% end %>
 <% link_to 'New Plant', plants_path%>
-<%= collection_select(:plant, :plant_id, @plants.all, :id, :name, { prompt: true } , { onchange: "change_plant(this)", :selected => @plants[0] }) %>
-<% @plants.all.each do |current_plant| %>
-   <div id="plant-<%= current_plant.id %>" class="dashboard-plant-info hide">
-      <%= render "weather_summary"%> 
+<%= collection_select(:plant, :plant_id, @plants.order(:created_at), :id, :name, { selected: @plants.first }, { onchange: "change_plant(this)", :selected => @plants.first }) %>
+<script>document.getElementById("plant_plant_id").selectedIndex = 0;</script>
+<hr>
+<% @plants.order(:created_at).each do |current_plant| %>
+   <div id="plant-<%= current_plant.id %>" class="dashboard-plant-info <% if current_plant != @plants.first %> hide <% end %>">
+      <%= render "weather_summary", plant: current_plant %> 
       <div class="center-dashboard">MAIN SECTION</div>
       <%= render "checklist", plant: current_plant %>
       <div class="clear-floats"></div>

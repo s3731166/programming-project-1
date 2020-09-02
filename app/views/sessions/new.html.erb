@@ -1,11 +1,19 @@
 <h1>Log In</h1>
 <p>Use the form below to log in to your user account.</p>
 <%= form_for(:session, url: login_path) do |f| %>
-    <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control', placeholder: "Email Address" %>
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control', placeholder: " Password" %><br/>
-    <%= f.submit "Log in", class: "btn btn-primary" %>
+    <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control', placeholder: "Email Address" %>
+    </div>
+    
+    <div class="field">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control', placeholder: " Password" %><br/>
+    </div>
+    
+    <div class="actions">
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+    </div>
 
 <% end %>
-    <%= link_to 'Sign Up', signup_path %>
+        <%= link_to 'Sign Up', signup_path %>
