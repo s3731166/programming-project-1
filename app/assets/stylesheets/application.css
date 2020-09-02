@@ -133,6 +133,10 @@ form {
   color: gold;
 }
 
+.alert-success .admin {
+  color:orangered;
+}
+
 .logged-in-notice {
   border-bottom: 1px dashed white;
   padding-bottom: 2px;
@@ -209,13 +213,16 @@ form {
   padding: 2px;
 }
 .name-and-title {
-  text-align: left;
-  float: right;
-  padding-left: 2px;
-  padding-right: 2px;
+  text-align: center;
+  display: inline;
 }
 .name-and-title p {
   margin: 0;
+}
+.name-and-title a{
+  background:none;
+  margin:0;
+  padding:0;
 }
 .nav-links {
   width: 60%;
@@ -241,8 +248,16 @@ form {
   margin-right: auto;
   margin-top:4px;
   margin-bottom:4px;
-  border: 4px inset goldenrod;
-  outline: 4px outset goldenrod;
+  border: 4px outset #dd643f;
+  border-top-color: #ecd9a9;
+  border-left-color: #ecd9a9;
+}
+
+#Weather-image img {
+  display: block;
+  border: 4px outset #dd643f;
+  border-bottom-color: #ecd9a9;
+  border-right-color: #ecd9a9;
 }
 
 
@@ -280,8 +295,4 @@ form {
 .gravatar {
   height: 45px;
   width: auto;
-}
-.name-and-title a{
-  background:none;
-
 }

@@ -29,7 +29,7 @@
                     </div>
             </div>
             <div class="clear-floats"></div>
-                <%= if current_user.admin then link_to "View Users", users_path end %> 
+                <%= if current_user.admin then link_to "Users", users_path end %> 
                 <%= link_to "Log out", logout_path, method: :delete %>
 
         <% end %> 
