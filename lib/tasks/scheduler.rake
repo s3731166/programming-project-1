@@ -7,17 +7,6 @@ task :daily_update => :environment  do
     User.daily_notify
 end
 
-# task :rest_dailies => :environment  do
-#     @users = User.all
-#     @users.each do |user|
-#         if user&&Time.beginning_of_week() <= user.last_active
-#             user.plants.each do |plant|
-#                 if plant
-#                     plant.watered = false
-#                     plant.sunlight = false
-#                     plant.trimmed = false
-#                 end
-#             end
-#         end
-#     end
-# end
+task :rest_dailies => :environment  do
+    User.reset_daily
+end

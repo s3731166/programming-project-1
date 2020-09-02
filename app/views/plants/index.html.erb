@@ -1,36 +1,34 @@
 <%= content_for :title, "Plants" %>
 <h1>Plants</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Owner</th>
-      <th>Watered Today?</th>
-      <th>Moved today?</th>
-      <th>Trimmed Today?</th>
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
+<%= link_to 'New Plant', new_plant_path %>
 <% if @plants%>
-  <tbody>
-    <% @plants.each do |plant| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= plant.name %></td>
-        <td><%= link_to plant.user.name, plant.user %></td>
-        <td><%= plant.watered %></td>
-        <td><%= plant.sunlight %></td>
-        <td><%= plant.trimmed %></td>
-        <td><%= link_to 'Show', plant %></td>
-        <td><%= link_to 'Edit', edit_plant_path(plant) %></td>
-        <td><%= link_to 'Destroy', plant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Owner</th>
+        <th>Watered Today?</th>
+        <th>Moved today?</th>
+        <th>Trimmed Today?</th>
+        <th colspan="3">Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-<%end  %>
-<%# Plants Must Exist %>
-</table>
+    </thead>
+    <tbody>
+      <% @plants.each do |plant| %>
+        <tr>
+          <td><%= plant.name %></td>
+          <td><%= link_to plant.user.name, plant.user %></td>
+          <td><%= plant.watered %></td>
+          <td><%= plant.sunlight %></td>
+          <td><%= plant.trimmed %></td>
+          <td><%= link_to 'Show', plant %></td>
+          <td><%= link_to 'Edit', edit_plant_path(plant) %></td>
+          <td><%= link_to 'Destroy', plant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%end%>    <%# Plants Must Exist %>
+
 
 <br>
-
-<%= link_to 'New Plant', new_plant_path %>

@@ -1,11 +1,7 @@
 <% # Until an admin account is made, load the _noadmin page
    # After that, if user is logged in, then load the _loggedin page, or else load the _loggedout page 
 %>
-   <h1>You are logged in to the plant monitor web server</h1>
-   <h2>Welcome back, <%= current_user.get_styled_name %></h2>
-   <% if current_user.admin %>
-      <h3 class="admin">Administrative privileges enabled.</h3>
-   <% end %>
+   <h1>Dashboard</h1>
 <% if @plants%>
    <% @plants.order('created_at desc').each do |plant| %>
       <%= link_to plant.name, plant %>
@@ -16,8 +12,13 @@
 <% link_to 'New Plant', plants_path%>
 <%= collection_select(:plant, :plant_id, @plants.all, :id, :name, { prompt: true } , { onchange: "change_plant(this)", :selected => @plants[0] }) %>
 <% @plants.all.each do |current_plant| %>
-   <%= render "checklist", plant: current_plant %>
+   <div id="plant-<%= current_plant.id %>" class="dashboard-plant-info hide">
+      <%= render "weather_summary"%> 
+      <div class="center-dashboard">MAIN SECTION</div>
+      <%= render "checklist", plant: current_plant %>
+      <div class="clear-floats"></div>
+   </div> 
 <% end %>
-<%= render "weather_summary" %>
+
 
 

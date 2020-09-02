@@ -14,14 +14,20 @@
         "name":"Melbourne",
         "cod":200} %>
 
-<hr>
 <div id="weather-Dashboard">
-    Weather Temp:
-    <div id ="Weather-temperature"><%= @json["main"]["temp"] %>&deg;C</div>
-    <div id ="Weather-desc"><%= @json["weather"][0]["description"] %></div>
-    <div id = "Weather-image"><img src="https://openweathermap.org/img/wn/<%= @json["weather"][0]["icon"] %>.png"></div> 
-    Tempature Maximum:
-    <div id = "Max-temp"><%= @json["main"]["temp_max"] %>&deg;C</div>
-    Tempature Minimum:
-    <div id = "Min-temp"><%= @json["main"]["temp_min"] %>&deg;C</div>
+    Temp: <div id ="Weather-temperature"><%= @json["main"]["temp"] %>&deg;C</div>
+
+    <div class="weather-sum">
+        <div id ="Weather-desc"><%= @json["weather"][0]["description"] %></div> 
+        <div id = "Weather-image"><img src="https://openweathermap.org/img/wn/<%= @json["weather"][0]["icon"] %>.png"></div> 
+    </div>
+
+
+    
+   <div class="inline-wrapper">
+        Max:<div id = "Max-temp"><%= @json["main"]["temp_max"] %>&deg;C</div>
+   </div>
+    <div class="inline-wrapper">
+        Min: <div id = "Min-temp"><%= @json["main"]["temp_min"] %>&deg;C</div>
+    </div>
 </div>

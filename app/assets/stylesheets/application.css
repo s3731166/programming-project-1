@@ -14,6 +14,7 @@
  *= require_self
  */
 
+   
 html {
   background-color: lightskyblue;
   padding-left: 8px;
@@ -27,7 +28,7 @@ body {
   margin-right: auto;
   max-width: 90%;
   text-align: center;
-  border: 1px dashed indianred;
+  border: 1px dashed white;
   padding: 1px;
   border-radius: 1em 1em 1em 1em;
 
@@ -43,10 +44,8 @@ header {
 a{
   color: black;
   padding: 0.6em;
-  margin: 2em;
   background-color: lavender;
   border-radius: 0.3em;
-
 }
 
 header a {
@@ -67,8 +66,8 @@ header a:hover {
 
 nav {
   margin-top: 1px;
-  border-top: 1px dashed indianred;
-  border-bottom: 1px dashed indianred;
+  border-top: 1px dashed white;
+  border-bottom: 1px dashed white;
   padding-top: 20px;
 
   padding-bottom: 2px;
@@ -94,7 +93,7 @@ nav a:visited{
 
 hr {
   border: none;
-  border-top: 1px dashed indianred;
+  border-top: 1px dashed white;
 }
 
 .hide {
@@ -116,7 +115,7 @@ table {
 table,
 td,
 th {
-  border: 1px dashed indianred;
+  border: 1px dashed white;
 }
 
 form {
@@ -131,12 +130,16 @@ form {
 
 .admin {
   font-weight: bold;
-  color: orangered;
+  color: gold;
 }
 
 .logged-in-notice {
-  border-bottom: 1px dashed indianred;
+  border-bottom: 1px dashed white;
   padding-bottom: 2px;
+}
+
+.dashboard-plant-info {
+  margin-bottom:1em;
 }
 
 .alert {
@@ -179,6 +182,7 @@ form {
   vertical-align: top;
   margin-left: 8px;
   margin-right: 8px;
+  margin-bottom: 8px;
 }
 .title-link {
   float: left;
@@ -192,7 +196,12 @@ form {
   display: block;
   float: right;
   max-width: 20%;
-  overflow-x: hidden;
+  margin-top: -15px;
+  margin-bottom: 5px;
+}
+.user-info a {
+  padding:4px;
+  margin:0.4em;
 }
 .name-and-date {
   padding: 2px;
@@ -210,20 +219,56 @@ form {
   width: 60%;
   float: left;
 }
+.nav-links a {
+  margin: 8px;
+}
+.checklist {
+  width:20%;
+  float:right;
+}
 .checklist form {
   width: 100%;
 }
 
 #Weather-image {
-  background: cadetblue;
+  background: dodgerblue;
   display: table;
   margin-left: auto;
   margin-right: auto;
-  border: 4px inset cadetblue;
+  margin-top:4px;
+  margin-bottom:4px;
+  border: 4px inset goldenrod;
+  outline: 4px outset goldenrod;
 }
+
+
+.center-dashboard {
+  float:left;
+  width:60%;
+}
+
+
 #plant-checklist {
   text-align: center;
 }
 .check-content {
   display: inline-block;
+}
+
+
+
+#weather-Dashboard{
+  text-align:center;
+  width:20%;
+  float:left;
+}
+
+.inline-wrapper{
+  display: block;
+}
+.weather-sum{
+  display: inline;
+}
+#Max-temp, #Min-temp, #Weather-Dashboard{
+  display:inline;
 }

@@ -22,4 +22,7 @@
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', root_path %>
-<%= link_to "Log out", logout_path, method: :delete %>
+
+<% if @user = current_user%>
+  <%= link_to "Log out", logout_path, method: :delete %>
+<% end %>
