@@ -1,6 +1,8 @@
 class PlantsController < ApplicationController
+  
   include SessionsHelper
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
+  require 'geocoder'
 
   # GET /plants
   # GET /plants.json
@@ -41,7 +43,12 @@ class PlantsController < ApplicationController
   # POST /plants
   # POST /plants.json
   def create
+
     @plant = Plant.new(plant_params)
+    #MAKE API CALL AND VERIFY :location = return
+    searchResults = Geocoder.search(:location)
+    
+    @plant.location = serchResults.first.address
     @plant.watered = false
     @plant.sunlight = false
     @plant.trimmed = false

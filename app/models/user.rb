@@ -1,5 +1,8 @@
 class User < ApplicationRecord
+    include Gravtastic
+        gravtastic
     include ActionView::Helpers::DateHelper
+    
     attr_accessor :remember_token
 
     has_many :plants

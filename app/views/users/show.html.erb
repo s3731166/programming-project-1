@@ -1,6 +1,5 @@
 <% content_for :title, @user.name %>
 <h1><%= @user.get_styled_name %></h1>
-
 <% if @user.admin %>
   <h2 class="admin">This user has access to administrative privileges</h2>
 <% end %>

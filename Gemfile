@@ -38,6 +38,8 @@ gem 'json', '~> 1.8', '>= 1.8.3'
 
 gem 'jquery-rails', '~> 4.4'
 
+#A Ruby wrapper for Gravatar URLs
+gem 'gravtastic', '~> 3.2', '>= 3.2.6'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -75,3 +77,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 gem "appengine", "~> 0.5.0"
+
+#Object geocoding (by street or IP address), reverse geocoding 
+#(coordinates to street address), distance queries for ActiveRecord and Mongoid,
+# result caching, and more.
+gem 'geocoder', '~> 1.6', '>= 1.6.3'

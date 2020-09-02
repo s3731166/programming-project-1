@@ -202,6 +202,8 @@ form {
 .user-info a {
   padding:4px;
   margin:0.4em;
+  white-space: nowrap;
+  line-height:2.2em;
 }
 .name-and-date {
   padding: 2px;
@@ -221,6 +223,8 @@ form {
 }
 .nav-links a {
   margin: 8px;
+  white-space: nowrap;
+  line-height: 40px;
 }
 .checklist {
   width:20%;
@@ -271,4 +275,13 @@ form {
 }
 #Max-temp, #Min-temp, #Weather-Dashboard{
   display:inline;
+}
+
+.gravatar {
+  height: 45px;
+  width: auto;
+}
+.name-and-title a{
+  background:none;
+
 }
