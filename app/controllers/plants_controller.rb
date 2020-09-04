@@ -104,10 +104,14 @@ class PlantsController < ApplicationController
     toSend = ""
     i=0
     4.times do |i|
-      if results[i].city!=nil
-        toSend+= results[i].city+", "+results[i].country+"|"
-      else
-        toSend+= results[i].country+"|"
+      if results[i] != nil
+        if results[i].city!=nil
+          toSend+= results[i].city+", "+results[i].country+"|"
+        else
+          toSend+= results[i].country+"|"
+        end
+      else 
+        toSend+="|"
       end
      
     end

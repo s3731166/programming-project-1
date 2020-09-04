@@ -349,8 +349,22 @@ a.admin:hover {
   width: auto;
 }
 
+.suggest {
+  border-radius: 3px 3px 0 0;
+}
+
+.location_field a:empty {
+  display: none !important;
+}
+
+.location_field a:last-of-type {
+  border-radius: 0 0 4px 4px !important;
+}
+
 .location_field a {
   display:block;
-  width:158px;
+  padding:0.1em;
+  width:163px;
   border-radius: 0;
+  border-top:0;
 }

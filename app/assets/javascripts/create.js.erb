@@ -20,16 +20,17 @@ function search_locations() {
       <%# location_field.value = results_array[0] %>
       links = [ document.createElement("A"), document.createElement("A"), document.createElement("A"), document.createElement("A") ]
       
+      location_field.classList.add("suggest")
+
       if(Rails.$(".location_field")[0].childElementCount<4){
         for (i=0;i<4;i++) {
           links[i].className = "location-suggest-"+i
           links[i].innerHTML = results_array[i];
-          links[i].onclick = function() { Rails.$(".loc-field")[0].value = this.innerHTML }
-      }
-        Rails.$(".location_field")[0].appendChild(links[0]);
-        Rails.$(".location_field")[0].appendChild(links[1]);
-        Rails.$(".location_field")[0].appendChild(links[2]);
-        Rails.$(".location_field")[0].appendChild(links[3]);
+          links[i].onclick = function() { Rails.$(".loc-field")[0].value = this.innerHTML; remove_links() }
+        }
+        for (i=0;i<4;i++) {
+            if (results_array[i].length > 0) { Rails.$(".location_field")[0].appendChild(links[i]); }
+        }
       }else{
         Rails.$(".location-suggest-0")[0].innerHTML = results_array[0]
         Rails.$(".location-suggest-1")[0].innerHTML = results_array[1]
@@ -40,3 +41,11 @@ function search_locations() {
     }
   )
 } 
+
+function remove_links() {
+    Rails.$(".loc-field")[0].classList.remove("suggest")
+    Rails.$(".location-suggest-0")[0].remove()
+    Rails.$(".location-suggest-1")[0].remove()
+    Rails.$(".location-suggest-2")[0].remove()
+    Rails.$(".location-suggest-3")[0].remove()
+}
