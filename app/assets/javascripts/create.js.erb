@@ -9,14 +9,33 @@
 %>
 
 function search_locations() {
-    alert("Placeholder Alert: This method will be used to retrieve locations.");
+    
       Rails.ajax({
       url: "/get_geocode_results?string=" + Rails.$(".loc-field")[0].value,
       type: "get",
       success:  function retData(data){
       results_array = data.split("|")
       <%# alert("First result is "+results_array[0]+"\nSecond Result is "+results_array[1]+"\nThird Result is "+results_array[2]+"\nFourth Result is "+results_array[3]) %>
-      Rails.$(".loc-field")[0].value = results_array[0]
+      location_field = Rails.$(".loc-field")[0]
+      <%# location_field.value = results_array[0] %>
+      links = [ document.createElement("A"), document.createElement("A"), document.createElement("A"), document.createElement("A") ]
+      
+      if(Rails.$(".location_field")[0].childElementCount<4){
+        for (i=0;i<4;i++) {
+          links[i].className = "location-suggest-"+i
+          links[i].innerHTML = results_array[i];
+          links[i].onclick = function() { Rails.$(".loc-field")[0].value = this.innerHTML }
+      }
+        Rails.$(".location_field")[0].appendChild(links[0]);
+        Rails.$(".location_field")[0].appendChild(links[1]);
+        Rails.$(".location_field")[0].appendChild(links[2]);
+        Rails.$(".location_field")[0].appendChild(links[3]);
+      }else{
+        Rails.$(".location-suggest-0")[0].innerHTML = results_array[0]
+        Rails.$(".location-suggest-1")[0].innerHTML = results_array[1]
+        Rails.$(".location-suggest-2")[0].innerHTML = results_array[2]
+        Rails.$(".location-suggest-3")[0].innerHTML = results_array[3]
+      }
       }
     }
   )

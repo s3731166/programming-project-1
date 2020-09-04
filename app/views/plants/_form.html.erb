@@ -16,12 +16,10 @@
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= form.label  :location %>
-    <%= form.text_field :location, class: "loc-field", oninput: "search_locations()" %>
+  <div class="field location_field">
+    <%= form.label  "Search Location" %>
+    <%= form.text_field "Search Location", class: "loc-field", oninput: "search_locations()" %>
   </div>
-
-  
 
   <div class="field">
     <%= form.label :species %>
