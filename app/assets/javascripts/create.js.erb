@@ -1,0 +1,23 @@
+
+<% 
+# This file is for displaying search results from user input in plant creation.
+# Should update a text_fields suggestions with displayed names from a search.
+# This allows the following searches first result to be the intended location.
+
+# https://nominatim.openstreetmap.org/search/<query>?<params>
+# https://nominatim.openstreetmap.org/search?q=17+Strada+Pictor+Alexandru+Romano%2C+Bukarest&format=geojson
+%>
+
+function search_locations() {
+    alert("Placeholder Alert: This method will be used to retrieve locations.");
+      Rails.ajax({
+      url: "/get_geocode_results?string=" + Rails.$(".loc-field")[0].value,
+      type: "get",
+      success:  function retData(data){
+      results_array = data.split("|");
+      <%# alert("First result is "+results_array[0]+"\nSecond Result is "+results_array[1]+"\nThird Result is "+results_array[2]+"\nFourth Result is "+results_array[3]) %>
+      Rails.$(".loc-field")[0].value = results_array[0]
+      }
+    }
+  )
+} 

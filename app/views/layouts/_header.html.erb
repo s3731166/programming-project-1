@@ -23,7 +23,7 @@
         <% if current_user%>
                     <div class="name-and-title">
                         <%=link_to current_user do%>
-                            <%= image_tag current_user.gravatar_url, :class => "gravatar", :title => current_user.name << ("\n(ADMINITSTATOR)" if current_user.admin) %>
+                            <%= image_tag current_user.gravatar_url , :class => "gravatar", :title => "ADMINISTRATOR" if (current_user.admin) %>
                         <% end %>
                     </div>
             </div>

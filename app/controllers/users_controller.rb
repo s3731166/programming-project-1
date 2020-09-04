@@ -61,19 +61,17 @@ class UsersController < ApplicationController
   # https://3rd-edition.railstutorial.org/book/sign_up#code-signup_flash
   def create
     @user = User.new(user_params)
-
     # If administrator boolean is not set, set it to false
     # This will happen when a user signs up and there is already an admin, since the admin checkbox will not show
     if (@user.admin.nil?)
       @user.admin = false
     end
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user
                       flash[:success] = 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
-        @user.notify("Sign up successfull!")
+        @user.notify("Welcome to the plant monitoring system "+@user.name+"!\n Get started by adding a plant.")
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -119,6 +117,11 @@ class UsersController < ApplicationController
       if (@user == current_user)
         log_out_no_redirect
       end
+      # Destroy all users plants 
+      @user.plants.each do |plant|
+        plant.destroy
+      end
+      # Do the deed
       @user.destroy
       respond_to do |format|
         format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }

@@ -85,18 +85,16 @@ class User < ApplicationRecord
     end
 
     def notify(body)
-        #Notification constants
         begin
             account_sid = 'AC1f9a60a66869c95de7e80492d52f3dd3'
-            auth_token = 'f16320d8ade46640cde7b0cab1bb0562' 
+            auth_token = 'e7cd2251098a929befd2e5c31853929d'
             client = Twilio::REST::Client.new(account_sid, auth_token)
             from = '+61488856462' # Your Twilio number
-
             to = "+61" + phone # Your mobile phone number ------ "+" + user.phone = "+04,d{8}"
             client.messages.create({
             from: from,
             to: to,
-            body: body 
+            body:body
             })
         
         rescue Twilio::REST::TwilioError  => exception
@@ -107,8 +105,8 @@ class User < ApplicationRecord
     def  User.daily_notify
         @users = User.all
         @users.each do |user|
-            if user
-                message="Plant summary for: "+ user.name
+            if user && !user.plants.empty?
+                message="Plant Summary for: "+ user.name
                 user.plants.each do |plant|
                     if plant
                         message+="\n"

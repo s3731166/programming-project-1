@@ -13,4 +13,6 @@ class Plant < ApplicationRecord
         if lat then lat=lat.tr('[','') end
         if lat and lon then ActiveSupport::JSON.decode(open('http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&APPID=9b732f988a82cb5ec7499a0d0e6416ff&units=metric').read) end
       end
+
+      
 end

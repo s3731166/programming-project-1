@@ -46,19 +46,16 @@ class PlantsController < ApplicationController
 
     @plant = Plant.new(plant_params)
     #MAKE API CALL AND VERIFY :location = sean
-    searchResults = Geocoder.search(@plant.location)
-    @plant.location = searchResults.first.coordinates
+    @plant.location = Geocoder.search(@plant.location).first.coordinates
     @plant.watered = false
     @plant.sunlight = false
     @plant.trimmed = false
     @plant.user = current_user
-   
 
     respond_to do |format|
       if @plant.save
         format.html { redirect_to root_path, notice: 'Plant was successfully created.' }
         format.json { render :show, status: :created, location: @plant }
-        @plant.user.notify("Plant '"+@plant.name+"' was successfully created")
       else
         format.html { render :new }
         format.json { render json: @plant.errors, status: :unprocessable_entity }
@@ -101,6 +98,23 @@ class PlantsController < ApplicationController
     end
   end
 
+  def geo_results 
+    results = Geocoder.search(params['string'])
+    # toSend = results.first.city+", "+results.first.country
+    toSend = ""
+    i=0
+    4.times do |i|
+      if results[i].city!=nil
+        toSend+= results[i].city+", "+results[i].country+"|"
+      else
+        toSend+= results[i].country+"|"
+      end
+     
+    end
+    #toSend = "{ \"city\":\""+results[0].city+"\", \"country\":\""+results[0].country+"\"}"
+    render json: toSend, status: :ok
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plant
@@ -111,7 +125,5 @@ class PlantsController < ApplicationController
     def plant_params
       params.require(:plant).permit(:name, :location, :species, :watered, :sunlight, :trimmed)
     end
-
-    
 end
 

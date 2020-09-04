@@ -1,5 +1,7 @@
 {
   "name": "PP1-development",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "js-autocomplete": "^1.0.4"
+  }
 }
