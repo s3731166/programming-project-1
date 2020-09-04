@@ -14,7 +14,7 @@ function search_locations() {
       url: "/get_geocode_results?string=" + Rails.$(".loc-field")[0].value,
       type: "get",
       success:  function retData(data){
-      results_array = data.split("|");
+      results_array = data.split("|")
       <%# alert("First result is "+results_array[0]+"\nSecond Result is "+results_array[1]+"\nThird Result is "+results_array[2]+"\nFourth Result is "+results_array[3]) %>
       Rails.$(".loc-field")[0].value = results_array[0]
       }

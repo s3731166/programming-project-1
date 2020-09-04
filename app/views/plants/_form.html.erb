@@ -21,10 +21,7 @@
     <%= form.text_field :location, class: "loc-field", oninput: "search_locations()" %>
   </div>
 
-  <div class="field">
-    <%= form.label :location, "Select location" %>
-    <%= form.collection_select("Select location", :location, :plant_id, "loc-select", collection )%>
-  </div> 
+  
 
   <div class="field">
     <%= form.label :species %>
