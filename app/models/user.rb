@@ -87,7 +87,7 @@ class User < ApplicationRecord
     def notify(body)
         begin
             account_sid = 'AC1f9a60a66869c95de7e80492d52f3dd3'
-            auth_token = 'e7cd2251098a929befd2e5c31853929d'
+            auth_token = 'a347831fc9a1cc4a65b7f9e252529ebe'
             client = Twilio::REST::Client.new(account_sid, auth_token)
             from = '+61488856462' # Your Twilio number
             to = "+61" + phone # Your mobile phone number ------ "+" + user.phone = "+04,d{8}"
