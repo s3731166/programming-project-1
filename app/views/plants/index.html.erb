@@ -11,18 +11,17 @@
         <th>Watered Today?</th>
         <th>Moved today?</th>
         <th>Trimmed Today?</th>
-        <th colspan="3">Actions</th>
+        <th colspan="2">Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @plants.each do |plant| %>
         <tr>
-          <td><%= plant.name %></td>
+          <td><%= link_to plant.name, plant %></td>
           <td><%= link_to plant.user.name, plant.user, {class: plant.user.get_styled_class } %></td>
           <td><%= plant.watered %></td>
           <td><%= plant.sunlight %></td>
           <td><%= plant.trimmed %></td>
-          <td><%= link_to 'Show', plant %></td>
           <td><%= link_to 'Edit', edit_plant_path(plant) %></td>
           <td><%= link_to 'Destroy', plant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>

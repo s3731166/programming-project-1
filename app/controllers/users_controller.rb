@@ -61,6 +61,7 @@ class UsersController < ApplicationController
   # https://3rd-edition.railstutorial.org/book/sign_up#code-signup_flash
   def create
     @user = User.new(user_params)
+    @user.last_active = DateTime.now
     # If administrator boolean is not set, set it to false
     # This will happen when a user signs up and there is already an admin, since the admin checkbox will not show
     if (@user.admin.nil?)

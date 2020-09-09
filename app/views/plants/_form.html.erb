@@ -18,7 +18,7 @@
 
   <div class="field location_field">
     <%= form.label  "Search Location" %>
-    <%= form.text_field :location, class: "loc-field", oninput: "search_locations()" %>
+    <%= form.text_field :location, class: "loc-field", oninput: "search_locations()", autocomplete: 'off' %>
   </div>
 
   <div class="field">

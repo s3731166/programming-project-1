@@ -368,3 +368,7 @@ a.admin:hover {
   border-radius: 0;
   border-top:0;
 }
+
+#error_explanation {
+  color:black;
+}
