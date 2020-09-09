@@ -46,6 +46,7 @@ class PlantsController < ApplicationController
 
     @plant = Plant.new(plant_params)
     #MAKE API CALL AND VERIFY :location = sean
+    @plant.locationName = :location
     @plant.location = Geocoder.search(@plant.location).first.coordinates
     @plant.watered = false
     @plant.sunlight = false
@@ -68,6 +69,7 @@ class PlantsController < ApplicationController
   def update
     respond_to do |format|
       if @plant.update(plant_params)
+        @plant.locationName = @plant.location
         searchResults = Geocoder.search(@plant.location)
         if searchResults
           @plant.location = searchResults.first.coordinates

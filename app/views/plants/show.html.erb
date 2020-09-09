@@ -1,7 +1,8 @@
 <% content_for :title, @plant.name %>
 <h1><%= @plant.name %></h1>
-<h3><%= @plant.location%></h3>
-<h3><%= @plant.species%></h3>
+<h3><%= @plant.locationName %></h3>
+<h4><%= @plant.location %></h4>
+<h3><%= @plant.species %></h3>
 <h3>Owned By <%= @plant.user.name %></h3>
 
 
