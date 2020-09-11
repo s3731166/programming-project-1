@@ -353,15 +353,15 @@ a.admin:hover {
   border-radius: 3px 3px 0 0;
 }
 
-.location_field a:empty {
+.location_field a:empty, .species_field a:empty {
   display: none !important;
 }
 
-.location_field a:last-of-type {
+.location_field a:last-of-type, .species_field a:last_of_type {
   border-radius: 0 0 4px 4px !important;
 }
 
-.location_field a {
+.location_field a, .species_field a {
   display:block;
   padding:0.1em;
   width:163px;

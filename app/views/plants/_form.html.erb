@@ -15,15 +15,25 @@
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
-
+<%# Calls Method in Assests/JS with #loc-field %>
   <div class="field location_field">
     <%= form.label  "Search Location" %>
     <%= form.text_field :location, class: "loc-field", oninput: "search_locations()", autocomplete: 'off' %>
   </div>
 
-  <div class="field">
+  <div class="field species_field">
     <%= form.label :species %>
-    <%= form.text_field :species %>
+    <%= form.text_field :species, class: "spec-field", oninput: "search_species()", autocomplete: 'off' %>
+  </div>
+
+  <div class = "field species_water">
+    <%= form.label "Daily water (mm)" %>
+    <%= form.number_field :daily_water, in: 0..12000 %>
+  </div>
+
+  <div class = "field species_light">
+<%= form.label "Daily light (lux)" %>
+    <%= form.number_field :daily_light, in: 0..100000 %>
   </div>
 
   <div class="actions">

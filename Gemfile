@@ -35,6 +35,8 @@ gem 'nokogiri', '~> 1.10', '>= 1.10.10'
 # Json gem is used to parse the json format into the rails application
 gem 'json', '~> 1.8', '>= 1.8.3'
 
+# Makes http fun! Also, makes consuming restful web services dead easy.
+gem 'httparty', '~> 0.13.7'
 
 gem 'jquery-rails', '~> 4.4'
 
