@@ -1,9 +1,11 @@
 <% content_for :title, @plant.name %>
 <h1><%= @plant.name %></h1>
-<h3><%= @plant.locationName %></h3>
-<h4><%= @plant.location %></h4>
-<h3><%= @plant.species %></h3>
-<h3>Owned By <%= @plant.user.name %></h3>
+<h3>Location: <%= @plant.locationName %></h3>
+<h4>Co-Ords: <%= @plant.location %></h4>
+<h3>Species: <%= @plant.species %></h3>
+<h3>Daily water (mm): <%= @plant.daily_water%></h3>
+<h3>Daily light (lux): <%= @plant.daily_light%></h3>
+<h3>Owned By: <%= @plant.user.name %></h3>
 
 
 <%= link_to 'Edit', edit_plant_path(@plant) %> |

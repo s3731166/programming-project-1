@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  light_recorded: 9.99
+  water_recorded: 9.99
+
+two:
+  light_recorded: 9.99
+  water_recorded: 9.99

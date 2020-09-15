@@ -47,20 +47,21 @@ class PlantsController < ApplicationController
 
     @plant = Plant.new(plant_params)
     #MAKE API CALL AND VERIFY :location = sean
-    @plant.locationName = :location
-    @plant.location = Geocoder.search(@plant.location).first.coordinates
+    @plant.location = Geocoder.search(@plant.locationName).first.coordinates
     @plant.watered = false
     @plant.sunlight = false
     @plant.trimmed = false
     @plant.user = current_user
-    #call(plant.species)
-    #plant.waterLevel = results[data][0][waterlevel]
-    #MAKE API CALL HERE AND HANDLE RESULTS
-
-
+    # Attempt to fill fields through plant lookup, on nil fields
+    plant_lookup()
+    
     respond_to do |format|
       if @plant.save
-        format.html { redirect_to root_path, notice: 'Plant was successfully created.' }
+        message = 'Plant was successfully updated.'
+        if !@plant.daily_water or !@plant.daily_light
+          message+= "\n Auto-fill attempt failed, please fill unfilled fields."
+        end
+        format.html { redirect_to root_path, notice: message}
         format.json { render :show, status: :created, location: @plant }
       else
         format.html { render :new }
@@ -75,51 +76,19 @@ class PlantsController < ApplicationController
     respond_to do |format|
       if @plant.update(plant_params)
         # Handle location geocoding
-        @plant.locationName = @plant.location
-        searchResults = Geocoder.search(@plant.location)
+        searchResults = Geocoder.search(@plant.locationName)
         if searchResults
           @plant.location = searchResults.first.coordinates
         end
-
-        #Handle plant lookup for water & light levels
-        auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
-        results = HTTParty.get(
-          'https://trefle.io/api/v1/species/search',
-        query: {
-          "q": @plant.species,
-          "token": auth_token
-        })
-        @species_decoded = results.parsed_response
-        # Assume with specices lookup active in form,
-        # that first result will be accurate enough for id attainment of correct plant
-        plantId = nil
-        if @species_decoded["data"][0]
-          plantId = @species_decoded["data"][0]["id"]
-        end
-        if plantId
-          
-          # Retirve plant details
-          results = HTTParty.get(
-            'https://trefle.io/api/v1/plants/'+plantId.to_s+"?token="+auth_token
-          )
-          @species_decoded = results.parsed_response 
-          
-          if @species_decoded["data"]
-            if @species_decoded["data"]["main_species"]["growth"]["minimum_precipitation"]["mm"] and @plant.daily_water==nil
-              if @species_decoded["data"]["main_species"]["growth"]["maximum_precipitation"]["mm"]
-                #Precipitation values are annual, daily_avg  = ((max + min) / 2) / 364 
-                @plant.daily_water = ((@species_decoded["data"]["main_species"]["growth"]["maximum_precipitation"]["mm"] + @species_decoded["data"]["main_species"]["growth"]["minimum_precipitation"]["mm"])/2) /365                
-              end
-            end
-
-            #Light level is 1/10,000th of lux levels; I.e 8 = 80,000 lux
-            if @species_decoded["data"]["main_species"]["growth"]["light"] and @plant.daily_light==nil
-              @plant.daily_light =  @species_decoded["data"]["main_species"]["growth"]["light"]*10000
-            end
-          end
-        end
+        # Attempt auto-Fill water and light fields if nil
+        plant_lookup()
+        
         if @plant.save
-          format.html { redirect_to root_path, notice: 'Plant was successfully updated.' }
+          message = 'Plant was successfully updated.'
+          if !@plant.daily_water or !@plant.daily_light
+            message+= "\n Auto-fill attempt failed, please fill unfilled fields."
+          end
+          format.html { redirect_to root_path, notice: message}
           format.json { render :show, status: :ok, location: @plant }
         else
           format.html { render :edit }
@@ -197,6 +166,42 @@ class PlantsController < ApplicationController
     render json: toSend, status: :ok
   end
   
+  # Will lookup @plant for daily water and light required fields given those fields are nil
+  # Does not garuntee fields will be filled
+  def plant_lookup
+    auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
+    results = HTTParty.get(
+      'https://trefle.io/api/v1/species/search',
+    query: {
+      "q": @plant.species,
+      "token": auth_token
+    })
+    @species_decoded = results.parsed_response
+    # Assume with specices lookup active in form,
+    # that first result will be accurate enough for id attainment of correct plant
+    plantId = nil
+    if @species_decoded["data"][0]
+      plantId = @species_decoded["data"][0]["id"]
+    end
+    if plantId
+      # Retirve plant details
+      results = HTTParty.get(
+        'https://trefle.io/api/v1/plants/'+plantId.to_s+"?token="+auth_token
+      )
+      @species_decoded = results.parsed_response 
+      
+      if @species_decoded["data"]
+        if @species_decoded["data"]["main_species"]["growth"]["minimum_precipitation"]["mm"] and @plant.daily_water==nil
+          #Precipitation values are annual, daily_avg  = ((max + min) / 2) / 364 
+          @plant.daily_water = ((@species_decoded["data"]["main_species"]["growth"]["maximum_precipitation"]["mm"] + @species_decoded["data"]["main_species"]["growth"]["minimum_precipitation"]["mm"])/2) /365                
+        end
+        #Light level is 1/10,000th of lux levels; I.e 8 = 80,000 lux
+        if @species_decoded["data"]["main_species"]["growth"]["light"] and @plant.daily_light==nil
+          @plant.daily_light =  @species_decoded["data"]["main_species"]["growth"]["light"]*10000
+        end
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -206,7 +211,8 @@ class PlantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def plant_params
-      params.require(:plant).permit(:name, :location, :species, :watered, :sunlight, :trimmed, :daily_water, :daily_light)
+      params.require(:plant).permit(:name, :location, :locationName, :species, :watered, :sunlight, :trimmed, :daily_water, :daily_light)
     end
-end
+  end
+
 
