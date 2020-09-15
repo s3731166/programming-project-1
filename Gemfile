@@ -78,7 +78,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
-gem "appengine", "~> 0.5.0"
+#gem "appengine", "~> 0.5.0"
 
 #Object geocoding (by street or IP address), reverse geocoding 
 #(coordinates to street address), distance queries for ActiveRecord and Mongoid,
