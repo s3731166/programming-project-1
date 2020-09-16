@@ -1,0 +1,11 @@
+<%# This partial is for the reporting of plant values%>
+<%# Will make use of chartkick gem and groupdate gem%>
+
+<div class = "report">
+    <%= form_with(model: plant, local: true) do |form| %>
+        <%@records = plant.plant_records %>
+        <%= if !@records.empty? then line_chart @records.group_by_day(:created_at).average(:water_recorded) else "No records!"end%>
+    <%end%>
+
+
+</div>

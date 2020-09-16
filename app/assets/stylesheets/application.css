@@ -387,12 +387,31 @@ a.admin:hover {
 
 /* This hide class is used to hide unneeded plant summaries (on the dashboard).
  * This allows for 'switching' between plants using the dropdown menu. 
+ * visibility:hidden is used instead of display:none because the graphs are drawn 
+ * from the size of the diiv they are in, and no displayed divs are not rendered
 */
 .hide {
-  display: none;
+  visibility: hidden;
+  position: absolute;
+  top:0;
+  left:0;
 }
 
 /* The empty class is used to hide unneeded search results. This should be left alone. */
 .location_field a:empty, .species_field a:empty {
   display: none !important;
+}
+
+/*chart*/
+#chart-1 {
+  background: white;
+  padding: 10px;
+  box-shadow: 0px 0px 5px black;
+  max-width: 300px;
+}
+#chart-2 {
+  background: white;
+  padding: 10px;
+  box-shadow: 0px 0px 5px black;
+  max-width: 300px;
 }

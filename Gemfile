@@ -87,3 +87,6 @@ gem 'geocoder', '~> 1.6', '>= 1.6.3'
 
 # Create beautiful Javascript charts with one line of Ruby
 gem 'chartkick', '~> 1.4', '>= 1.4.1'
+
+# The simplest way to group temporal data
+gem 'groupdate', '~> 2.5', '>= 2.5.2'
