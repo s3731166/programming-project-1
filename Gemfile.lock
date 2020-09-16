@@ -74,6 +74,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
+    chartkick (1.5.2)
     childprocess (3.0.0)
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
@@ -230,6 +231,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
+  chartkick (~> 1.4, >= 1.4.1)
   chromedriver-helper
   coffee-rails (~> 4.2)
   geocoder (~> 1.6, >= 1.6.3)

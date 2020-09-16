@@ -339,7 +339,7 @@ a.admin:hover {
   padding-left:10px;
   float:left;
 }
-/* Keeps the weather inline with the min and max temp */
+/* Keeps the weather image inline with the min and max temp */
 .inline-wrapper{
   display: block;
 }
@@ -357,7 +357,7 @@ a.admin:hover {
   height: 45px;
   width: auto;
 }
-
+/*Makes alert errors stand out better*/
 #error_explanation {
   color:black;
 }
