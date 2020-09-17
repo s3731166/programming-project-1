@@ -1,17 +1,14 @@
-<header><h1><%= link_to "Plant Monitor", root_path %></h1></header>
-<nav>
+<header> 
     <div class="wrapper">
-        <% # Link to users page if logged-in user is admin %>
         <div class="title-link">
-            <%=  image_tag("big-logo.png", width: "140px") %>
+            <%=  image_tag("big-logo.png", width: "150px") %>
         </div>
-        <%# ADD THE 2 BUTTONS %>
-        <div class="nav-links">
-            <%= link_to "Dashboard", root_path%>
-            <%= link_to "Plant Management", plants_path%>
-            
+        <div>
+            <h1>
+                <%= link_to "Plant Monitor", root_path %>
+            </h1>
         </div>
-       
+        
         <%# OPEN RIGHT DIV %>
         <div class="user-info">
             <div class="name-and-date">
@@ -20,20 +17,19 @@
                     <div class="month"><%= Date.today.strftime("%b").upcase %></div>
                 </div>
 
-        <% if current_user%>
-                    <div class="name-and-title">
-                        <%=link_to current_user do%>
-                            <%= image_tag current_user.gravatar_url , :class => "gravatar", :title => "ADMINISTRATOR" if (current_user.admin) %>
-                        <% end %>
-                    </div>
+            <% if current_user%>
+                <div class="name-and-title">
+                    <%=link_to current_user do%>
+                        <%= image_tag current_user.gravatar_url , :class => "gravatar", :title => "ADMINISTRATOR" if (current_user.admin) %>
+                    <% end %>
+                </div>
             </div>
-            <div class="clear-floats"></div>
-                <%= if current_user.admin then link_to "Users", users_path end %> 
-                <%= link_to "Log out", logout_path, method: :delete %>
+                <div class="clear-floats"></div>
+                    <%= if current_user.admin then link_to "Users", users_path end %> 
+                    <%= link_to "Log out", logout_path, method: :delete %>
 
-        <% end %> 
+            <% end %> 
         </div> 
         <%# END RIGHT DIV %>
-
     </div>
-</nav>
+</header>

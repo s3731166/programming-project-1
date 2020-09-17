@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_113921) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "location"
-    t.string "variety"
+    t.string "type"
     t.integer "user_id"
     t.string "species"
     t.boolean "watered"
