@@ -193,7 +193,7 @@ class PlantsController < ApplicationController
       if @plant_decoded["data"]["growth"]["light"]
         #light is in 1/1000 notation
         light = @plant_decoded["data"]["growth"]["light"]
-        toSend+=(light*1000).to_s
+        toSend+=(light*2000).to_s
       end
     end
     render json: toSend, status: :ok
