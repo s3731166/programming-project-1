@@ -32,8 +32,13 @@
   </div>
 
   <div class = "field species_light">
-<%= form.label "Daily light (lux)" %>
+	<%= form.label "Daily light (lux)" %>
     <%= form.number_field :daily_light, in: 0..100000 %>
+  </div>
+  
+  <div class = "plant picture">
+	<%= form.label :plant_pic %>
+    <%= form.file_field :plant_pic %>
   </div>
 
   <div class="actions">
