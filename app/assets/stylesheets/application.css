@@ -219,6 +219,47 @@ a.admin:hover {
   margin-right: auto;
 }
 
+
+/* TOOLTIP FUNCTIONALITY */
+.tip-prompt {
+  border-radius: 50%;
+  border:1px dashed;
+  -moz-outline-radius: 50%;
+  color:lightblue;
+  font-size: 12px;
+  padding:1px 5px;
+  cursor: help;
+}
+
+.tooltip {
+  opacity:0;
+  position: absolute;
+  transform: translate(calc(-50% - 12px), calc(-2px - 100%));
+  border: 1px solid black;
+  background:antiquewhite;
+  border-radius: 3px;
+  padding-left:6px;
+  padding-right:6px;
+  pointer-events: none;
+  font-size:small;
+  color: black;
+  display: inline;
+  transition: opacity 0.5s;
+}
+
+.tip-prompt:hover+.tooltip, .tip-prompt:focus+.tooltip {
+  opacity: 1;
+}
+
+.tooltip:before {
+  color:#2554C7;
+  content: "WHAT'S THIS?";
+  font-size:0.8em;
+  display:block;
+  font-weight:bold;
+}
+/* END TOOLTIP FUNCTIONALITY */
+
 .date-box {
   border: 1px solid black;
   color:black;
@@ -342,6 +383,9 @@ a.admin:hover {
 /* Keeps the weather image inline with the min and max temp */
 .inline-wrapper{
   display: block;
+}
+.inline {
+  display: inline;
 }
 /* Weather sum is the weather image */
 .weather-sum{

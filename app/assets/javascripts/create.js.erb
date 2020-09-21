@@ -9,51 +9,44 @@
 %>
 
 function search_locations() {
-
   Rails.ajax({
-
     <%# Ajax request from controller method get_gecode%>
-    url: "/get_geocode_results?string=" + Rails.$(".loc-field")[0].value,
+    url: "/get_geocode_results?string=" + Rails.$(".location_field")[1].value,
     type: "get",
     success:  function retData(data){
       <%# Split returned array %>
       results_array = data.split("|")
 
-      <%# Assign location field as first in class ".loc-field" %>
-      location_field = Rails.$(".loc-field")[0]
+      <%# Assign location field as first in class ".location_field" %>
+      location_field = Rails.$(".location_field")[0]
 
       <%# Create array of HTML links (<a> tags) %>
-      links = [ document.createElement("A"), document.createElement("A"), document.createElement("A"), document.createElement("A") ]
+      links = [ 
+      document.createElement("A"), 
+      document.createElement("A"), 
+      document.createElement("A"), 
+      document.createElement("A")
+      ]
 
       <%# add "suggest" class to location field (removes bottom curved corners) %>
       location_field.classList.add("suggest")
 
       <%# Check if child elements exist for creation or edit %>
-      if(Rails.$(".location_field")[0].childElementCount<4){
-        for (i=0;i<4;i++) {
-          links[i].className = "location-suggest-"+i
-          links[i].innerHTML = results_array[i];
-          links[i].onclick = function() { Rails.$(".loc-field")[0].value = this.innerHTML;
-           remove_links("location_field", "location-suggest") }
-        }
-        <%# Append/create only as many that exist %>
-        for (i=0;i<4&&results_array[i]!=null;i++) {
-            if (results_array[i].length > 0) { Rails.$(".location_field")[0].appendChild(links[i]); }
-        }
-      }else{
-        <%# For all suggestion links (out of the possible 4) that exist on the page, change text to corresponding string in API results %>
-        if (Rails.$(".location-suggest-0").length != 0) {
-          Rails.$(".location-suggest-0")[0].innerHTML = results_array[0]
-        }
-        if (Rails.$(".location-suggest-1").length != 0) {
-          Rails.$(".location-suggest-1")[0].innerHTML = results_array[1]
-        }
-        if (Rails.$(".location-suggest-2").length != 0) {
-          Rails.$(".location-suggest-2")[0].innerHTML = results_array[2]
-        }
-        if (Rails.$(".location-suggest-3").length != 0) {
-          Rails.$(".location-suggest-3")[0].innerHTML = results_array[3]
-        }
+      if(Rails.$(".location_field")[0].childElementCount>5){
+        remove_links("location_field", "location_suggest")
+      }
+      for (i=0;i<4;i++) {
+        links[i].className = "location_suggest-"+i
+        links[i].innerHTML = results_array[i];
+        links[i].onclick = function() { 
+          Rails.$(".location_field")[1].value = this.innerHTML;
+          remove_links("location_field", "location_suggest")
+           }
+      }
+      
+      <%# Append/create only as many that exist %>
+      for (i=0;i<4&&results_array[i]!=null;i++) {
+          if (results_array[i].length > 0) { Rails.$(".location_field")[0].appendChild(links[i]); }
       }
     }
     <%# END Success Function %>
@@ -63,7 +56,7 @@ function search_locations() {
 
 <%# Remove Elements upon clicking one %>
 function remove_links(field, suggests) {
-    Rails.$("."+field)[0].classList.remove("suggest")
+    Rails.$("."+field)[1].classList.remove("suggest")
     for(i=0;i<Rails.$("."+field)[0].childElementCount+1;++i){
       if (Rails.$("."+suggests+'-'+i)[0]!=null){
         Rails.$("."+suggests+'-'+i)[0].remove()
@@ -77,7 +70,7 @@ function search_species(){
   Rails.ajax({
 
     <%# Ajax request from controller method get_spec%>
-    url: "/get_spec_results?toSearch=" + Rails.$(".spec-field")[0].value,
+    url: "/get_spec_results?toSearch=" + Rails.$(".species_field")[1].value,
     type: "get",
     success:  function retData(data){
       <%# Split returned array %>
@@ -98,14 +91,14 @@ function search_species(){
       species_field.classList.add("suggest")
 
       <%# Check if child elements exist for creation or edit %>
-      if(Rails.$(".species_field")[0].childElementCount>2){
-        remove_links("species_field","species-suggest")
+      if(Rails.$(".species_field")[0].childElementCount>5){
+        remove_links("species_field","species_suggest")
       }
       for (i=0;i<4&&final_array[i];i++) {
-        links[i].className = "species-suggest-"+i
+        links[i].className = "species_suggest-"+i
         links[i].innerHTML = final_array[i][0];
-        links[i].onclick = function() { Rails.$(".spec-field")[0].value = this.innerHTML; 
-         remove_links("species_field", "species-suggest") }
+        links[i].onclick = function() { Rails.$(".species_field")[1].value = this.innerHTML; 
+         remove_links("species_field", "species_suggest") }
       }
       <%# Append/create only as many that exist %>
       for (i=0;i<4&&final_array[i]!=null;i++) {
@@ -116,4 +109,3 @@ function search_species(){
   })
   <%# END Ajax %>
   }
-

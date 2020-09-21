@@ -17,22 +17,43 @@
   </div>
 <%# Calls Method in Assests/JS with #loc-field %>
   <div class="field location_field">
-    <%= form.label  "Search Location" %>
+    <%= form.label "Search Location", class: "inline"%>
+    <span class="tip-prompt" tabindex="0">?</span>
+    <div class = "tooltip">
+    This field will automatically suggest city names and country to select from. <br>
+    Once picked, city info will be automatically filled in.<br>
+    It is important to select a known location from suggestions for weather purposes.<br>
+    </div><br>
     <%= form.text_field :locationName, class: "location_field", oninput: "search_locations()", autocomplete: 'off' %>
   </div>
 
   <div class="field species_field">
-    <%= form.label :species %>
+    <%= form.label :species , class: "inline" %> 
+    <span class="tip-prompt" tabindex="0">?</span>
+    <div class = "tooltip">
+    This field will automatically suggest names of plants to select from. <br>
+    Once picked, plant info will be automatically filled in to the following fields, if possible.<br>
+    </div><br>
     <%= form.text_field :species, class: "species_field", oninput: "search_species()", autocomplete: 'off' %>
   </div>
 
   <div class = "field species_water">
-    <%= form.label "Daily water (mm)" %>
+    <%= form.label "Daily water (mm)", class: "inline" %>
+    <span class="tip-prompt" tabindex="0">?</span>
+    <div class = "tooltip">
+    Represents the water needed daily for this plant to survive. <br>
+    If not automatically filled, please fill.<br>
+    </div><br>
     <%= form.number_field :daily_water, in: 0..12000 %>
   </div>
 
   <div class = "field species_light">
-<%= form.label "Daily light (lux)" %>
+    <%= form.label "Daily light (lux)", class: "inline" %>
+    <span class="tip-prompt" tabindex="0">?</span>
+    <div class = "tooltip">
+      Represents the light needed daily for this plant to survive. <br>
+      If not automatically filled, please fill.<br>
+    </div><br>
     <%= form.number_field :daily_light, in: 0..100000 %>
   </div>
 

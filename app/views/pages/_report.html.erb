@@ -12,7 +12,7 @@
         messages: {empty:"No Records!"}, id: "graph-"+plant.id.to_s %>
 
         <% valueChoices = options_for_select( [ ["Water", ":water_recorded"], ["Tempature", ":temp_recorded"] ] ) %>
-        <% timeChoices = options_for_select( [ ["Day", "group_by_day"], ["Month", "group_by_month"], ["Year","group_by_year"] ] ) %>
+        <% timeChoices = options_for_select( [ ["Week", "week"], ["Month", "month"], ["Year","year"] ] ) %>
         <%dataSelect = select("dataSelect", "selectValue-"+plant.id.to_s, valueChoices,
             {}, onchange: "change_graph("+plant.id.to_s+")" ) %>
         <%timeSelect = select("timeSelect", "selectTime-"+plant.id.to_s, timeChoices,

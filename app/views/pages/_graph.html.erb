@@ -3,5 +3,14 @@
    #and uses these to create a line chart. %>
 <% toGraph = Plant.find_by(id: Integer(@plant_for_graph)) %>
 <%@records = toGraph.plant_records %>
-<%= line_chart @records.group_by_day(:created_at).average(@report_value), 
-messages: {empty:"No Records!"}, id: "graph-"+@plant_for_graph, xtitle: "Date", ytitle: @report_value.to_s.gsub('_',' ').capitalize, width: "320px" %>
+<%case @report_time
+   when "week" 
+      count = 7
+   when "month"
+      count = 31
+   when "year"
+      count = 365
+   end%>
+<%=   line_chart @records.group_by_day(:created_at, last: count).average(@report_value), 
+      messages: {empty:"No Records!"}, id: "graph-"+@plant_for_graph, xtitle: "Dates", 
+      ytitle: @report_value.to_s.gsub('_',' ').capitalize, width: "320px" %>
