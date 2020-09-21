@@ -18,12 +18,12 @@
 <%# Calls Method in Assests/JS with #loc-field %>
   <div class="field location_field">
     <%= form.label  "Search Location" %>
-    <%= form.text_field :locationName, class: "loc-field", oninput: "search_locations()", autocomplete: 'off' %>
+    <%= form.text_field :locationName, class: "location_field", oninput: "search_locations()", autocomplete: 'off' %>
   </div>
 
   <div class="field species_field">
     <%= form.label :species %>
-    <%= form.text_field :species, class: "spec-field", oninput: "search_species()", autocomplete: 'off' %>
+    <%= form.text_field :species, class: "species_field", oninput: "search_species()", autocomplete: 'off' %>
   </div>
 
   <div class = "field species_water">

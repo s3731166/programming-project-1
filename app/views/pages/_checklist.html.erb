@@ -8,7 +8,7 @@
                 <%= form.label :watered do %>
                     Watered? 
                     <% if plant.daily_water %>
-                        <br><%= "("+plant.daily_water.to_s+"mm)" %>
+                        <br><%= "("+plant.daily_water.to_s+"ml)" %>
                     <% end %>
                 <% end %><%= form.check_box :watered, { disabled: plant.watered } %><br>
             </div>

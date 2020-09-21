@@ -403,15 +403,11 @@ a.admin:hover {
 }
 
 /*chart*/
-#chart-1 {
+.report {
   background: white;
   padding: 10px;
   box-shadow: 0px 0px 5px black;
-  max-width: 300px;
-}
-#chart-2 {
-  background: white;
-  padding: 10px;
-  box-shadow: 0px 0px 5px black;
-  max-width: 300px;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
 }

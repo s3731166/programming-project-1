@@ -33,7 +33,8 @@ function search_locations() {
         for (i=0;i<4;i++) {
           links[i].className = "location-suggest-"+i
           links[i].innerHTML = results_array[i];
-          links[i].onclick = function() { Rails.$(".loc-field")[0].value = this.innerHTML; remove_links("loc-field", "location-suggest") }
+          links[i].onclick = function() { Rails.$(".loc-field")[0].value = this.innerHTML;
+           remove_links("location_field", "location-suggest") }
         }
         <%# Append/create only as many that exist %>
         for (i=0;i<4&&results_array[i]!=null;i++) {
@@ -63,57 +64,52 @@ function search_locations() {
 <%# Remove Elements upon clicking one %>
 function remove_links(field, suggests) {
     Rails.$("."+field)[0].classList.remove("suggest")
-    Rails.$("."+suggests+"-0")[0].remove()
-    Rails.$("."+suggests+"-1")[0].remove()
-    Rails.$("."+suggests+"-2")[0].remove()
-    Rails.$("."+suggests+"-3")[0].remove()
+    for(i=0;i<Rails.$("."+field)[0].childElementCount+1;++i){
+      if (Rails.$("."+suggests+'-'+i)[0]!=null){
+        Rails.$("."+suggests+'-'+i)[0].remove()
+        
+      }
+    }
 }
 
 function search_species(){
 
   Rails.ajax({
 
-    <%# Ajax request from controller method get_gecode%>
+    <%# Ajax request from controller method get_spec%>
     url: "/get_spec_results?toSearch=" + Rails.$(".spec-field")[0].value,
     type: "get",
     success:  function retData(data){
       <%# Split returned array %>
-      results_array = data.split("|")
-
-      <%# Assign location field as first in class ".spec-field" %>
-      location_field = Rails.$(".spec-field")[0]
+      hold_array = data.split("|")
+      final_array = []
+      for(i=0;i<hold_array.length;++i){
+        check_array = hold_array[i].split(',')
+        final_array[i] = check_array
+      }
+      
+      <%# Assign species field as first in class ".species-field" %>
+      species_field = Rails.$(".species_field")[0]
 
       <%# Create array of HTML links (<a> tags) %>
       links = [ document.createElement("A"), document.createElement("A"), document.createElement("A"), document.createElement("A") ]
 
       <%# add "suggest" class to species field (removes bottom curved corners) %>
-      location_field.classList.add("suggest")
+      species_field.classList.add("suggest")
 
       <%# Check if child elements exist for creation or edit %>
-      if(Rails.$(".species_field")[0].childElementCount<4){
-        for (i=0;i<4;i++) {
-          links[i].className = "species-suggest-"+i
-          links[i].innerHTML = results_array[i];
-          links[i].onclick = function() { Rails.$(".spec-field")[0].value = this.innerHTML; remove_links("spec-field","species-suggest") }
-        }
-        <%# Append/create only as many that exist %>
-        for (i=0;i<4&&results_array[i]!=null;i++) {
-            if (results_array[i].length > 0) { Rails.$(".species_field")[0].appendChild(links[i]); }
-        }
-      }else{
-        <%# For all suggestion links (out of the possible 4) that exist on the page, change text to corresponding string in API results %>
-        if (Rails.$(".species-suggest-0").length != 0) {
-          Rails.$(".species-suggest-0")[0].innerHTML = results_array[0]
-        }
-        if (Rails.$(".species-suggest-1").length != 0) {
-          Rails.$(".species-suggest-1")[0].innerHTML = results_array[1]
-        }
-        if (Rails.$(".species-suggest-2").length != 0) {
-          Rails.$(".species-suggest-2")[0].innerHTML = results_array[2]
-        }
-        if (Rails.$(".species-suggest-3").length != 0) {
-          Rails.$(".species-suggest-3")[0].innerHTML = results_array[3]
-        }
+      if(Rails.$(".species_field")[0].childElementCount>2){
+        remove_links("species_field","species-suggest")
+      }
+      for (i=0;i<4&&final_array[i];i++) {
+        links[i].className = "species-suggest-"+i
+        links[i].innerHTML = final_array[i][0];
+        links[i].onclick = function() { Rails.$(".spec-field")[0].value = this.innerHTML; 
+         remove_links("species_field", "species-suggest") }
+      }
+      <%# Append/create only as many that exist %>
+      for (i=0;i<4&&final_array[i]!=null;i++) {
+          if (final_array[i].length > 0) { Rails.$(".species_field")[0].appendChild(links[i]); }
       }
     }
     <%# END Success Function %>

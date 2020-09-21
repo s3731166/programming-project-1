@@ -26,14 +26,7 @@ class Plant < ApplicationRecord
         record = PlantRecord.new()
         record.water_recorded = plant.daily_water
       end
-      # If the plant has a light level and there is no record, build a record with the plant's light level
-      # If there is a light level and a record, add the light level to the existing record
-      if plant.daily_light and plant.sunlight
-        if record.nil?
-          record = PlantRecord.new()
-        end
-        record.light_recorded = plant.daily_light
-      end
+      
       # If the record has a value, save the record
       if record
         plant.plant_records << record

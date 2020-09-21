@@ -3,7 +3,8 @@
 %>
    <h1>Dashboard</h1>
 <% link_to 'New Plant', plants_path%>
-<%= collection_select(:plant, :plant_id, @plants.order(:created_at), :id, :name, { selected: @plants.first }, { onchange: "change_plant(this)", :selected => @plants.first }) %>
+<%= collection_select(:plant, :plant_id, @plants.order(:created_at), :id, :name,
+ { selected: @plants.first }, { onchange: "change_plant(this)", :selected => @plants.first }) %>
 <script>document.getElementById("plant_plant_id").selectedIndex = 0;</script>
 <hr>
 <% @plants.order(:created_at).each do |current_plant| %>
