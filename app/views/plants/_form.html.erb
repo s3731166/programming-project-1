@@ -1,4 +1,4 @@
-<%= form_with(model: plant) do |form| %>
+as<%= form_with(model: plant) do |form| %>
   <% if plant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(plant.errors.count, "error") %> prohibited this plant from being saved:</h2>
@@ -44,7 +44,7 @@
     Represents the water needed daily for this plant to survive. <br>
     If not automatically filled, please fill.<br>
     </div><br>
-    <%= form.number_field :daily_water, in: 0..12000 %>
+    <%= form.number_field :daily_water, in: 0..12000, id: "plant_daily_water"%>
   </div>
 
   <div class = "field species_light">
@@ -54,7 +54,7 @@
       Represents the light needed daily for this plant to survive. <br>
       If not automatically filled, please fill.<br>
     </div><br>
-    <%= form.number_field :daily_light, in: 0..100000 %>
+    <%= form.number_field :daily_light, in: 0..100000, id: "plant_daily_light" %>
   </div>
 
   <div class="actions">

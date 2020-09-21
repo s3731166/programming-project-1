@@ -66,9 +66,7 @@ function remove_links(field, suggests) {
 }
 
 function search_species(){
-
   Rails.ajax({
-
     <%# Ajax request from controller method get_spec%>
     url: "/get_spec_results?toSearch=" + Rails.$(".species_field")[1].value,
     type: "get",
@@ -81,7 +79,7 @@ function search_species(){
         final_array[i] = check_array
       }
       
-      <%# Assign species field as first in class ".species-field" %>
+      <%# Assign species field as first in class ".species_field" %>
       species_field = Rails.$(".species_field")[0]
 
       <%# Create array of HTML links (<a> tags) %>
@@ -94,12 +92,22 @@ function search_species(){
       if(Rails.$(".species_field")[0].childElementCount>5){
         remove_links("species_field","species_suggest")
       }
-      for (i=0;i<4&&final_array[i];i++) {
+      for (i=0;i<4&&final_array[i];++i) {
         links[i].className = "species_suggest-"+i
-        links[i].innerHTML = final_array[i][0];
-        links[i].onclick = function() { Rails.$(".species_field")[1].value = this.innerHTML; 
-         remove_links("species_field", "species_suggest") }
+        links[i].innerHTML = final_array[i][0]
       }
+      links[0].addEventListener("click" , function(){
+        delegate(0, final_array[0][2], links[0].innerHTML)
+      })
+      links[1].addEventListener("click" , function(){
+        delegate(1, final_array[1][2], links[1].innerHTML)
+      })
+      links[2].addEventListener("click" , function(){
+        delegate(2, final_array[2][2], links[2].innerHTML)
+      })
+      links[3].addEventListener("click" , function(){
+        delegate(3, final_array[3][2], links[3].innerHTML)
+      })
       <%# Append/create only as many that exist %>
       for (i=0;i<4&&final_array[i]!=null;i++) {
           if (final_array[i].length > 0) { Rails.$(".species_field")[0].appendChild(links[i]); }
@@ -108,4 +116,33 @@ function search_species(){
     <%# END Success Function %>
   })
   <%# END Ajax %>
+  }
+
+function delegate(clickedId, plantId, textToFill){
+  Rails.$(".species_field")[1].value =  textToFill
+  remove_links("species_field", "species_suggest")
+  fillFields(plantId)
+}
+
+function fillFields(id){
+  Rails.ajax({
+    <%# Ajax request from controller method get_plant %>
+    url: "/get_plants?id="+ id,
+    type: "get",
+    success:  function retData(data){
+      result = data.split('|')
+      if(result[0]!=null){
+        document.getElementById("plant_daily_water").value = result[0]
+      }else{
+        document.getElementById("plant_daily_water").value - ""
+      }
+      if(result[1]!=null){
+        document.getElementById("plant_daily_light").value = result[1]
+      }else{
+        document.getElementById("plant_daily_light").value = ""
+      }
+      <%# END Success Function %>
+    }
+    <%# END Ajax %>
+  })
   }
