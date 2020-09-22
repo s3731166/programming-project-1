@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2020_09_18_010345) do
     t.decimal "daily_water"
     t.decimal "daily_light"
     t.integer "treffleID"
+    t.decimal "water_level"
+    t.decimal "sun_time"
   end
 
   create_table "users", force: :cascade do |t|
