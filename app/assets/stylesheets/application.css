@@ -16,9 +16,10 @@
 
    
 html {
-  background-image: url('Bkg.bmp');
+  /* background-image: url('Bkg.bmp'); */
   /* background-repeat: repeat; */
   background-size: cover;
+  background-color: lightblue;
   padding-left: 8px;
   padding-right: 8px;
 }
