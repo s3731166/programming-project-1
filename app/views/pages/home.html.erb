@@ -1,11 +1,9 @@
-<% # Until an admin account is made, load the _noadmin page
-   # After that, if user is logged in, then load the _loggedin page, or else load the _loggedout page 
-%>
-   <h1>Dashboard</h1>
+
 <% link_to 'New Plant', plants_path%>
-<%= collection_select(:plant, :plant_id, @plants.order(:created_at), :id, :name,
- { selected: @plants.first }, { onchange: "change_plant(this)", :selected => @plants.first }) %>
+<%= collection_select(:plant, :plant_id, @plants.order(:created_at), :id, :name, { selected: @plants.first }, { onchange: "change_plant(this)", :selected => @plants.first , :class =>'choice'}) %>
 <script>document.getElementById("plant_plant_id").selectedIndex = 0;</script>
+            <%= link_to "Plant Management", plants_path%>
+
 <hr>
 <% @plants.order(:created_at).each do |current_plant| %>
    <div id="plant-<%= current_plant.id %>" class="dashboard-plant-info <% if current_plant != @plants.first %> hide <% end %>">
