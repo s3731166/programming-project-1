@@ -16,7 +16,9 @@
 
    
 html {
-  background-color: lightskyblue;
+  background-image: url('Bkg.bmp');
+  /* background-repeat: repeat; */
+  background-size: cover;
   padding-left: 8px;
   padding-right: 8px;
 }
@@ -27,7 +29,7 @@ body {
   margin: revert;
   margin-left: auto;
   margin-right: auto;
-  max-width: 90%;
+  max-width: 70%;
   text-align: center;
   border: 1px solid black;
   padding: 1px;
