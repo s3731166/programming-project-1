@@ -1,0 +1,3 @@
+<%# Sets the element html of "chart-plant-#" where # is plant id%>
+<%# to a graph partial of relevant data (Partial being _graph.html.erb) %>
+$("#chart-plant-<%= escape_javascript(@plant_for_graph.to_s) %>").html("<%= escape_javascript(render partial: 'graph', locals: { plant_for_graph: @plant_for_graph })%>")

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_055929) do
+ActiveRecord::Schema.define(version: 2020_09_18_010345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,11 +37,11 @@ ActiveRecord::Schema.define(version: 2020_09_16_055929) do
   end
 
   create_table "plant_records", force: :cascade do |t|
-    t.decimal "light_recorded"
     t.decimal "water_recorded"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "plant_id"
+    t.decimal "temp_recorded"
   end
 
   create_table "plants", force: :cascade do |t|
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2020_09_16_055929) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "location"
-    t.string "variety"
     t.integer "user_id"
     t.string "species"
     t.boolean "watered"
@@ -58,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_09_16_055929) do
     t.string "locationName"
     t.decimal "daily_water"
     t.decimal "daily_light"
+    t.integer "treffleID"
   end
 
   create_table "users", force: :cascade do |t|

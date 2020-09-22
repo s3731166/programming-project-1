@@ -89,3 +89,6 @@ gem 'geocoder', '~> 1.6', '>= 1.6.3'
 gem 'chartkick', '~> 1.4', '>= 1.4.1'
 
 gem "aws-sdk-s3", require: false
+
+# The simplest way to group temporal data
+gem 'groupdate', '~> 2.5', '>= 2.5.2'
