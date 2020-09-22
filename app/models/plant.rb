@@ -27,6 +27,15 @@ class Plant < ApplicationRecord
         record.water_recorded = plant.daily_water
       end
       
+      # Record average tempatrure for day
+      weatherJson = @plant.get_weather
+      if weatherJson["main"]
+        averageWeather = (weatherJson["main"]["temp_max"]+weatherJson["main"]["temp_min"]) / 2
+        if !record
+          record = PlantRecord.new()
+        end
+        record.temp_recorded = averageWeather
+      end
       # If the record has a value, save the record
       if record
         plant.plant_records << record
