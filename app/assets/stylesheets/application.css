@@ -59,18 +59,21 @@ select, input {
 
 header {
   background-color: #276ba6;
-  display: flow-root;
+  /* display: flow-root; */
   /* border-radius: 0.5em 0.5em 0em 0em; */
   padding: 3em;
+  text-align: center;
 }
 
 
 a, button, input[type="submit"] {
-  color: black;
+  color: white;
   padding: 0.3em;
   background-color: lavender;
   /* border-radius: 0.3em; */
   border:none;
+  display: inline;
+  margin: auto;
   text-decoration:underline;
   border:1px solid;
 }
@@ -365,6 +368,8 @@ a.admin:hover {
 .gravatar {
   height: 45px;
   width: auto;
+  border-radius: .6em;
+  box-shadow: 6px 6px  6px #151515;
 }
 
 #error_explanation {
