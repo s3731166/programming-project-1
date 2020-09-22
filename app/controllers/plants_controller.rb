@@ -74,8 +74,6 @@ class PlantsController < ApplicationController
     @plant.sunlight = false
     @plant.trimmed = false
     @plant.user = current_user
-    # Attempt to fill fields through plant lookup, on nil fields
-    plant_lookup()
     respond_to do |format|
       if @plant.save
         message = 'Plant was successfully updated.'
@@ -101,8 +99,6 @@ class PlantsController < ApplicationController
         if searchResults
           @plant.location = searchResults.first.coordinates
         end
-        # Attempt auto-Fill water and light fields if nil
-        plant_lookup()
         if @plant.save
           message = 'Plant was successfully updated.'
           if !@plant.daily_water or !@plant.daily_light
@@ -182,6 +178,8 @@ class PlantsController < ApplicationController
           if species_decoded["data"][i]["image_url"]
             toSend+=species_decoded["data"][i]["image_url"]
           end
+          toSend+=','
+          toSend+=species_decoded["data"][i]["id"].to_s
           toSend+='|'
         end
         # end the if data
@@ -194,43 +192,33 @@ class PlantsController < ApplicationController
   
   # Will lookup @plant for daily water and light required fields given those fields are nil
   # Does not garuntee fields will be filled
-  def plant_lookup
+  def get_plant
     auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
     results = HTTParty.get(
-      'https://trefle.io/api/v1/species/search',
+      'https://trefle.io/api/v1/species/'+params["id"],
     query: {
-      "q": @plant.species,
       "token": auth_token
     })
-    @species_decoded = results.parsed_response
+    @plant_decoded = results.parsed_response
     # Assume with specices lookup active in form,
     # that first result will be accurate enough for id attainment of correct plant
-    if @species_decoded["data"][0]
-      @plant.treffleID = @species_decoded["data"][0]["id"]
-    end
-    if @plant.treffleID
-      # Retirve plant details
-      results = HTTParty.get(
-        'https://trefle.io/api/v1/plants/'+@plant.treffleID.to_s+"?token="+auth_token
-      )
-      @species_decoded = results.parsed_response 
-      
-      if @species_decoded["data"]
-        if @species_decoded["data"]["main_species"]["growth"]["minimum_precipitation"]["mm"] and @plant.daily_water==nil
-          #Precipitation values are annual, daily_avg  = ((max + min) / 2) / 364 
-          @plant.daily_water = ((@species_decoded["data"]["main_species"]["growth"]["maximum_precipitation"]["mm"] + 
-          @species_decoded["data"]["main_species"]["growth"]["minimum_precipitation"]["mm"])/2) /365                
-        end
-        #Light level is 1/10,000th of lux levels; I.e 8 = 80,000 lux
-        if @species_decoded["data"]["main_species"]["growth"]["light"] and @plant.daily_light==nil
-          @plant.daily_light =  @species_decoded["data"]["main_species"]["growth"]["light"]*1000
-          #0*1000 = 0, and as such if zero, must be assigned to 10 lux
-          if @plant.daily_light == 0
-              @plant.daily_light+=10
-          end
-        end
+    toSend=""
+    if @plant_decoded["data"]["growth"]
+      if @plant_decoded["data"]["growth"]["minimum_precipitation"]["mm"] && @plant_decoded["data"]["growth"]["maximum_precipitation"]["mm"]
+        # Daily average = (min+max / 2) / 365
+        daily_water = (@plant_decoded["data"]["growth"]["minimum_precipitation"]["mm"] + @plant_decoded["data"]["growth"]["maximum_precipitation"]["mm"] / 2) / 365
+          # Round to the nearest 50ml
+          daily_water= ((daily_water.to_d/50).ceil) *50
+          toSend+=(daily_water).to_s
+      end
+      toSend+="|"
+      if @plant_decoded["data"]["growth"]["light"]
+        #light is in 1/1000 notation
+        light = @plant_decoded["data"]["growth"]["light"]
+        toSend+=(light*2000).to_s
       end
     end
+    render json: toSend, status: :ok
   end
 
   private
