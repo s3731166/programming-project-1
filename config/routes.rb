@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # devise_for :users
   resources :plants
   root 'pages#home'
   get 'signup', to: 'users#new'
