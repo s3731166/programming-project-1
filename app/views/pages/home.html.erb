@@ -10,6 +10,12 @@
 <% @plants.order(:created_at).each do |current_plant| %>
    <div id="plant-<%= current_plant.id %>" class="dashboard-plant-info <% if current_plant != @plants.first %> hide <% end %>">
       <%= render "weather_summary", plant: current_plant %> 
+      <div class="center-dashboard">MAIN SECTION</div>
+	  <%= link_to current_plant.name, current_plant %>
+	  <br>
+	  <% if current_plant.plant_pic.attached? %>
+		<%= image_tag current_plant.plant_pic, size: "75" %>
+	  <% end %>
       <div class="center-dashboard">
       <%= render "report", plant: current_plant %></div>
       <%= render "checklist", plant: current_plant %>

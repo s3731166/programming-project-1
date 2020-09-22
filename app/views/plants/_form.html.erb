@@ -48,6 +48,7 @@ as<%= form_with(model: plant) do |form| %>
   </div>
 
   <div class = "field species_light">
+
     <%= form.label "Daily light (lux)", class: "inline" %>
     <span class="tip-prompt" tabindex="0">?</span>
     <div class = "tooltip">
@@ -56,6 +57,11 @@ as<%= form_with(model: plant) do |form| %>
       If not automatically filled, please fill.<br>
     </div><br>
     <%= form.number_field :daily_light, in: 0..500000, step: 100, id: "plant_daily_light" %>
+  </div>
+  
+  <div class = "plant picture">
+	<%= form.label :plant_pic %>
+    <%= form.file_field :plant_pic %>
   </div>
 
   <div class="actions">

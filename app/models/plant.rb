@@ -1,6 +1,7 @@
 class Plant < ApplicationRecord
   belongs_to :user
   has_many :plant_records
+  has_one_attached :plant_pic
 
   def get_weather
     #ActiveSupport::JSON.decode(open('http://api.openweathermap.org/data/2.5/weather?q=melbourne,au&APPID=9b732f988a82cb5ec7499a0d0e6416ff&units=metric'

@@ -19,6 +19,28 @@ class PlantsController < ApplicationController
   # GET /plants/1
   # GET /plants/1.json
   def show
+	auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
+    results = HTTParty.get(
+      'https://trefle.io/api/v1/species/search',
+    query: {
+      "q": @plant.species,
+      "token": auth_token
+    })
+	@species_decoded = results.parsed_response
+	@plantImage = @species_decoded["data"][0]["image_url"]
+	
+	plantId = nil
+    if @species_decoded["data"][0]
+      plantId = @species_decoded["data"][0]["id"]
+    end
+    if plantId
+      # Retirve plant details
+      plantResults = HTTParty.get(
+        'https://trefle.io/api/v1/species/'+plantId.to_s+"?token="+auth_token
+      )
+      @plants_decoded = plantResults.parsed_response
+	@plantDescription = @plants_decoded["data"]["growth"]["description"]
+	end
   end
 
   # GET /plants/new
@@ -207,7 +229,7 @@ class PlantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def plant_params
-      params.require(:plant).permit(:name, :location, :locationName, :species, :watered, :sunlight, :trimmed, :daily_water, :daily_light)
+      params.require(:plant).permit(:name, :location, :locationName, :species, :watered, :sunlight, :trimmed, :daily_water, :daily_light, :plant_pic)
     end
   end
 
