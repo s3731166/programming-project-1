@@ -87,8 +87,9 @@ class User < ApplicationRecord
     def notify(body)
         begin
             account_sid = 'AC1f9a60a66869c95de7e80492d52f3dd3'
-            auth_token = 'a347831fc9a1cc4a65b7f9e252529ebe'
-            client = Twilio::REST::Client.new(account_sid, auth_token)
+            api_sid = "SKa9acd53d62bbe66526c78b7bd6105c13"
+            api_secret = "soqB2yV9co4lyJoRS0UW7HQiCom8lbEP"
+            client = Twilio::REST::Client.new api_sid, api_secret, account_sid
             from = '+61488856462' # Your Twilio number
             to = "+61" + phone # Your mobile phone number ------ "+" + user.phone = "+04,d{8}"
             client.messages.create({
@@ -124,8 +125,8 @@ class User < ApplicationRecord
                             message+="Needs to be put in sunlight\!"
                         end
                         message+="\n"
-                        if plant.trimmed?
-                            message+="Has been trimmed."
+                        if plant.relocated?
+                            message+="Has been relocated."
                         end
                     end
                 end
@@ -134,6 +135,12 @@ class User < ApplicationRecord
             end
         end
     end
+    # This method will compare forecasted weather from plants location
+    # Against their outside plants paramaters, if exceeded (e.g: temp > plants max_temp) 
+    # Notifies user to relocate their plant to indoors.
+    def User.danger_check
+    end
+
     def User.reset_daily
         @users = User.all
         @users.each do |user|
@@ -142,7 +149,7 @@ class User < ApplicationRecord
                     if plant
                         plant.watered = false
                         plant.sunlight = false
-                        plant.trimmed = false
+                        plant.relocated = false
                     end
                 end
             end

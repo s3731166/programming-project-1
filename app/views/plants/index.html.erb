@@ -10,7 +10,7 @@
         <th>Owner</th>
         <th>Watered Today?</th>
         <th>Moved today?</th>
-        <th>Trimmed Today?</th>
+        <th>Relocated Today?</th>
         <th colspan="2">Actions</th>
       </tr>
     </thead>
@@ -21,7 +21,7 @@
           <td><%= link_to plant.user.name, plant.user, {class: plant.user.get_styled_class } %></td>
           <td><%= plant.watered %></td>
           <td><%= plant.sunlight %></td>
-          <td><%= plant.trimmed %></td>
+          <td><%= plant.relocated %></td>
           <td><%= link_to 'Edit', edit_plant_path(plant) %></td>
           <td><%= link_to 'Destroy', plant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>

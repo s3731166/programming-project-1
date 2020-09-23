@@ -4,10 +4,9 @@
 <h4>Co-Ords: <%= @plant.location %></h4>
 <h3>Species: <%= @plant.species %></h3>
 <h3>Daily water (mm): <%= @plant.daily_water%></h3>
-<h3>Daily light (lux): <%= @plant.daily_light%></h3>
+<h3>Outside Plant?: <%= @plant.outside%></h3>
 <h3>Owned By: <%= @plant.user.name %></h3>
-<h3>Description: <%= @plantDescription %></h3>
-
+<h3>Description: <%=@plantDescription%></h3>
 <% if @plant.watered == false %>
 	<h3>Plant needs to be watered today!<h3>
 <% else %>
@@ -20,10 +19,10 @@
 	<h3>Plant is happy and has recived sunlight!</h3>
 <% end %>
 
-<% if @plant.trimmed == false %>
-	<h3>Plant has not recived trimming if required.<h3>
+<% if @plant.relocated == false %>
+	<h3>Plant has not been relocated.<h3>
 <% else %>
-	<h3>Plant has been trimmed!</h3>
+	<h3>Plant has been relocated!</h3>
 <% end %>
 
 <% if @plant.plant_pic.attached? %>

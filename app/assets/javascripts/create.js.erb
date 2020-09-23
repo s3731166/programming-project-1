@@ -137,9 +137,11 @@ function fillFields(id){
         document.getElementById("plant_daily_water").value - ""
       }
       if(result[1]!=null){
-        document.getElementById("plant_daily_light").value = result[1]
-      }else{
-        document.getElementById("plant_daily_light").value = ""
+        if (result[1]>10000){
+          document.getElementById("outsideSet").checked = true
+        }else{
+          document.getElementById("outsideSet").checked = false
+        }
       }
       <%# END Success Function %>
     }

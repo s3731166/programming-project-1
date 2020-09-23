@@ -13,13 +13,18 @@
                 <% end %><%= form.check_box :watered, { disabled: plant.watered } %><br>
             </div>
             <div class="check-content">
-                <%= form.label :sunlight %> <%= form.check_box :sunlight, { disabled: plant.sunlight }%><br>
+                <%= form.label :relocated %><span class="tip-prompt" tabindex="0">?</span>
+                <div class = "tooltip">
+                Represents moving your plant outside/inside from its normal position.<br>
+                Used for tracking plant health for advantageous or disadvantageous weather.<br>
+                </div><br>
+                <%= form.check_box :relocated, { disabled: plant.relocated } %>
             </div>
             <div class="check-content">
-                <%= form.label :trimmed %> <%= form.check_box :trimmed, { disabled: plant.trimmed } %>
+                <%= form.label :sunlight %> <%= form.check_box :sunlight, { disabled: plant.sunlight }%><br>
             </div>
             <div class="actions">
-                <%= form.submit "Update Plant", { disabled: plant.watered&&plant.sunlight&&plant.trimmed } %>
+                <%= form.submit "Update Plant", { disabled: plant.watered&&plant.sunlight&&plant.relocated } %>
             </div>
         </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_010345) do
+ActiveRecord::Schema.define(version: 2020_09_23_043209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,13 +53,11 @@ ActiveRecord::Schema.define(version: 2020_09_18_010345) do
     t.string "species"
     t.boolean "watered"
     t.boolean "sunlight"
-    t.boolean "trimmed"
+    t.boolean "relocated"
     t.string "locationName"
     t.decimal "daily_water"
-    t.decimal "daily_light"
     t.integer "treffleID"
-    t.decimal "water_level"
-    t.decimal "sun_time"
+    t.boolean "outside"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,4 +1,4 @@
-as<%= form_with(model: plant) do |form| %>
+<%= form_with(model: plant) do |form| %>
   <% if plant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(plant.errors.count, "error") %> prohibited this plant from being saved:</h2>
@@ -49,14 +49,14 @@ as<%= form_with(model: plant) do |form| %>
 
   <div class = "field species_light">
 
-    <%= form.label "Daily light (lux)", class: "inline" %>
+    <%= form.label "Outside plant?", class: "inline" %>
     <span class="tip-prompt" tabindex="0">?</span>
     <div class = "tooltip">
-      Represents the light needed daily for this plant to survive. <br>
-      low: 500-2,500, medium: 2,500-10,000, bright: 10,000-20,000, outside: 20,000+.<br>
-      If not automatically filled, please fill.<br>
+      This will determine whether the plant is meant to be kept outside.<br>
+      Will update upon selecting a species.<br>
+      If unchecked, system interprets as an inside plant (default/unknown value)
     </div><br>
-    <%= form.number_field :daily_light, in: 0..500000, step: 100, id: "plant_daily_light" %>
+    <%=form.check_box :outside, id: "outsideSet" %>
   </div>
   
   <div class = "plant picture">
