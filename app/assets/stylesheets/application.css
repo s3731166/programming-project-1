@@ -14,7 +14,6 @@
  *= require_self
  */
 
-   
 html {
   /* background-image: url('Bkg.bmp'); */
   /* background-repeat: repeat; */
@@ -25,49 +24,71 @@ html {
 }
 
 body {
+
+  /* background-color: white; */
+  color: white;
+
   background-color: #276ba6;
   color:#fff6ea;
-  margin: revert;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 70%;
-  text-align: center;
-  border: 1px solid black;
-  padding: 1px;
-  padding-bottom:21px;
-  border-radius: 0.5em;
+  /* padding: 1px; */
+  /* padding-bottom:21px; */
+  /* border-radius: 0.5em; */
+  /* max-width: 50%; */
+  height: 100%;
+}
+.bg {
+  display: block;
+  background-image: url("Bkg.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
-body, select, input {
+body,
+select,
+input {
   font-family: bahnschrift, vedana, arial, helvetica, sans-serif;
 }
 
-select, input {
+select,
+input {
   background-color: lightcyan;
   color: black;
-  border:1px solid;
-  border-radius: 3px;
-  text-align: center;
-}
+  border: 1px solid;
+  /* border-radius: 3px; */
 
+  border-radius: 3px;
+
+}
 header {
   background-color: #276ba6;
-  display: flow-root;
-  border-radius: 0.5em 0.5em 0em 0em;
+  /* display: flow-root; */
+  /* border-radius: 0.5em 0.5em 0em 0em; */
+  padding: 3em;
+  text-align: center;
+
 }
 
-
-a, button, input[type="submit"] {
-  color: black;
+a,
+button,
+input[type="submit"] {
+  color: white;
   padding: 0.3em;
   background-color: lavender;
-  border-radius: 0.3em;
-  border:none;
-  text-decoration:underline;
-  border:1px solid;
+  /* border-radius: 0.3em; */
+  border: none;
+  display: inline;
+  margin: auto;
+  text-decoration: underline;
+  border: 1px solid;
+
 }
 
-a:hover, button:hover, input[type="submit"]:hover {
+a:hover,
+button:hover,
+input[type="submit"]:hover {
   color: #fff;
   background-color: #000;
   cursor: pointer;
@@ -77,9 +98,10 @@ header a {
   color: black;
   text-decoration: none;
   background: none;
-  border:none;
-}
+  border: none;
+  padding: 2em;
 
+}
 
 header a:visited {
   color: antiquewhite;
@@ -90,28 +112,8 @@ header a:hover {
   background: inherit;
 }
 
-nav {
-  margin-top: 1px;
-  border: 1px solid black;
-  padding-top: 20px;
-  padding-bottom: 2px;
-  display: inline-block;
-  width: calc(100% - 8px);
-  background-color: lightcyan;
-  border-radius: 0.25em;
-}
-
-nav a{
-    padding: 0.7em;
-    background-color: #276ba6;
-    color: white;
-}
-nav a:visited{
-    color: white;
-
-}
-.title-link{
-    background-color: none;
+.title-link {
+  background-color: none;
 
 }
 
@@ -125,15 +127,17 @@ hr {
 }
 
 .table-holder {
-  display:inline-block;
-  max-width:calc(100% - 32px);
-  overflow-x:auto;
-  border:2px inset #276ba6;
+  display: inline-block;
+  max-width: calc(100% - 32px);
+  overflow-x: auto;
+  border: 2px inset #276ba6;
   border-right-color: #74b2e9;
   border-bottom-color: #74b2e9;
 }
 
 table {
+  background-color: rgb(255, 255, 255, 0.3);
+  padding: 0.2em;
   margin-left: auto;
   margin-right: auto;
   table-layout: fixed;
@@ -149,8 +153,8 @@ th {
 
 td,
 th {
-  padding:5px;
-  padding-top:8px;
+  padding: 5px;
+  padding-top: 8px;
   padding-bottom: 6px;
 }
 
@@ -165,13 +169,13 @@ form {
 }
 
 a.admin {
-  color:chocolate;
-  background:antiquewhite;
+  color: chocolate;
+  background: antiquewhite;
 }
 
 a.admin:hover {
-  background:chocolate;
-  color:antiquewhite;
+  background: chocolate;
+  color: antiquewhite;
 }
 
 .admin {
@@ -180,15 +184,13 @@ a.admin:hover {
 }
 
 .alert-success .admin {
-  color:orangered;
+  color: orangered;
 }
 
 .logged-in-notice {
   border-bottom: 1px dashed #fff6ea;
   padding-bottom: 2px;
 }
-
-
 
 .alert {
   margin-top: 18px;
@@ -265,11 +267,11 @@ a.admin:hover {
 
 .date-box {
   border: 1px solid black;
-  color:black;
+  color: black;
   display: inline-block;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  padding-top:4px;
+  padding-top: 4px;
   vertical-align: top;
   margin-left: 8px;
   margin-right: 8px;
@@ -282,7 +284,7 @@ a.admin:hover {
 }
 .title-link img {
   max-width: 100%;
-  padding-left:10px;
+  padding-left: 10px;
 }
 .user-info {
   display: block;
@@ -292,10 +294,10 @@ a.admin:hover {
   margin-bottom: 5px;
 }
 .user-info a {
-  padding:4px;
-  margin:0.4em;
+  padding: 4px;
+  margin: 0.4em;
   white-space: nowrap;
-  line-height:2.2em;
+  line-height: 2.2em;
 }
 .name-and-date {
   padding: 2px;
@@ -307,10 +309,10 @@ a.admin:hover {
 .name-and-title p {
   margin: 0;
 }
-.name-and-title a{
-  background:none;
-  margin:0;
-  padding:0;
+.name-and-title a {
+  background: none;
+  margin: 0;
+  padding: 0;
 }
 .nav-links {
   width: 60%;
@@ -320,22 +322,32 @@ a.admin:hover {
   margin: 8px;
   white-space: nowrap;
   line-height: 40px;
+  padding: 1em;
+  /* border-radius: 0.7em; */
+  border: 2em;
+  /* margin-bottom: auto; */
 }
+.nav-links a:active {
+  background-color: #151515;
+
+}
+
+/* CHECKLIST STYLING */
 .checklist {
-  width:25%;
-  padding-right:10px;
-  float:right;
+  width: 25%;
+  padding-right: 10px;
+  background-color: rgb(255, 255, 255, 0.8);
+  float: right;
+  color: #151515;
 }
 .checklist form {
   width: 100%;
 }
 
 .center-dashboard {
-  float:left;
-  width:calc(50% - 20px);
+  float: left;
+  width: calc(50% - 20px);
 }
-
-
 
 #plant-checklist {
   text-align: center;
@@ -344,6 +356,12 @@ a.admin:hover {
   display: inline-block;
 }
 
+.choice {
+  width: 30%;
+  padding: 0.7em;
+  text-align: center;
+}
+/* END CHECKLIST STYLING */
 
 
 /* BEGIN WEATHER CSS */
@@ -354,8 +372,8 @@ a.admin:hover {
   display: table;
   margin-left: auto;
   margin-right: auto;
-  margin-top:4px;
-  margin-bottom:4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   border: 4px outset #dd643f;
   border-top-color: #ecd9a9;
   border-left-color: #ecd9a9;
@@ -371,57 +389,65 @@ a.admin:hover {
  * of the two following class & id pair
 */
 .dashboard-plant-info {
-  margin-bottom:1em;
+  margin-bottom: 1em;
 }
 /* Weather-Dashboard and .inline-wrapper
  * These class and Id are hidden and shown on
  * The weather report on the dashboard
 */
-#weather-Dashboard{
-  text-align:center;
-  width:25%;
-  padding-left:10px;
-  float:left;
+#weather-Dashboard {
+  text-align: center;
+  width: 25%;
+  padding-left: 10px;
+  float: left;
 }
-/* Keeps the weather image inline with the min and max temp */
-.inline-wrapper{
+/* Keeps the weather inline with the min and max temp */
+.inline-wrapper {
+
   display: block;
 }
 .inline {
   display: inline;
 }
 /* Weather sum is the weather image */
-.weather-sum{
+.weather-sum {
   display: inline;
 }
 
-#Max-temp, #Min-temp, #Weather-Dashboard{
-  display:inline;
+#Max-temp,
+#Min-temp,
+#Weather-Dashboard {
+  display: inline;
 }
 /* END WEATHER CSS */
 
 .gravatar {
   height: 45px;
   width: auto;
+  border-radius: 0.6em;
+  box-shadow: 6px 6px 6px #151515;
 }
 /*Makes alert errors stand out better*/
 #error_explanation {
-  color:black;
+  color: black;
 }
 
 /* The classes below are used in the javascript for search suggestions for location/species. */
 
 /* Gives a border radius to elements generated by suggest. */
-.location_field a:last-of-type, .species_field a:last_of_type {
+.location_field a:last-of-type,
+.species_field a:last_of_type {
   border-radius: 0 0 4px 4px !important;
 }
 
 /* Some CSS for the search suggestion links that appear. This can be changed. */
-.location_field a, .species_field a {
-  display:block;
-  padding:0.1em;
-  width:163px;
+.location_field a,
+.species_field a {
+  display: block;
+  padding: 0.1em;
+  width: 163px;
   border-radius: 0;
+
   border-top:0;
   margin-left: auto;
   margin-right: auto;
@@ -447,10 +473,56 @@ a.admin:hover {
 }
 
 /* The empty class is used to hide unneeded search results. This should be left alone. */
-.location_field a:empty, .species_field a:empty {
+.location_field a:empty,
+.species_field a:empty {
   display: none !important;
 }
 
+/* Content For Split Screens */
+.split-container{
+  display: inline-block;
+  text-align: center;
+  background-color: rgb(15, 15, 15, 0.8);
+  width:90%;
+  height: 90%;
+  
+}
+.split-container a{
+  display: block;
+  float: left;
+}
+.right-container{
+  margin-left: 2em;
+  display: inline-block;
+  width: 40%;
+  background-color: rgb(255, 255, 255, 0.8);
+  padding: 2em;
+  height: 85%;
+  overflow:hidden; 
+
+}
+.left-container{
+  margin-left: 2em;
+  display: inline-block;
+  text-align: center;
+  width: 40%;
+  background-color: rgb(255, 255, 255, 0.8);
+  padding: 2em;
+  height: 85%;
+  overflow:hidden; /*added this*/
+
+}
+
+.list-item{
+  display: block;
+}
+.list-item a{
+  display: block;
+  background-color: green;
+  width: 90%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  color: #151515;
 /*chart*/
 .report {
   background: white;
@@ -459,4 +531,5 @@ a.admin:hover {
   max-width: 340px;
   margin-left: auto;
   margin-right: auto;
+
 }

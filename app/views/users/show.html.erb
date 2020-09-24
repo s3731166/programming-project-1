@@ -1,27 +1,44 @@
 <% content_for :title, @user.name %>
-<h1><%= @user.get_styled_name %></h1>
-<% if @user.admin %>
-  <h2 class="admin">This user has access to administrative privileges</h2>
-<% end %>
+<div class="wrapper">
+  <div class="split-container">
+    <div class="left-container">
+      <%= link_to 'Back', root_path %>
+      <% @user.plants.order(:created_at).each do |current_plant| %>
+        <div class="list-item">
+          <br><br>
+          <%= link_to  current_plant.name , current_plant %>
+          <br><br>
+        </div>
+      <% end %>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+    
+    </div>
 
-<p>
-<strong>Created at:</strong>
-<%=@user.created_at%>
-</p>
+    <div class="right-container">
+      <%= link_to 'Edit', edit_user_path(@user) %> 
 
-<p>
-<strong>Phone:</strong>
-<%= @user.phone if @user.phone%>
-</p>
+      <h1><%= @user.get_styled_name %></h1>
+      <% if @user.admin %>
+        <h2 class="admin">This user has access to administrative privileges</h2>
+      <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', root_path %>
+      <p>
+        <strong>Email:</strong>
+        <%= @user.email %>
+      </p>
 
-<% if @user == current_user%>
-  | <%= link_to "Log out", logout_path, method: :delete %>
-<% end %>
+      <p>
+      <strong>Created at:</strong>
+      <%=@user.created_at%>
+      </p>
+
+      <p>
+      <strong>Phone:</strong>
+      <%= @user.phone if @user.phone%>
+      </p>
+      <% if @user == current_user%>
+        | <%= link_to "Log out", logout_path, method: :delete %>
+      <% end %>
+    </div>
+  </div>
+</div>

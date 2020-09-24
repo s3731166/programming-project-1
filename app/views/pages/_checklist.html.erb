@@ -1,7 +1,6 @@
 <div class="checklist">  
     <%= form_with(model: plant, local: true) do |form| %>
-        <%# <hr> %>
-        <h4><%= plant.name %> Checklist</h4>
+      <h4><%= plant.name %> Checklist</h4>
 
         <div id="plant-checklist">
             <div class="check-content">
@@ -27,6 +26,7 @@
                 <%= form.submit "Update Plant", { disabled: plant.watered&&plant.sunlight&&plant.relocated } %>
             </div>
         </div>
-
+    
+      
     <% end %>
 </div>
