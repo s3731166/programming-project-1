@@ -10,13 +10,11 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="bg" >
-            <%= render 'layouts/header' %>
-
-      <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message.html_safe, class: "alert alert-#{message_type}")%>
-      <% end %>
-      <%= yield %>
-    
+  <body>
+    <%= render 'layouts/header' %>
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:div, message.html_safe, class: "alert alert-#{message_type}")%>
+    <% end %>
+    <%= yield %>
   </body>
 </html>

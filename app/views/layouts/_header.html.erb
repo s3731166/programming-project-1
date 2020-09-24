@@ -1,14 +1,17 @@
-<header> 
+<header><h1><%= link_to "Plant Monitor", root_path %></h1></header>
+<nav>
     <div class="wrapper">
+        <% # Link to users page if logged-in user is admin %>
         <div class="title-link">
-            <%=  image_tag("big-logo.png", width: "150px") %>
+            <%=  image_tag("big-logo.png", width: "140px") %>
         </div>
-        <div>
-            <h1>
-                <%= link_to "Plant Monitor", root_path %>
-            </h1>
+        <%# ADD THE 2 BUTTONS %>
+        <div class="nav-links">
+            <%= link_to "Dashboard", root_path%>
+            <%= link_to "Plant Management", plants_path%>
+            
         </div>
-        
+       
         <%# OPEN RIGHT DIV %>
         <div class="user-info">
                    
@@ -30,8 +33,10 @@
             </div>
                
 
-            <% end %> 
+
+        <% end %> 
         </div> 
         <%# END RIGHT DIV %>
+
     </div>
-</header>
+</nav>

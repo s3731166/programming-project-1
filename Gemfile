@@ -84,3 +84,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #(coordinates to street address), distance queries for ActiveRecord and Mongoid,
 # result caching, and more.
 gem 'geocoder', '~> 1.6', '>= 1.6.3'
+
+# Create beautiful Javascript charts with one line of Ruby
+gem 'chartkick', '~> 1.4', '>= 1.4.1'
+
+gem "aws-sdk-s3", require: false
+
+# The simplest way to group temporal data
+gem 'groupdate', '~> 2.5', '>= 2.5.2'

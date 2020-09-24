@@ -1,6 +1,7 @@
 class Plant < ApplicationRecord
   belongs_to :user
   has_many :plant_records
+  has_one_attached :plant_pic
 
   def get_weather
     #ActiveSupport::JSON.decode(open('http://api.openweathermap.org/data/2.5/weather?q=melbourne,au&APPID=9b732f988a82cb5ec7499a0d0e6416ff&units=metric'
@@ -26,13 +27,15 @@ class Plant < ApplicationRecord
         record = PlantRecord.new()
         record.water_recorded = plant.daily_water
       end
-      # If the plant has a light level and there is no record, build a record with the plant's light level
-      # If there is a light level and a record, add the light level to the existing record
-      if plant.daily_light and plant.sunlight
-        if record.nil?
+      
+      # Record average tempatrure for day
+      weatherJson = @plant.get_weather
+      if weatherJson["main"]
+        averageWeather = (weatherJson["main"]["temp_max"]+weatherJson["main"]["temp_min"]) / 2
+        if !record
           record = PlantRecord.new()
         end
-        record.light_recorded = plant.daily_light
+        record.temp_recorded = averageWeather
       end
       # If the record has a value, save the record
       if record

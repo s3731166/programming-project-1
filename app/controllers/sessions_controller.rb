@@ -11,8 +11,10 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.password == params[:session][:password]
-      log_in(user)
-      remember(user)
+      if !current_user
+        log_in(user)
+        remember(user)
+      end
       # isactive(user) where isactive is user.setActiveTime to now 
 
       flash[:success] = "Successfully logged in. Welcome, #{user.get_styled_name}.".html_safe

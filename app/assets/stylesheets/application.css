@@ -15,18 +15,21 @@
  */
 
 html {
-  /* padding-left: 8px;
-  padding-right: 8px; */
-  height: 100%;
+  /* background-image: url('Bkg.bmp'); */
+  /* background-repeat: repeat; */
+  background-size: cover;
+  background-color: lightblue;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 body {
+
   /* background-color: white; */
   color: white;
-  margin: revert;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+
+  background-color: #276ba6;
+  color:#fff6ea;
   /* padding: 1px; */
   /* padding-bottom:21px; */
   /* border-radius: 0.5em; */
@@ -40,6 +43,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
 }
 
 body,
@@ -54,15 +58,17 @@ input {
   color: black;
   border: 1px solid;
   /* border-radius: 3px; */
-  text-align: center;
-}
 
+  border-radius: 3px;
+
+}
 header {
   background-color: #276ba6;
   /* display: flow-root; */
   /* border-radius: 0.5em 0.5em 0em 0em; */
   padding: 3em;
   text-align: center;
+
 }
 
 a,
@@ -77,6 +83,7 @@ input[type="submit"] {
   margin: auto;
   text-decoration: underline;
   border: 1px solid;
+
 }
 
 a:hover,
@@ -93,6 +100,7 @@ header a {
   background: none;
   border: none;
   padding: 2em;
+
 }
 
 header a:visited {
@@ -106,6 +114,7 @@ header a:hover {
 
 .title-link {
   background-color: none;
+
 }
 
 hr {
@@ -115,12 +124,6 @@ hr {
 
 .wrapper {
   text-align: center;
-  height: 100%;
-  /* position: relative; */
-  /* display: inline-block; */
-}
-.wrapper h1 {
-  margin: auto;
 }
 
 .table-holder {
@@ -196,7 +199,7 @@ a.admin:hover {
   margin-right: auto;
   padding: 8px;
   font-weight: bold;
-  /* border-radius: 2px; */
+  border-radius: 2px;
   font-size: 1.2em;
   display: ruby-base !important;
 }
@@ -220,6 +223,47 @@ a.admin:hover {
   margin-left: auto;
   margin-right: auto;
 }
+
+
+/* TOOLTIP FUNCTIONALITY */
+.tip-prompt {
+  border-radius: 50%;
+  border:1px dashed;
+  -moz-outline-radius: 50%;
+  color:lightblue;
+  font-size: 12px;
+  padding:1px 5px;
+  cursor: help;
+}
+
+.tooltip {
+  opacity:0;
+  position: absolute;
+  transform: translate(calc(-50% - 12px), calc(-2px - 100%));
+  border: 1px solid black;
+  background:antiquewhite;
+  border-radius: 3px;
+  padding-left:6px;
+  padding-right:6px;
+  pointer-events: none;
+  font-size:small;
+  color: black;
+  display: inline;
+  transition: opacity 0.5s;
+}
+
+.tip-prompt:hover+.tooltip, .tip-prompt:focus+.tooltip {
+  opacity: 1;
+}
+
+.tooltip:before {
+  color:#2554C7;
+  content: "WHAT'S THIS?";
+  font-size:0.8em;
+  display:block;
+  font-weight:bold;
+}
+/* END TOOLTIP FUNCTIONALITY */
 
 .date-box {
   border: 1px solid black;
@@ -274,8 +318,8 @@ a.admin:hover {
   width: 60%;
   float: left;
 }
-
 .nav-links a {
+  margin: 8px;
   white-space: nowrap;
   line-height: 40px;
   padding: 1em;
@@ -285,6 +329,7 @@ a.admin:hover {
 }
 .nav-links a:active {
   background-color: #151515;
+
 }
 
 /* CHECKLIST STYLING */
@@ -317,6 +362,7 @@ a.admin:hover {
   text-align: center;
 }
 /* END CHECKLIST STYLING */
+
 
 /* BEGIN WEATHER CSS */
 
@@ -357,7 +403,11 @@ a.admin:hover {
 }
 /* Keeps the weather inline with the min and max temp */
 .inline-wrapper {
+
   display: block;
+}
+.inline {
+  display: inline;
 }
 /* Weather sum is the weather image */
 .weather-sum {
@@ -377,7 +427,7 @@ a.admin:hover {
   border-radius: 0.6em;
   box-shadow: 6px 6px 6px #151515;
 }
-
+/*Makes alert errors stand out better*/
 #error_explanation {
   color: black;
 }
@@ -397,7 +447,10 @@ a.admin:hover {
   padding: 0.1em;
   width: 163px;
   border-radius: 0;
-  border-top: 0;
+
+  border-top:0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* This sharpens the bottom corners of a search field for dropdown suggestions. */
@@ -409,9 +462,14 @@ a.admin:hover {
 
 /* This hide class is used to hide unneeded plant summaries (on the dashboard).
  * This allows for 'switching' between plants using the dropdown menu. 
+ * visibility:hidden is used instead of display:none because the graphs are drawn 
+ * from the size of the diiv they are in, and no displayed divs are not rendered
 */
 .hide {
-  display: none;
+  visibility: hidden;
+  position: absolute;
+  top:0;
+  left:0;
 }
 
 /* The empty class is used to hide unneeded search results. This should be left alone. */
@@ -465,4 +523,13 @@ a.admin:hover {
   padding-top: 1em;
   padding-bottom: 1em;
   color: #151515;
+/*chart*/
+.report {
+  background: white;
+  padding: 10px;
+  box-shadow: 0px 0px 5px black;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+
 }
