@@ -132,7 +132,7 @@ hr {
 }
 
 table {
-  background-color: rgb(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.3);
   padding: 0.2em;
   margin-left: auto;
   margin-right: auto;
@@ -332,7 +332,7 @@ a.admin:hover {
 .checklist {
   width: 25%;
   padding-right: 10px;
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   float: right;
   color: #151515;
 }
@@ -497,7 +497,7 @@ a.admin:hover {
   margin-left: 2em;
   display: inline-block;
   width: 40%;
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 2em;
   height: 85%;
   overflow:hidden; 
@@ -508,7 +508,7 @@ a.admin:hover {
   display: inline-block;
   text-align: center;
   width: 40%;
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 2em;
   height: 85%;
   overflow:hidden; /*added this*/
