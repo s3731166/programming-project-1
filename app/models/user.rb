@@ -151,14 +151,28 @@ class User < ApplicationRecord
                         toSend = ""
                         if forecast && plant_info
                             # Max Temp
-                            if forecast["daily"][1]["temp"]["max"] && plant_info["data"]["growth"]["maximum_temperature"]["deg_c"]
-                                if forecast["daily"][1]["temp"]["max"].to_i>=plant_info["data"]["growth"]["maximum_temperature"]["deg_c"].to_i
+                            tempToUse = nil
+                            # Use entered max_temp if avaliable
+                            if plant.max_temp
+                                tempToUse = plant.max_temp
+                            else
+                                tempToUse = plant_info["data"]["growth"]["maximum_temperature"]["deg_c"].to_d
+                            end
+                            if forecast["daily"][1]["temp"]["max"] && tempToUse
+                                if forecast["daily"][1]["temp"]["max"].to_i>=tempToUse
                                     toSend+="The temperature tommorow might be a bit hot for your plant "+plant.name+". Consider keeping it inside if possible."
                                 end
                             end
                             # Min Temp
-                            if forecast["daily"][1]["temp"]["min"] && plant_info["data"]["growth"]["minimum_temperature"]["deg_c"]
-                                if forecast["daily"][1]["temp"]["min"].to_i<=plant_info["data"]["growth"]["minimum_temperature"]["deg_c"].to_i
+                            tempToUse = nil
+                            # Use entered min_temp if avaliable
+                            if plant.min_temp
+                                tempToUse = plant.min_temp
+                            else
+                                tempToUse = plant_info["data"]["growth"]["minimum_temperature"]["deg_c"].to_d
+                            end
+                            if forecast["daily"][1]["temp"]["min"] && tempToUse
+                                if forecast["daily"][1]["temp"]["min"].to_i<=tempToUse
                                     toSend+="The temperature tommorow might be a bit cold for your plant "+plant.name+". Consider keeping it inside if possible."
                                 end
                             end

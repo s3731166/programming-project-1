@@ -83,7 +83,12 @@ function search_species(){
       species_field = Rails.$(".species_field")[0]
 
       <%# Create array of HTML links (<a> tags) %>
-      links = [ document.createElement("A"), document.createElement("A"), document.createElement("A"), document.createElement("A") ]
+      links = [ 
+      document.createElement("A"), 
+      document.createElement("A"), 
+      document.createElement("A"), 
+      document.createElement("A")
+       ]
 
       <%# add "suggest" class to species field (removes bottom curved corners) %>
       species_field.classList.add("suggest")
@@ -92,21 +97,23 @@ function search_species(){
       if(Rails.$(".species_field")[0].childElementCount>5){
         remove_links("species_field","species_suggest")
       }
+      
       for (i=0;i<4&&final_array[i];++i) {
         links[i].className = "species_suggest-"+i
         links[i].innerHTML = final_array[i][0]
+        links[i].innerHTML+="<br><img src="+final_array[i][1]+">"
       }
       links[0].addEventListener("click" , function(){
-        delegate(0, final_array[0][2], links[0].innerHTML)
+        delegate(0, final_array[0][2], final_array[0][0])
       })
       links[1].addEventListener("click" , function(){
-        delegate(1, final_array[1][2], links[1].innerHTML)
+        delegate(1, final_array[1][2], final_array[1][0])
       })
       links[2].addEventListener("click" , function(){
-        delegate(2, final_array[2][2], links[2].innerHTML)
+        delegate(2, final_array[2][2], final_array[2][0])
       })
       links[3].addEventListener("click" , function(){
-        delegate(3, final_array[3][2], links[3].innerHTML)
+        delegate(3, final_array[3][2], final_array[3][0])
       })
       <%# Append/create only as many that exist %>
       for (i=0;i<4&&final_array[i]!=null;i++) {
@@ -127,7 +134,7 @@ function delegate(clickedId, plantId, textToFill){
 function fillFields(id){
   Rails.ajax({
     <%# Ajax request from controller method get_plant %>
-    url: "/spec_fill?id="+ id,
+    url: "/species_fill?id="+ id,
     type: "get",
     success:  function retData(data){
       result = data.split('|')
@@ -143,6 +150,25 @@ function fillFields(id){
           document.getElementById("outsideSet").checked = false
         }
       }
+      if(result[2]!=null){
+        tempArr = result[2].split(",")
+        if(tempArr[0]!=""){
+          document.getElementById("plant_minimum_temp").value = Number(tempArr[0])
+        }else{
+          document.getElementById("plant_minimum_temp").value = null
+        }
+        
+        if(tempArr[1]!=""){
+          document.getElementById("plant_maximum_temp").value = Number(tempArr[1])
+        }else{
+          document.getElementById("plant_maximum_temp").value = null
+        }
+      }else{
+        document.getElementById("plant_minimum_temp").value = null
+        document.getElementById("plant_maximum_temp").value = null
+      }
+
+
       <%# END Success Function %>
     }
     <%# END Ajax %>

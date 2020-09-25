@@ -30,6 +30,8 @@ class PlantsController < ApplicationController
       @plants_decoded = plantResults.parsed_response
       @plantDescription = @plants_decoded["data"]["growth"]["description"]
       @plantImage = @plants_decoded["data"]["image_url"]
+      @plantMaxTemp = @plants_decoded["data"]["growth"]["maximum_temperature"]["deg_c"]
+      @plantMinTemp = @plants_decoded["data"]["growth"]["minimum_temperature"]["deg_c"]
     end
 	end
 
@@ -208,7 +210,12 @@ class PlantsController < ApplicationController
   # Will lookup @plant for daily water and light required fields given those fields are nil
   # Does not garuntee fields will be filled
   def species_fill
-    @plant_decoded = @plant.get_plant
+    results = HTTParty.get(
+      'https://trefle.io/api/v1/species/'+ params["id"],
+    query: {
+      "token": @@auth_token
+    })
+    @plant_decoded = results.parsed_response
     toSend=""
     if @plant_decoded["data"]["growth"]
       if @plant_decoded["data"]["growth"]["minimum_precipitation"]["mm"] && @plant_decoded["data"]["growth"]["maximum_precipitation"]["mm"]
@@ -224,6 +231,14 @@ class PlantsController < ApplicationController
         light = @plant_decoded["data"]["growth"]["light"]
         toSend+=(light*2000).to_s
       end
+      toSend+="|"
+      if @plant_decoded["data"]["growth"]["minimum_temperature"]["deg_c"]
+        toSend+= @plant_decoded["data"]["growth"]["minimum_temperature"]["deg_c"].to_s
+      end
+      toSend+=","
+      if @plant_decoded["data"]["growth"]["maximum_temperature"]["deg_c"]
+        tosend += @plant_decoded["data"]["growth"]["maximum_temperature"]["deg_c"].to_s
+      end
     end
     render json: toSend, status: :ok
   end
@@ -236,7 +251,7 @@ class PlantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def plant_params
-      params.require(:plant).permit(:name, :location, :locationName, :species, :watered, :sunlight, :relocated, :daily_water, :outside, :plant_pic)
+      params.require(:plant).permit(:name, :location, :locationName, :species, :watered, :sunlight, :relocated, :daily_water, :outside, :plant_pic, :max_temp, :min_temp)
     end
   end
 

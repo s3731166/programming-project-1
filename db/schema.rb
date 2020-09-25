@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_043209) do
+ActiveRecord::Schema.define(version: 2020_09_25_070230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2020_09_23_043209) do
     t.decimal "daily_water"
     t.integer "treffleID"
     t.boolean "outside"
+    t.decimal "max_temp"
+    t.decimal "min_temp"
   end
 
   create_table "users", force: :cascade do |t|

@@ -59,9 +59,26 @@
     <%=form.check_box :outside, id: "outsideSet" %>
   </div>
   
+  <div class = "field species_temps inline"><span class="tip-prompt" tabindex="0">?</span>
+    <div class = "tooltip">
+      While not required to register a plant, it is used for forcasting weather.<br>
+      Can be manually filled if not automatically filled when accepting a suggestion.<br>
+      If unfilled, the system will attempt to lookup these values when forcasting, results not garunteed.
+    </div><br>
+    <%# Tese temp ranges are based on the hottest and coldest places on earth. Good luck finding a plant to exceed them.%>
+    <%= form.label raw("Minimum temperature (°C)") %>
+    <%= form.number_field :min_temp, in: -41..70, step: 0.5, id: "plant_minimum_temp"%>
+    <%= form.label raw("Maximum temperature (°C)")%>
+    <%= form.number_field :max_temp, in: -41..70, step: 0.5, id: "plant_maximum_temp"%>
+  </div>
+
   <div class = "plant picture">
-	<%= form.label :plant_pic %>
-    <%= form.file_field :plant_pic %>
+  <%= form.label :plant_pic, class: "inline" %><span class="tip-prompt" tabindex="0">?</span>
+  <div class = "tooltip">
+      If you would like to use a picture of your own plant, you can choose one from your device using the setting below.<br>
+      The plant may have an existing image associated with its species, which it will fall back on if you do not provide your own picture.
+  </div><br>  
+  <%= form.file_field :plant_pic %>
   </div>
 
   <div class="actions">

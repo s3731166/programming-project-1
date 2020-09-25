@@ -449,6 +449,12 @@ a.admin:hover {
   margin-right: auto;
 }
 
+/* Images in suggestion */
+.species_field a img {
+  max-width: 40px;
+  max-height: 40px;
+}
+
 /* This sharpens the bottom corners of a search field for dropdown suggestions. */
 .suggest {
   border-radius: 3px 3px 0 0;
