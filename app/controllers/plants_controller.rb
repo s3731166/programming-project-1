@@ -28,10 +28,14 @@ class PlantsController < ApplicationController
         'https://trefle.io/api/v1/species/'+@plant.treffleID.to_s+"?token="+@@auth_token
       )
       @plants_decoded = plantResults.parsed_response
-      @plantDescription = @plants_decoded["data"]["growth"]["description"]
-      @plantImage = @plants_decoded["data"]["image_url"]
-      @plantMaxTemp = @plants_decoded["data"]["growth"]["maximum_temperature"]["deg_c"]
-      @plantMinTemp = @plants_decoded["data"]["growth"]["minimum_temperature"]["deg_c"]
+      if @plants_decoded && @plants_decoded["data"]
+        if @plants_decoded["data"]["growth"] 
+          @plantDescription = @plants_decoded["data"]["growth"]["description"] 
+          @plantMaxTemp = @plants_decoded["data"]["growth"]["maximum_temperature"]["deg_c"]
+          @plantMinTemp = @plants_decoded["data"]["growth"]["minimum_temperature"]["deg_c"]
+        end
+        @plantImage = @plants_decoded["data"]["image_url"]
+      end
     end
 	end
 
