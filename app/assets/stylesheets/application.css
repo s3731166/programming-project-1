@@ -13,27 +13,23 @@
  *= require_tree .
  *= require_self
  */
-
-html {
-  /* background-image: url('Bkg.bmp'); */
-  /* background-repeat: repeat; */
-  background-size: cover;
-  background-color: lightblue;
-  padding-left: 8px;
-  padding-right: 8px;
+ html {
+  /* padding-left: 8px;
+  padding-right: 8px; */
+  height: 100%;
 }
 
 body {
-
-  /* background-color: white; */
+  background-color: black;
   color: white;
-
-  background-color: #276ba6;
-  color:#fff6ea;
-  /* padding: 1px; */
+  margin: revert;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 1px; 
   /* padding-bottom:21px; */
   /* border-radius: 0.5em; */
-  /* max-width: 50%; */
+  /* /* max-width: 50%; */
   height: 100%;
 }
 .bg {
@@ -43,7 +39,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 
 body,
@@ -58,17 +53,15 @@ input {
   color: black;
   border: 1px solid;
   /* border-radius: 3px; */
-
-  border-radius: 3px;
-
+  text-align: center;
 }
+
 header {
   background-color: #276ba6;
   /* display: flow-root; */
   /* border-radius: 0.5em 0.5em 0em 0em; */
   padding: 3em;
   text-align: center;
-
 }
 
 a,
@@ -83,7 +76,6 @@ input[type="submit"] {
   margin: auto;
   text-decoration: underline;
   border: 1px solid;
-
 }
 
 a:hover,
@@ -100,7 +92,6 @@ header a {
   background: none;
   border: none;
   padding: 2em;
-
 }
 
 header a:visited {
@@ -114,7 +105,6 @@ header a:hover {
 
 .title-link {
   background-color: none;
-
 }
 
 hr {
@@ -124,6 +114,12 @@ hr {
 
 .wrapper {
   text-align: center;
+  height: 100%;
+  /* position: relative; */
+  /* display: inline-block; */
+}
+.wrapper h1 {
+  margin: auto;
 }
 
 .table-holder {
@@ -523,8 +519,9 @@ a.admin:hover {
   padding-top: 1em;
   padding-bottom: 1em;
   color: #151515;
+}
 /*chart*/
-.report {
+.report{
   background: white;
   padding: 10px;
   box-shadow: 0px 0px 5px black;
