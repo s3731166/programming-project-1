@@ -135,10 +135,23 @@ class User < ApplicationRecord
             end
         end
     end
+
     # This method will compare forecasted weather from plants location
     # Against their outside plants paramaters, if exceeded (e.g: temp > plants max_temp) 
     # Notifies user to relocate their plant to indoors.
     def User.danger_check
+        @users = User.all
+        @user.each do |user|
+            if user&&!user.plants.empty?
+                user.plants.each do |plant|
+                    forecast = plant.get_forecast
+                    if forecast
+                        # Read next days forecast
+                        # if forecast["daily"][1]
+                    end
+                end
+            end
+        end
     end
 
     def User.reset_daily

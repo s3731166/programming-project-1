@@ -6,7 +6,9 @@
 <h3>Daily water (mm): <%= @plant.daily_water%></h3>
 <h3>Outside Plant?: <%= @plant.outside%></h3>
 <h3>Owned By: <%= @plant.user.name %></h3>
-<h3>Description: <%=@plantDescription%></h3>
+<% if @plantDescription %>
+	<h3>Description: <%=@plantDescription%></h3> 
+<%end%>
 <% if @plant.watered == false %>
 	<h3>Plant needs to be watered today!<h3>
 <% else %>
@@ -27,9 +29,11 @@
 
 <% if @plant.plant_pic.attached? %>
 	<%= image_tag @plant.plant_pic, size: "400" %>
-<% else %>
+<% elsif @plantImage %>
 	<%= image_tag @plantImage, size: "400" %>
-<% end %>
+<% else %>
+	<h3>No Image!</h3>
+<%end%>
 <br>
 <%= link_to 'Edit', edit_plant_path(@plant) %> |
 <%= link_to 'Back', root_path %>

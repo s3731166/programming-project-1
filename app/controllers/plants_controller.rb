@@ -5,6 +5,8 @@ class PlantsController < ApplicationController
   require 'geocoder'
   require 'httparty'
   
+  @@auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
+
   # GET /plants
   # GET /plants.json
   def index
@@ -19,16 +21,16 @@ class PlantsController < ApplicationController
   # GET /plants/1
   # GET /plants/1.json
   def show
-    auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
+
     if @plant.treffleID
       # Retirve plant details
       plantResults = HTTParty.get(
-        'https://trefle.io/api/v1/species/'+@plant.treffleID.to_s+"?token="+auth_token
+        'https://trefle.io/api/v1/species/'+@plant.treffleID.to_s+"?token="+@@auth_token
       )
       @plants_decoded = plantResults.parsed_response
+      @plantDescription = @plants_decoded["data"]["growth"]["description"]
+      @plantImage = @plants_decoded["data"]["image_url"]
     end
-    @plantDescription = @plants_decoded["data"]["growth"]["description"]
-    @plantImage = @plants_decoded["data"]["image_url"]
 	end
 
   # GET /plants/new
@@ -56,8 +58,21 @@ class PlantsController < ApplicationController
   def create
 
     @plant = Plant.new(plant_params)
+    
     #MAKE API CALL AND VERIFY :location = sean
     @plant.location = Geocoder.search(@plant.locationName).first.coordinates
+    # Handle TreffleID assigment
+    results = HTTParty.get(
+      'https://trefle.io/api/v1/species/search',
+      query: {
+        "q": @plant.species,
+        "token": @@auth_token
+      }
+    )
+    species_decoded = results.parsed_response 
+    if species_decoded["data"][0]
+      @plant.treffleID = species_decoded["data"][0]["id"].to_i
+    end
     @plant.watered = false
     @plant.sunlight = false
     @plant.relocated = false
@@ -86,6 +101,19 @@ class PlantsController < ApplicationController
         searchResults = Geocoder.search(@plant.locationName)
         if searchResults
           @plant.location = searchResults.first.coordinates
+        end
+        # Handle TreffleID assigment
+        results = HTTParty.get(
+          'https://trefle.io/api/v1/species/search',
+          query: {
+            "q": @plant.species,
+            "token": @@auth_token
+          }
+        )
+        species_decoded = results.parsed_response 
+        if species_decoded["data"][0]
+          # Assume the first result is most accurate, due to name lookup in form
+          @plant.treffleID = species_decoded["data"][0]["id"].to_i
         end
         if @plant.save
           message = 'Plant was successfully updated.'
@@ -143,12 +171,11 @@ class PlantsController < ApplicationController
   def spec_results 
     #https://trefle.io/api/v1/species/search?q=coconut&token=YOUR_TREFLE_TOKEN
     #results = 'https://trefle.io/api/v1/species/search?q='+params['toSearch']+'&token='+auth_token
-    auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
     results = HTTParty.get(
       'https://trefle.io/api/v1/species/search',
       query: {
         "q": params['toSearch'],
-        "token": auth_token
+        "token": @@auth_token
       }
     )
     species_decoded = results.parsed_response  
@@ -181,11 +208,11 @@ class PlantsController < ApplicationController
   # Will lookup @plant for daily water and light required fields given those fields are nil
   # Does not garuntee fields will be filled
   def get_plant
-    auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
+    
     results = HTTParty.get(
       'https://trefle.io/api/v1/species/'+params["id"],
     query: {
-      "token": auth_token
+      "token": @@auth_token
     })
     @plant_decoded = results.parsed_response
     # Assume with specices lookup active in form,
