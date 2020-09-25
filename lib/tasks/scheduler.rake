@@ -1,6 +1,7 @@
 # Task to notify users of their plants status'
 task :daily_update => :environment  do
     User.daily_notify
+    User.danger_check
 end
 # Task to reset the daily chores
 task :rest_dailies => :environment  do

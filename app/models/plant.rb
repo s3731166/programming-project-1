@@ -27,8 +27,8 @@ class Plant < ApplicationRecord
     # Returns the next 7 days forecast inclusive of current day
     # format is JSON in daily serperators
     # example: http://api.openweathermap.org/data/2.5/onecall?lat=51.5073219&lon=-0.1276474&APPID=9b732f988a82cb5ec7499a0d0e6416ff&units=metric&exclude=current,minutely,hourly,alerts  
-    if lat and lon then ActiveSupport::JSON.decode(open('http://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+
-      '&APPID=9b732f988a82cb5ec7499a0d0e6416ff&units=metric&exclude=current,minutely,hourly,alerts').read) end
+    if lat and lon then ActiveSupport::JSON.decode(open("http://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+
+      "&APPID=9b732f988a82cb5ec7499a0d0e6416ff&units=metric&exclude=current,minutely,hourly,alerts").read) end
   end
   
 

@@ -207,16 +207,8 @@ class PlantsController < ApplicationController
   
   # Will lookup @plant for daily water and light required fields given those fields are nil
   # Does not garuntee fields will be filled
-  def get_plant
-    
-    results = HTTParty.get(
-      'https://trefle.io/api/v1/species/'+params["id"],
-    query: {
-      "token": @@auth_token
-    })
-    @plant_decoded = results.parsed_response
-    # Assume with specices lookup active in form,
-    # that first result will be accurate enough for id attainment of correct plant
+  def species_fill
+    get_plant(params["id"])
     toSend=""
     if @plant_decoded["data"]["growth"]
       if @plant_decoded["data"]["growth"]["minimum_precipitation"]["mm"] && @plant_decoded["data"]["growth"]["maximum_precipitation"]["mm"]
@@ -235,6 +227,17 @@ class PlantsController < ApplicationController
     end
     render json: toSend, status: :ok
   end
+
+  def get_plant
+    results = HTTParty.get(
+      'https://trefle.io/api/v1/species/'+params["id"],
+    query: {
+      "token": @@auth_token
+    })
+    @plant_decoded = results.parsed_response
+
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -127,7 +127,7 @@ function delegate(clickedId, plantId, textToFill){
 function fillFields(id){
   Rails.ajax({
     <%# Ajax request from controller method get_plant %>
-    url: "/get_plants?id="+ id,
+    url: "/spec_fill?id="+ id,
     type: "get",
     success:  function retData(data){
       result = data.split('|')
