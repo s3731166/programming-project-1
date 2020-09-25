@@ -61,4 +61,14 @@ class Plant < ApplicationRecord
     end
   end
 
+  def get_plant
+    auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
+    results = HTTParty.get(
+      'https://trefle.io/api/v1/species/'+ treffleID.to_s,
+    query: {
+      "token": auth_token
+    })
+    results.parsed_response
+
+  end
 end

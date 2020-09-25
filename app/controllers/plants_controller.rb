@@ -69,9 +69,9 @@ class PlantsController < ApplicationController
         "token": @@auth_token
       }
     )
-    species_decoded = results.parsed_response 
-    if species_decoded["data"][0]
-      @plant.treffleID = species_decoded["data"][0]["id"].to_i
+    @species_decoded = results.parsed_response 
+    if @species_decoded["data"][0]
+      @plant.treffleID = @species_decoded["data"][0]["id"].to_i
     end
     @plant.watered = false
     @plant.sunlight = false
@@ -110,10 +110,10 @@ class PlantsController < ApplicationController
             "token": @@auth_token
           }
         )
-        species_decoded = results.parsed_response 
-        if species_decoded["data"][0]
+        @species_decoded = results.parsed_response 
+        if @species_decoded["data"][0]
           # Assume the first result is most accurate, due to name lookup in form
-          @plant.treffleID = species_decoded["data"][0]["id"].to_i
+          @plant.treffleID = @species_decoded["data"][0]["id"].to_i
         end
         if @plant.save
           message = 'Plant was successfully updated.'
@@ -208,7 +208,7 @@ class PlantsController < ApplicationController
   # Will lookup @plant for daily water and light required fields given those fields are nil
   # Does not garuntee fields will be filled
   def species_fill
-    get_plant(params["id"])
+    @plant_decoded = @plant.get_plant
     toSend=""
     if @plant_decoded["data"]["growth"]
       if @plant_decoded["data"]["growth"]["minimum_precipitation"]["mm"] && @plant_decoded["data"]["growth"]["maximum_precipitation"]["mm"]
@@ -227,17 +227,6 @@ class PlantsController < ApplicationController
     end
     render json: toSend, status: :ok
   end
-
-  def get_plant
-    results = HTTParty.get(
-      'https://trefle.io/api/v1/species/'+params["id"],
-    query: {
-      "token": @@auth_token
-    })
-    @plant_decoded = results.parsed_response
-
-  end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -146,28 +146,24 @@ class User < ApplicationRecord
                 user.plants.each do |plant|
                     if plant.outside
                         forecast = plant.get_forecast
-                        plant_info = plant.get_plant(plant.treffleID)
+                        
+                        plant_info = plant.get_plant
                         toSend = ""
                         if forecast && plant_info
                             # Max Temp
                             if forecast["daily"][1]["temp"]["max"] && plant_info["data"]["growth"]["maximum_temperature"]["deg_c"]
-                                # TESTING CODE BELLOW, REMOVE WHEN DONE
-                                forecast["daily"][1]["temp"]["max"] = plant_info["data"]["growth"]["maximum_temperature"]["deg_c"]
                                 if forecast["daily"][1]["temp"]["max"].to_i>=plant_info["data"]["growth"]["maximum_temperature"]["deg_c"].to_i
                                     toSend+="The temperature tommorow might be a bit hot for your plant "+plant.name+". Consider keeping it inside if possible."
                                 end
                             end
                             # Min Temp
                             if forecast["daily"][1]["temp"]["min"] && plant_info["data"]["growth"]["minimum_temperature"]["deg_c"]
-                                # TESTING CODE BELLOW, REMOVE WHEN DONE
-                                forecast["daily"][1]["temp"]["min"] = plant_info["data"]["growth"]["minimum_temperature"]["deg_c"]
                                 if forecast["daily"][1]["temp"]["min"].to_i<=plant_info["data"]["growth"]["minimum_temperature"]["deg_c"].to_i
                                     toSend+="The temperature tommorow might be a bit cold for your plant "+plant.name+". Consider keeping it inside if possible."
                                 end
                             end
                             # Wind speed, 14 m/s is considered alarming speeds
                             if forecast["daily"][1]["wind_speed"]
-                                forecast["daily"][1]["wind_speed"] = 14.to_s
                                 if forecast["daily"][1]["wind_speed"].to_i>=14
                                     toSend+="The wind tommorow will be quite windy for your plant "+plant.name+". Consider keeping it inside if possible."
                                 end
@@ -188,7 +184,8 @@ class User < ApplicationRecord
                     if plant
                         plant.watered = false
                         plant.sunlight = false
-                        plant.relocated = false
+                        # Opting to not reset relocated, as one might keep a plant out/in for multiple days
+                        # plant.relocated = false
                     end
                 end
             end
