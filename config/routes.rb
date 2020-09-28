@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'generate_graph', to: 'pages#plant_graph'
   get 'species_fill', to: 'plants#species_fill'
   post 'login', to: 'sessions#create'
+  get 'leaderboard', to: 'pages#leaderboard'
   delete 'logout', to: 'sessions#destroy'
   resources :users
 end

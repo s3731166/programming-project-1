@@ -213,11 +213,11 @@ class User < ApplicationRecord
             points = 0
             plants.each do |plant|
                 records = plant.plant_records
-                record_count = 1
+                record_count = 0
                 records.each do |record|
                     if record.water_recorded
-                        points+=100*record_count
                         record_count+=1
+                        points+=100*record_count
                     else
                         record_count=0
                     end
