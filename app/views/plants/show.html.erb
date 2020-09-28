@@ -6,6 +6,21 @@
 <h3>Daily water (mm): <%= @plant.daily_water%></h3>
 <h3>Outside Plant?: <%= @plant.outside%></h3>
 <h3>Owned By: <%= @plant.user.name %></h3>
+<% if @plant.max_temp %>
+<h3>Ideal plant temperature is below: <%=@plant.max_temp%></h3>
+<%elsif @plantMaxTemp%>
+<h3>Ideal plant temperature is below: <%= @plantMinTemp %></h3>
+<%else%>
+<h3>Unknown ideal max temperature!</h3>
+<%end%>
+<% if @plant.min_temp %>
+<h3>Ideal plant temperature is above: <%= @plant.min_temp %></h3>
+<% elsif @plantMinTemp %>
+<h3>Ideal plant temperature is above: <%= @plantMinTemp %></h3>
+<%else%>
+<h3>Unknown ideal min temperature!</h3>
+<% end %>
+
 <% if @plantDescription %>
 	<h3>Description: <%=@plantDescription%></h3> 
 <%end%>

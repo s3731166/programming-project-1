@@ -17,13 +17,13 @@
                 Represents moving your plant outside/inside from its normal position.<br>
                 Used for tracking plant health for advantageous or disadvantageous weather.<br>
                 </div><br>
-                <%= form.check_box :relocated, { disabled: plant.relocated } %>
+                <%= form.check_box :relocated %>
             </div>
             <div class="check-content">
                 <%= form.label :sunlight %> <%= form.check_box :sunlight, { disabled: plant.sunlight }%><br>
             </div>
             <div class="actions">
-                <%= form.submit "Update Plant", { disabled: plant.watered&&plant.sunlight } %>
+                <%= form.submit "Update Plant" %>
             </div>
         </div>
     

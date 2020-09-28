@@ -28,8 +28,14 @@ class PlantsController < ApplicationController
         'https://trefle.io/api/v1/species/'+@plant.treffleID.to_s+"?token="+@@auth_token
       )
       @plants_decoded = plantResults.parsed_response
-      @plantDescription = @plants_decoded["data"]["growth"]["description"]
-      @plantImage = @plants_decoded["data"]["image_url"]
+      if @plants_decoded && @plants_decoded["data"]
+        if @plants_decoded["data"]["growth"] 
+          @plantDescription = @plants_decoded["data"]["growth"]["description"] 
+          @plantMaxTemp = @plants_decoded["data"]["growth"]["maximum_temperature"]["deg_c"]
+          @plantMinTemp = @plants_decoded["data"]["growth"]["minimum_temperature"]["deg_c"]
+        end
+        @plantImage = @plants_decoded["data"]["image_url"]
+      end
     end
 	end
 
@@ -69,9 +75,9 @@ class PlantsController < ApplicationController
         "token": @@auth_token
       }
     )
-    species_decoded = results.parsed_response 
-    if species_decoded["data"][0]
-      @plant.treffleID = species_decoded["data"][0]["id"].to_i
+    @species_decoded = results.parsed_response 
+    if @species_decoded["data"][0]
+      @plant.treffleID = @species_decoded["data"][0]["id"].to_i
     end
     @plant.watered = false
     @plant.sunlight = false
@@ -221,16 +227,13 @@ class PlantsController < ApplicationController
   
   # Will lookup @plant for daily water and light required fields given those fields are nil
   # Does not garuntee fields will be filled
-  def get_plant
-    
+  def species_fill
     results = HTTParty.get(
-      'https://trefle.io/api/v1/species/'+params["id"],
+      'https://trefle.io/api/v1/species/'+ params["id"],
     query: {
       "token": @@auth_token
     })
     @plant_decoded = results.parsed_response
-    # Assume with specices lookup active in form,
-    # that first result will be accurate enough for id attainment of correct plant
     toSend=""
     if @plant_decoded["data"]["growth"]
       if @plant_decoded["data"]["growth"]["minimum_precipitation"]["mm"] && @plant_decoded["data"]["growth"]["maximum_precipitation"]["mm"]
@@ -246,6 +249,14 @@ class PlantsController < ApplicationController
         light = @plant_decoded["data"]["growth"]["light"]
         toSend+=(light*2000).to_s
       end
+      toSend+="|"
+      if @plant_decoded["data"]["growth"]["minimum_temperature"]["deg_c"]
+        toSend+= @plant_decoded["data"]["growth"]["minimum_temperature"]["deg_c"].to_s
+      end
+      toSend+=","
+      if @plant_decoded["data"]["growth"]["maximum_temperature"]["deg_c"]
+        tosend += @plant_decoded["data"]["growth"]["maximum_temperature"]["deg_c"].to_s
+      end
     end
     render json: toSend, status: :ok
   end
@@ -258,7 +269,7 @@ class PlantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def plant_params
-      params.require(:plant).permit(:name, :location, :locationName, :species, :watered, :sunlight, :relocated, :daily_water, :outside, :plant_pic)
+      params.require(:plant).permit(:name, :location, :locationName, :species, :watered, :sunlight, :relocated, :daily_water, :outside, :plant_pic, :max_temp, :min_temp)
     end
   end
 

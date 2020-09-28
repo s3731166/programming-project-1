@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2020_09_25_035051) do
     t.decimal "daily_water"
     t.integer "treffleID"
     t.boolean "outside"
+    t.decimal "max_temp"
+    t.decimal "min_temp"
   end
 
   create_table "users", force: :cascade do |t|

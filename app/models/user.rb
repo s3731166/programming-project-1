@@ -136,18 +136,54 @@ class User < ApplicationRecord
         end
     end
 
-    # This method will compare forecasted weather from plants location
+    # This method will compare forecasted weather of next day from plants location
     # Against their outside plants paramaters, if exceeded (e.g: temp > plants max_temp) 
     # Notifies user to relocate their plant to indoors.
     def User.danger_check
         @users = User.all
-        @user.each do |user|
+        @users.each do |user|
             if user&&!user.plants.empty?
                 user.plants.each do |plant|
-                    forecast = plant.get_forecast
-                    if forecast
-                        # Read next days forecast
-                        # if forecast["daily"][1]
+                    if plant.outside
+                        forecast = plant.get_forecast
+                        
+                        plant_info = plant.get_plant
+                        toSend = ""
+                        if forecast && plant_info
+                            # Max Temp
+                            tempToUse = nil
+                            # Use entered max_temp if avaliable
+                            if plant.max_temp
+                                tempToUse = plant.max_temp
+                            else
+                                tempToUse = plant_info["data"]["growth"]["maximum_temperature"]["deg_c"].to_d
+                            end
+                            if forecast["daily"][1]["temp"]["max"] && tempToUse
+                                if forecast["daily"][1]["temp"]["max"].to_i>=tempToUse
+                                    toSend+="The temperature tommorow might be a bit hot for your plant "+plant.name+". Consider keeping it inside if possible."
+                                end
+                            end
+                            # Min Temp
+                            tempToUse = nil
+                            # Use entered min_temp if avaliable
+                            if plant.min_temp
+                                tempToUse = plant.min_temp
+                            else
+                                tempToUse = plant_info["data"]["growth"]["minimum_temperature"]["deg_c"].to_d
+                            end
+                            if forecast["daily"][1]["temp"]["min"] && tempToUse
+                                if forecast["daily"][1]["temp"]["min"].to_i<=tempToUse
+                                    toSend+="The temperature tommorow might be a bit cold for your plant "+plant.name+". Consider keeping it inside if possible."
+                                end
+                            end
+                            # Wind speed, 14 m/s is considered alarming speeds
+                            if forecast["daily"][1]["wind_speed"]
+                                if forecast["daily"][1]["wind_speed"].to_i>=14
+                                    toSend+="The wind tommorow will be quite windy for your plant "+plant.name+". Consider keeping it inside if possible."
+                                end
+                            end
+                            user.notify(toSend)
+                        end
                     end
                 end
             end
@@ -162,8 +198,8 @@ class User < ApplicationRecord
                     if plant
                         plant.watered = false
                         plant.sunlight = false
-                        plant.relocated = false
-                        plant.save
+                        # Opting to not reset relocated, as one might keep a plant out/in for multiple days
+                        # plant.relocated = false
                     end
                 end
             end
@@ -171,21 +207,24 @@ class User < ApplicationRecord
     end
 
     def User.calculate_score
-        plants = user.plants
-        points = 0
-        plants.each do |plant|
-            records = plant.plant_records
-            record_count = 1
-            records.each do |record|
-                if record.water_recorded
-                    points+=100*record_count
-                    record_count+=1
-                else
-                    record_count=0
+        users = User.all
+        users.each do |user|
+            plants = user.plants
+            points = 0
+            plants.each do |plant|
+                records = plant.plant_records
+                record_count = 1
+                records.each do |record|
+                    if record.water_recorded
+                        points+=100*record_count
+                        record_count+=1
+                    else
+                        record_count=0
+                    end
                 end
             end
+            user.points = points
+            user.save
         end
-        user.points = points
-        user.save
     end
 end

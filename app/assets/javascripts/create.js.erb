@@ -66,57 +66,68 @@ function remove_links(field, suggests) {
 }
 
 function search_species(){
-  Rails.ajax({
-    <%# Ajax request from controller method get_spec%>
-    url: "/get_spec_results?toSearch=" + Rails.$(".species_field")[1].value,
-    type: "get",
-    success:  function retData(data){
-      <%# Split returned array %>
-      hold_array = data.split("|")
-      final_array = []
-      for(i=0;i<hold_array.length;++i){
-        check_array = hold_array[i].split(',')
-        final_array[i] = check_array
-      }
-      
-      <%# Assign species field as first in class ".species_field" %>
-      species_field = Rails.$(".species_field")[0]
+  if(Rails.$(".species_field")[1].value!=""){
+    Rails.ajax({
+      <%# Ajax request from controller method get_spec %>
+      url: "/get_spec_results?toSearch=" + Rails.$(".species_field")[1].value,
+      type: "get",
+      success:  function retData(data){
+        <%# Split returned array %>
+        hold_array = data.split("|")
+        final_array = []
+        for(i=0;i<hold_array.length;++i){
+          check_array = hold_array[i].split(',')
+          final_array[i] = check_array
+        }
+        
+        <%# Assign species field as first in class ".species_field" %>
+        species_field = Rails.$(".species_field")[0]
 
-      <%# Create array of HTML links (<a> tags) %>
-      links = [ document.createElement("A"), document.createElement("A"), document.createElement("A"), document.createElement("A") ]
+        <%# Create array of HTML links (<a> tags) %>
+        links = [ 
+        document.createElement("A"), 
+        document.createElement("A"), 
+        document.createElement("A"), 
+        document.createElement("A")
+        ]
 
-      <%# add "suggest" class to species field (removes bottom curved corners) %>
-      species_field.classList.add("suggest")
+        <%# add "suggest" class to species field (removes bottom curved corners) %>
+        species_field.classList.add("suggest")
 
-      <%# Check if child elements exist for creation or edit %>
-      if(Rails.$(".species_field")[0].childElementCount>5){
-        remove_links("species_field","species_suggest")
+        <%# Check if child elements exist for creation or edit %>
+        if(Rails.$(".species_field")[0].childElementCount>5){
+          remove_links("species_field","species_suggest")
+        }
+        
+        for (i=0;i<4&&final_array[i];++i) {
+          links[i].className = "species_suggest-"+i
+          links[i].innerHTML = final_array[i][0]
+          links[i].innerHTML+="<br><img src="+final_array[i][1]+">"
+        }
+        links[0].addEventListener("click" , function(){
+          delegate(0, final_array[0][2], final_array[0][0])
+        })
+        links[1].addEventListener("click" , function(){
+          delegate(1, final_array[1][2], final_array[1][0])
+        })
+        links[2].addEventListener("click" , function(){
+          delegate(2, final_array[2][2], final_array[2][0])
+        })
+        links[3].addEventListener("click" , function(){
+          delegate(3, final_array[3][2], final_array[3][0])
+        })
+        <%# Append/create only as many that exist %>
+        for (i=0;i<4&&final_array[i]!=null;i++) {
+            if (final_array[i].length > 0) { Rails.$(".species_field")[0].appendChild(links[i]); }
+        }
       }
-      for (i=0;i<4&&final_array[i];++i) {
-        links[i].className = "species_suggest-"+i
-        links[i].innerHTML = final_array[i][0]
-      }
-      links[0].addEventListener("click" , function(){
-        delegate(0, final_array[0][2], links[0].innerHTML)
-      })
-      links[1].addEventListener("click" , function(){
-        delegate(1, final_array[1][2], links[1].innerHTML)
-      })
-      links[2].addEventListener("click" , function(){
-        delegate(2, final_array[2][2], links[2].innerHTML)
-      })
-      links[3].addEventListener("click" , function(){
-        delegate(3, final_array[3][2], links[3].innerHTML)
-      })
-      <%# Append/create only as many that exist %>
-      for (i=0;i<4&&final_array[i]!=null;i++) {
-          if (final_array[i].length > 0) { Rails.$(".species_field")[0].appendChild(links[i]); }
-      }
-    }
-    <%# END Success Function %>
-  })
-  <%# END Ajax %>
+      <%# END Success Function %>
+    })
+    <%# END Ajax %>
+  }else{
+    remove_links("species_field", "species_suggest")
   }
+}
 
 function delegate(clickedId, plantId, textToFill){
   Rails.$(".species_field")[1].value =  textToFill
@@ -127,7 +138,7 @@ function delegate(clickedId, plantId, textToFill){
 function fillFields(id){
   Rails.ajax({
     <%# Ajax request from controller method get_plant %>
-    url: "/get_plants?id="+ id,
+    url: "/species_fill?id="+ id,
     type: "get",
     success:  function retData(data){
       result = data.split('|')
@@ -143,6 +154,25 @@ function fillFields(id){
           document.getElementById("outsideSet").checked = false
         }
       }
+      if(result[2]!=null){
+        tempArr = result[2].split(",")
+        if(tempArr[0]!=""){
+          document.getElementById("plant_minimum_temp").value = Number(tempArr[0])
+        }else{
+          document.getElementById("plant_minimum_temp").value = null
+        }
+        
+        if(tempArr[1]!=""){
+          document.getElementById("plant_maximum_temp").value = Number(tempArr[1])
+        }else{
+          document.getElementById("plant_maximum_temp").value = null
+        }
+      }else{
+        document.getElementById("plant_minimum_temp").value = null
+        document.getElementById("plant_maximum_temp").value = null
+      }
+
+
       <%# END Success Function %>
     }
     <%# END Ajax %>
