@@ -23,7 +23,7 @@
                 <%= form.label :sunlight %> <%= form.check_box :sunlight, { disabled: plant.sunlight }%><br>
             </div>
             <div class="actions">
-                <%= form.submit "Update Plant", { disabled: plant.watered&&plant.sunlight&&plant.relocated } %>
+                <%= form.submit "Update Plant", { disabled: plant.watered&&plant.sunlight } %>
             </div>
         </div>
     

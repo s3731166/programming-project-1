@@ -157,15 +157,35 @@ class User < ApplicationRecord
     def User.reset_daily
         @users = User.all
         @users.each do |user|
-            if user&&Time.beginning_of_week() <= user.last_active
+            if user&&DateTime.current-7.days <= user.last_active
                 user.plants.each do |plant|
                     if plant
                         plant.watered = false
                         plant.sunlight = false
                         plant.relocated = false
+                        plant.save
                     end
                 end
             end
         end
+    end
+
+    def User.calculate_score
+        plants = user.plants
+        points = 0
+        plants.each do |plant|
+            records = plant.plant_records
+            record_count = 1
+            records.each do |record|
+                if record.water_recorded
+                    points+=100*record_count
+                    record_count+=1
+                else
+                    record_count=0
+                end
+            end
+        end
+        user.points = points
+        user.save
     end
 end

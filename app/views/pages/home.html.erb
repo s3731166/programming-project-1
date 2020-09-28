@@ -1,4 +1,4 @@
-<% # Until an admin account is made, load the _noadmin page
+   <% # Until an admin account is made, load the _noadmin page
    # After that, if user is logged in, then load the _loggedin page, or else load the _loggedout page 
 %>
    <h1>Dashboard</h1>
@@ -15,7 +15,8 @@
 	  <br>
 	  <% if current_plant.plant_pic.attached? %>
 		<%= image_tag current_plant.plant_pic, size: "75" %>
-	  <% end %>
+     <% end %>
+     <%= current_plant.user.points %>
       <div class="center-dashboard">
       <%= render "report", plant: current_plant %></div>
       <%= render "checklist", plant: current_plant %>

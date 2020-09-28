@@ -38,14 +38,14 @@ class Plant < ApplicationRecord
     @plants.each do |plant|
       # Set record to nil at first
       record=nil
-      # Build a plant record for this plant if there is a water level, and add the water level o the record
+      # Build a plant record for this plant if there is a water level, and add if has been watered
       if plant.daily_water and plant.watered
         record = PlantRecord.new()
         record.water_recorded = plant.daily_water
       end
       
       # Record average tempatrure for day
-      weatherJson = @plant.get_weather
+      weatherJson = plant.get_weather()
       if weatherJson["main"]
         averageWeather = (weatherJson["main"]["temp_max"]+weatherJson["main"]["temp_min"]) / 2
         if !record

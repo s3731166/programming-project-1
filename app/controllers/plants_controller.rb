@@ -96,25 +96,39 @@ class PlantsController < ApplicationController
   # PATCH/PUT /plants/1.json
   def update
     respond_to do |format|
+      # Used to handle score upon checklist waterring
+      if !plant_params[:watered].nil? && plant_params[:watered]=='1' && !@plant.watered
+        @plant.user.points+=10
+        @plant.user.save
+      end
+
+
       if @plant.update(plant_params)
+
         # Handle location geocoding
-        searchResults = Geocoder.search(@plant.locationName)
-        if searchResults
-          @plant.location = searchResults.first.coordinates
+        if plant_params[:location]
+          searchResults = Geocoder.search(@plant.locationName)
+          if searchResults
+            @plant.location = searchResults.first.coordinates
+          end
         end
+
         # Handle TreffleID assigment
-        results = HTTParty.get(
-          'https://trefle.io/api/v1/species/search',
-          query: {
-            "q": @plant.species,
-            "token": @@auth_token
-          }
-        )
-        species_decoded = results.parsed_response 
-        if species_decoded["data"][0]
-          # Assume the first result is most accurate, due to name lookup in form
-          @plant.treffleID = species_decoded["data"][0]["id"].to_i
+        if plant_params[:species]
+          results = HTTParty.get(
+            'https://trefle.io/api/v1/species/search',
+            query: {
+              "q": @plant.species,
+              "token": @@auth_token
+            }
+          )
+          species_decoded = results.parsed_response 
+          if species_decoded["data"][0]
+            # Assume the first result is most accurate, due to name lookup in form
+            @plant.treffleID = species_decoded["data"][0]["id"].to_i
+          end
         end
+
         if @plant.save
           message = 'Plant was successfully updated.'
           if !@plant.daily_water
