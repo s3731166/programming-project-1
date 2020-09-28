@@ -1,0 +1,20 @@
+<h1>Leaderboard</h1>
+<p>Compare your score to other plant owners using our plant monitor. Who's the caringest plant owner in all the land? Let's see...</p>
+<table>
+    <tbody>
+    <% rank = 1 %>
+    <% User.order(points: :desc).each do |user| %>
+        <tr>
+            <th>Rank</th>
+            <th>User Name</th>
+            <th>Points</th>
+        </tr>
+        <tr>
+            <td>#<%=rank%></td>
+            <td><%= user.get_styled_name %></td>
+            <td><%= user.points %></td>
+            <%++rank%>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
