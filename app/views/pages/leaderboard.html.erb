@@ -3,17 +3,17 @@
 <table>
     <tbody>
     <% rank = 1 %>
+    <tr>
+        <th>Rank</th>
+        <th>User Name</th>
+        <th>Points</th>
+    </tr>
     <% User.order(points: :desc).each do |user| %>
-        <tr>
-            <th>Rank</th>
-            <th>User Name</th>
-            <th>Points</th>
-        </tr>
         <tr>
             <td>#<%=rank%></td>
             <td><%= user.get_styled_name %></td>
             <td><%= user.points %></td>
-            <%++rank%>
+            <%rank+=1%>
         </tr>
     <% end %>
     </tbody>
