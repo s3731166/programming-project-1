@@ -36,8 +36,14 @@
       <strong>Phone:</strong>
       <%= @user.phone if @user.phone%>
       </p>
+
+      <p>
+      <strong>Points:</strong>
+      <%= @user.points if @user.points%>
+      </p>
+
       <% if @user == current_user%>
-        | <%= link_to "Log out", logout_path, method: :delete %>
+        <%= link_to "Log out", logout_path, method: :delete %>
       <% end %>
     </div>
   </div>

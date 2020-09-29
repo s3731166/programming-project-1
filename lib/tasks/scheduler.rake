@@ -1,5 +1,5 @@
 # Task to notify users of their plants status'
-task :daily_update => :environment  do
+task :daily_notify => :environment  do
     User.daily_notify
 end
 # Task to reset the daily chores
@@ -15,6 +15,6 @@ task :forecast_check => :environment do
     User.danger_check
 end
 
-task :calculate_score => :enviroment do
+task :calculate_score => :environment do
     User.calculate_score
 end

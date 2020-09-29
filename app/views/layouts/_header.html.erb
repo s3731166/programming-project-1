@@ -12,23 +12,19 @@
         
         <%# OPEN RIGHT DIV %>
         <div class="user-info">
-                   
             <div class="name-and-date">
-            
-
             <% if current_user%>
-
              <%= if current_user.admin then link_to "Users", users_path end %> 
-            <div class="date-box" title="Today is the <%= Date.today.strftime("#{Date.today.day.ordinalize} of %B, %Y") %>.">
-                <div class="day"><%= Date.today.strftime("%d") %></div>
-                <div class="month"><%= Date.today.strftime("%b").upcase %></div>
-            </div>
+                <div class="date-box" title="Today is the <%= Date.today.strftime("#{Date.today.day.ordinalize} of %B, %Y") %>.">
+                    <div class="day"><%= Date.today.strftime("%d") %></div>
+                    <div class="month"><%= Date.today.strftime("%b").upcase %></div>
+                </div>
                 <div class="name-and-title">
                     <%=link_to current_user do%>
-                        <%= image_tag current_user.gravatar_url , :class => "gravatar", :title => "ADMINISTRATOR" if (current_user.admin) %>
+                        <%= image_tag current_user.gravatar_url , :class => "gravatar" %>
                     <% end %>
+                    </div>
                 </div>
-            </div>
             <% end %> 
         </div> 
         <%# END RIGHT DIV %>
