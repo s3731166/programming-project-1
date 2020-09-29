@@ -1,54 +1,64 @@
 <% content_for :title, @plant.name %>
-<h1><%= @plant.name %></h1>
-<h3>Location: <%= @plant.locationName %></h3>
-<h4>Co-Ords: <%= @plant.location %></h4>
-<h3>Species: <%= @plant.species %></h3>
-<h3>Daily water (mm): <%= @plant.daily_water%></h3>
-<h3>Outside Plant?: <%= @plant.outside%></h3>
-<h3>Owned By: <%= @plant.user.name %></h3>
-<% if @plant.max_temp %>
-<h3>Ideal plant temperature is below: <%=@plant.max_temp%></h3>
-<%elsif @plantMaxTemp%>
-<h3>Ideal plant temperature is below: <%= @plantMinTemp %></h3>
-<%else%>
-<h3>Unknown ideal max temperature!</h3>
-<%end%>
-<% if @plant.min_temp %>
-<h3>Ideal plant temperature is above: <%= @plant.min_temp %></h3>
-<% elsif @plantMinTemp %>
-<h3>Ideal plant temperature is above: <%= @plantMinTemp %></h3>
-<%else%>
-<h3>Unknown ideal min temperature!</h3>
-<% end %>
+<div class="split-container">
+    <div class="left-container">
+		<h1><%= @plant.name %></h1>
+		<h3>Location: <%= @plant.locationName %></h3>
+		<h4>Co-Ords: <%= @plant.location %></h4>
+		<h3>Species: <%= @plant.species %></h3>
+		<h3>Daily water (mm): <%= @plant.daily_water%></h3>
+		<h3>Outside Plant?: <%= @plant.outside%></h3>
+		<h3>Owned By: <%= @plant.user.name %></h3>
+		<% if @plant.max_temp %>
+			<h3>Ideal plant temperature is below: <%=@plant.max_temp%></h3>
+		<%elsif @plantMaxTemp%>
+			<h3>Ideal plant temperature is below: <%= @plantMinTemp %></h3>
+		<%else%>
+			<h3>Unknown ideal max temperature!</h3>
+		<%end%>
 
-<% if @plantDescription %>
-	<h3>Description: <%=@plantDescription%></h3> 
-<%end%>
-<% if @plant.watered == false %>
-	<h3>Plant needs to be watered today!<h3>
-<% else %>
-	<h3>Plant is happy and watered!</h3>
-<% end %>
+		<% if @plant.min_temp %>
+			<h3>Ideal plant temperature is above: <%= @plant.min_temp %></h3>
+		<% elsif @plantMinTemp %>
+			<h3>Ideal plant temperature is above: <%= @plantMinTemp %></h3>
+		<%else%>
+			<h3>Unknown ideal min temperature!</h3>
+		<% end %>
+		<%= link_to 'Edit', edit_plant_path(@plant) %> 
+		<%= link_to 'Back', root_path %>
 
-<% if @plant.sunlight == false %>
-	<h3>Plant needs some sun today!<h3>
-<% else %>
-	<h3>Plant is happy and has recived sunlight!</h3>
-<% end %>
+	</div>
+	<div class="right-container">
+		<% if @plantDescription %>
+			<h3>Description: <%=@plantDescription%></h3> 
+		<%end%>
+		<% if @plant.watered == false %>
+			<h3>Plant needs to be watered today!<h3>
+		<% else %>
+			<h3>Plant is happy and watered!</h3>
+		<% end %>
 
-<% if @plant.relocated == false %>
-	<h3>Plant has not been relocated.<h3>
-<% else %>
-	<h3>Plant has been relocated!</h3>
-<% end %>
+		<% if @plant.sunlight == false %>
+			<h3>Plant needs some sun today!<h3>
+		<% else %>
+			<h3>Plant is happy and has recived sunlight!</h3>
+		<% end %>
 
-<% if @plant.plant_pic.attached? %>
-	<%= image_tag @plant.plant_pic, size: "400" %>
-<% elsif @plantImage %>
-	<%= image_tag @plantImage, size: "400" %>
-<% else %>
-	<h3>No Image!</h3>
-<%end%>
-<br>
-<%= link_to 'Edit', edit_plant_path(@plant) %> |
-<%= link_to 'Back', root_path %>
+		<% if @plant.relocated == false %>
+			<h3>Plant has not been relocated.<h3>
+		<% else %>
+			<h3>Plant has been relocated!</h3>
+		<% end %>
+
+		<% if @plant.plant_pic.attached? %>
+			<%= image_tag @plant.plant_pic, size: "400" %>
+		<% elsif @plantImage %>
+			<%= image_tag @plantImage, size: "400" %>
+		<% else %>
+			<h3>No Image!</h3>
+		<%end%>
+	</div>
+
+
+
+	
+</div>
