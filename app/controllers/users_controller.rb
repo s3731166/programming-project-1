@@ -36,7 +36,6 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @user.points = 0
   end
 
   # GET /users/1/edit
@@ -61,6 +60,7 @@ class UsersController < ApplicationController
   # https://3rd-edition.railstutorial.org/book/sign_up#code-signup_flash
   def create
     @user = User.new(user_params)
+    @user.points = 0
     @user.last_active = DateTime.now
     # If administrator boolean is not set, set it to false
     # This will happen when a user signs up and there is already an admin, since the admin checkbox will not show
