@@ -1,8 +1,8 @@
 <%= form_with(model: plant) do |form| %>
+
   <% if plant.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(plant.errors.count, "error") %> prohibited this plant from being saved:</h2>
-
       <ul>
         <% plant.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,12 +10,11 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
-<%# Calls Method in Assests/JS with #loc-field %>
+  <%# Calls Method in Assests/JS with #loc-field %>
   <div class="field location_field">
     <%= form.label "Search Location", class: "inline"%>
     <span class="tip-prompt" tabindex="0">?</span>
@@ -58,7 +57,7 @@
     </div><br>
     <%=form.check_box :outside, id: "outsideSet" %>
   </div>
-  
+
   <div class = "field species_temps inline"><span class="tip-prompt" tabindex="0">?</span>
     <div class = "tooltip">
       While not required to register a plant, it is used for forcasting weather.<br>
@@ -84,4 +83,6 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+
+
 <% end %>
