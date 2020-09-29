@@ -262,6 +262,10 @@ a.admin:hover {
 }
 /* END TOOLTIP FUNCTIONALITY */
 
+.header-center {
+  float:left;
+  width:60%;
+}
 .date-box {
   border: 1px solid black;
   color: black;
