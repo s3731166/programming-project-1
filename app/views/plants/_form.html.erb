@@ -1,3 +1,5 @@
+<div class="split-container">
+    <div class="left-container">
 <%= form_with(model: plant) do |form| %>
 
   <% if plant.errors.any? %>
@@ -46,6 +48,10 @@
     <%= form.number_field :daily_water, in: 0..12000, step: 50, id: "plant_daily_water"%>
   </div>
 
+  </div>
+
+  <div class="right-container">
+
   <div class = "field species_light">
 
     <%= form.label "Outside plant?", class: "inline" %>
@@ -84,5 +90,6 @@
     <%= form.submit %>
   </div>
 
-
+</div>
+</div>
 <% end %>
