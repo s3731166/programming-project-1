@@ -20,7 +20,7 @@
                     <div class="month"><%= Date.today.strftime("%b").upcase %></div>
                 </div>
                 <div class="name-and-title">
-                    <%=link_to current_user do%>
+                    <%=link_to current_user do %>
                         <%= image_tag current_user.gravatar_url , :class => "gravatar" %>
                     <% end %>
                     </div>

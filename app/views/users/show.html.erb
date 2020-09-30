@@ -34,12 +34,39 @@
       <strong>Phone:</strong>
       <%= @user.phone if @user.phone%>
       </p>
-
+      <p>Recieving text notifications? <%=@user.recieve_texts%></p>
       <p>
       <strong>Points:</strong>
       <%= @user.points if @user.points%>
       </p>
 
+      <p>Show in leaderboard? <%=@user.competitive%></p>
+      <%# Badges for plant maintnance %>
+      <strong>Badges for plant maintnance:</strong><br>
+      <%# One plant for a month %>
+      <% if @user.points >= 46500 %>
+        <%= image_tag("badge-graphic.png", alt: "badge graphic", size: "75") %>
+      <% end %>
+      <%# One plant for half a year %>
+      <% if @user.points >= 1665300 %>
+        <%= image_tag("badge-graphic2.png", alt: "badge graphic", size: "75") %>
+      <% end %>
+      <%# One plant for a year %>
+      <% if @user.points >= 6643000 %>
+        <%= image_tag("badge-graphic3.png", alt: "badge graphic", size: "75") %>
+      <% end %>
+      
+      <%# Badges for site attendence %>
+      <br><strong>Badges for site attendence:</strong><br>
+      <%if DateTime.current-1.month >= @user.created_at %>
+        <%= image_tag("badge-graphic.png", alt: "badge graphic", size: "75") %>
+      <%end%>
+      <%if DateTime.current-6.month >= @user.created_at %>
+        <%= image_tag("badge-graphic2.png", alt: "badge graphic", size: "75") %>
+      <%end%>
+      <%if DateTime.current-1.year >= @user.created_at %>
+        <%= image_tag("badge-graphic3.png", alt: "badge graphic", size: "75") %>
+      <%end%>
       <% if @user == current_user%>
         <%= link_to "Log out", logout_path, method: :delete %>
       <% end %>

@@ -9,12 +9,14 @@
         <th>Points</th>
     </tr>
     <% User.order(points: :desc).each do |user| %>
-        <tr>
-            <td>#<%=rank%></td>
-            <td><%= user.get_styled_name %></td>
-            <td><%= user.points %></td>
-            <%rank+=1%>
-        </tr>
+        <%if user.competitive%>
+            <tr>
+                <td>#<%=rank%></td>
+                <td><%= user.get_styled_name %></td>
+                <td><%= user.points %></td>
+                <%rank+=1%>
+            </tr>
+        <%end%>
     <% end %>
     </tbody>
 </table>

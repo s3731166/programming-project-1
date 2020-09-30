@@ -25,7 +25,17 @@
     <%= form.label :phone %>
     <%= form.text_field :phone %>
   </div>
-  
+
+  <div class="field">
+    <%= form.label "Recieve text notifications?" %>
+    <%= form.check_box :recieve_texts %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Compete in leaderboard?" %>
+    <%= form.check_box :competitive %>
+  </div>
+
   <div class="field">
     <%= form.label :password %>
     <%= form.password_field :password %>

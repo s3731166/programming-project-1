@@ -106,7 +106,7 @@ class User < ApplicationRecord
     def  User.daily_notify
         @users = User.all
         @users.each do |user|
-            if user && !user.plants.empty?
+            if user && user.recieve_texts && !user.plants.empty?
                 message="Plant Summary for: "+ user.name
                 user.plants.each do |plant|
                     if plant
@@ -142,7 +142,7 @@ class User < ApplicationRecord
     def User.danger_check
         @users = User.all
         @users.each do |user|
-            if user&&!user.plants.empty?
+            if user&&user.recieve_texts?&&!user.plants.empty?
                 user.plants.each do |plant|
                     if plant.outside
                         forecast = plant.get_forecast
@@ -214,7 +214,7 @@ class User < ApplicationRecord
             plants.each do |plant|
                 records = plant.plant_records
                 record_count = 0
-                records.each do |record|
+                records.order(created_at: :desc).each do |record|
                     if record.water_recorded
                         record_count+=1
                         points+=100*record_count
