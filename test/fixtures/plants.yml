@@ -1,7 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: "Bobe"
+  user_id: 1
 
 two:
-  name: MyString
+  name: "Bober"
+  location: "[-24.7761086, 134.755]"
+  locationName: "Melbourne, Australia"
+  species: "Common sunflower"
+  daily_water: 45.5
+  treffleID: 141504
+  outside: true
+  user_id: 1
+  min_temp: 15.5
+  watered: false
+  sunlight: false
+  relocated: false

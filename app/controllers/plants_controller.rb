@@ -4,8 +4,9 @@ class PlantsController < ApplicationController
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
   require 'geocoder'
   require 'httparty'
-  
-  @@auth_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
+ 
+  # Treffle ID Authentication token
+  @@treffle_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
 
   # GET /plants
   # GET /plants.json
@@ -24,10 +25,10 @@ class PlantsController < ApplicationController
 
     if @plant.treffleID
       # Retirve plant details
-      plantResults = HTTParty.get(
-        'https://trefle.io/api/v1/species/'+@plant.treffleID.to_s+"?token="+@@auth_token
-      )
-      @plants_decoded = plantResults.parsed_response
+      # plantResults = HTTParty.get(
+      #   'https://trefle.io/api/v1/species/'+@plant.treffleID.to_s+"?token="+@@treffle_token
+      # )
+      @plants_decoded = @plant.get_plant
       if @plants_decoded && @plants_decoded["data"]
         if @plants_decoded["data"]["growth"] 
           #FURTHER SIMPLIFIY FOR CODE RESUE : @plants_decoded["data"]["growth"]  = growthResponse
@@ -63,20 +64,18 @@ class PlantsController < ApplicationController
   # POST /plants
   # POST /plants.json
   def create
-
     @plant = Plant.new(plant_params)
-    
-    #MAKE API CALL AND VERIFY :location = sean
+    # Assume first result is accurate given in form location auto-fill
     @plant.location = Geocoder.search(@plant.locationName).first.coordinates
     # Handle TreffleID assigment
     results = HTTParty.get(
       'https://trefle.io/api/v1/species/search',
       query: {
         "q": @plant.species,
-        "token": @@auth_token
+        "token": @@treffle_token
       }
     )
-    @species_decoded = results.parsed_response 
+    @species_decoded = results.parsed_response
     if @species_decoded["data"][0]
       @plant.treffleID = @species_decoded["data"][0]["id"].to_i
     end
@@ -108,10 +107,7 @@ class PlantsController < ApplicationController
         @plant.user.points+=10
         @plant.user.save
       end
-
-
       if @plant.update(plant_params)
-
         # Handle location geocoding
         if plant_params[:location]
           searchResults = Geocoder.search(@plant.locationName)
@@ -126,7 +122,7 @@ class PlantsController < ApplicationController
             'https://trefle.io/api/v1/species/search',
             query: {
               "q": @plant.species,
-              "token": @@auth_token
+              "token": @@treffle_token
             }
           )
           species_decoded = results.parsed_response 
@@ -191,12 +187,12 @@ class PlantsController < ApplicationController
 
   def spec_results 
     #https://trefle.io/api/v1/species/search?q=coconut&token=YOUR_TREFLE_TOKEN
-    #results = 'https://trefle.io/api/v1/species/search?q='+params['toSearch']+'&token='+auth_token
+    #results = 'https://trefle.io/api/v1/species/search?q='+params['toSearch']+'&token='+treffle_token
     results = HTTParty.get(
       'https://trefle.io/api/v1/species/search',
       query: {
         "q": params['toSearch'],
-        "token": @@auth_token
+        "token": @@treffle_token
       }
     )
     species_decoded = results.parsed_response  
@@ -226,13 +222,14 @@ class PlantsController < ApplicationController
     render json: toSend, status: :ok
   end
   
+  # Method to parse data into javascript files for plant form auto-fill
   # Will lookup @plant for daily water and light required fields given those fields are nil
   # Does not garuntee fields will be filled
   def species_fill
     results = HTTParty.get(
       'https://trefle.io/api/v1/species/'+ params["id"],
     query: {
-      "token": @@auth_token
+      "token": @@treffle_token
     })
     @plant_decoded = results.parsed_response
     toSend=""

@@ -463,6 +463,10 @@ a.admin:hover {
 /* This sharpens the bottom corners of a search field for dropdown suggestions. */
 .suggest {
   border-radius: 3px 3px 0 0;
+  width: 163px;
+  /* height: 50%; */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* CSS FOR DYNAMIC HIDING */
@@ -516,7 +520,7 @@ a.admin:hover {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 2em;
   height: 85%;
-  overflow:hidden; /*added this*/
+  overflow:auto; /*added this*/
 
 }
 

@@ -26,6 +26,8 @@
     It is important to select a known location from suggestions for weather purposes.<br>
     </div><br>
     <%= form.text_field :locationName, class: "location_field", oninput: "search_locations()", autocomplete: 'off' %>
+    <div class="field location_field">
+    </div>
   </div>
 
   <div class="field species_field">
@@ -36,6 +38,8 @@
     Once picked, plant info will be automatically filled in to the following fields, if possible.<br>
     </div><br>
     <%= form.text_field :species, class: "species_field", oninput: "search_species()", autocomplete: 'off' %>
+    <div class="field species_field">
+    </div>
   </div>
 
   <div class = "field species_water">

@@ -10,7 +10,7 @@ Because of this, work done by the group as a whole will usually be committed and
 
 ## Licence
 
-All work not mentioned below is built from scratch in Ruby on Rails by the SEED ORG Rails Team, Jessiah Malik, Sean Clare, Scott Ross and Marcus Geary.
+All work not mentioned below is built from scratch in Ruby on Rails by the SEED ORG Rails Team, Jessiah Malik, Sean Clare, Scott Ross and Marcus Geary and Glenn Iudice.
 
 ### Base User and Session Fuctionality
 The user registration, log-in, log-out, and persistent session functionality of this program are built with the help of Michael Hartl's book *[Ruby in Rails Tutorial: Learn Web Development with Rails](https://www.learnenough.com/ruby-on-rails-6th-edition-tutorial#copyright_and_license)*, which is published under the MIT License and the Beerware License.
@@ -46,39 +46,57 @@ The code built referencing this tutorial can be found in:
 ### API CONNECTION AND REGISTRATIONS 
 
 
-*TWILLIO* 
+*TWILIO* 
 
-    - Link TO Registration
-    - Required Data
-    - Where to find and put key in Code
-    - Json Format Required/Sanitisied
+    - Link TO Registration: https://www.twilio.com/try-twilio
+    - Required Data:                        models/user.rb: line 95-111
+    - Where to Put Account ID in Code:      models/user.rb: line 24
+    - Where to Put API ID in code:          models/user.rb: line 26 
+    - Where to Put API Secret in code:      models/user.rb: line 28
+    - Where to Put Phone Number in code:    models/user.rb: line 30
 
 
 *OPEN WEATHER MAP*
 
-    - Link TO Registration : https://openweathermap.org/api 
+    - Link TO Registration: https://openweathermap.org/api 
     - Required Data: views/pages/_weather_sumary.html.erb: Line 18+
-    - Where to find and put key in Code: models/plant.rb: Line 7
-    - Json Format Required/Sanitisied: Max and Min Temp by json["main"]["temp_max/temp_min"].to_d.round 
-                                        Description by @json["weather"][0]["description"]
+    - Where to find and put key in Code:    models/plant.rb: Line 7
+    - Json Format Required/Sanitisied:      Max and Min Temp by json["main"]["temp_max/temp_min"]
+                                            Description by @json["weather"][0]["description"]
 
-*TREFEL.IO*
+*TREFLE.IO*
 
-    - Link TO Registration
-    - Required Data
-    - Where to find and put key in Code * abstracted to top of file TO-DO
-    - Json Format Required/Sanitisied 
+    - Link TO Registration:                 https://trefle.io/
+    - Required Data:                        model/plant.rb: line 80 - 88
+                                            controllers/plants_controller.rb: line 24-42
+                                            controllers/plants_controller.rb: line 66-151
+                                            controllers/plants_controller.rb: line 191-262
+    - Where to find and put key in Code:    model/plant.rb: line 12
+                                            controllers/plants_controller.rb: line 9
+    - Json Format Required/Sanitisied: 
+                   For search results: 
+                    common name:            json["data"][<result number>]["common_name"]
+                    Scientific name:        json["data"][<result number>]["scientific_name"]
+                    Image associated:       json["data"][<result number>]["image_url"]
+                    trefle id:              json["data"][<result number>]["id"]
+                   For get results:
+                    Maximum temperature:    json["data"]["growth"]["maximum_temperature"]["deg_c"]
+                    Minimum temperature:    json["data"]["growth"]["minimum_temperature"]["deg_c"]
+                    light level:            json["data"]["growth"]["light"]
+                    Minimum precipitation:  json["data"]["growth"]["minimum_precipitation"]["mm"]
+                    Maximum precipitation:  json["data"]["growth"]["maximum_precipitation"]["mm"]
+                   
+
 
 *Gravatar (Gem API: 'gravtastic', '~> 3.2', '>= 3.2.6')*
     -Sourced in Gemfile line 44
 
-    - Link TO Registration: Gets via user email in parital '_header.html.erb: Line 24'
-    - Required Data: User Email If REgistered 
+    - Link TO Registration:                 Gets via user email in parital '_header.html.erb: Line 24'
+    - Required Data:                        User Email If Registered 
 
 *Geocoder (Gem API: 'geocoder', '~> 1.6', '>= 1.6.3')*
     -Sourced in Gemfile line 86
-
-    - Link TO Registration
-    - Required Data
-    - Where to find and put key in Code
-    - Json Format Required/Sanitisied
+    - Required Data:                        controllers/plants_controller: lines 110-116
+    - Json Format Required/Sanitisied:      
+                   From search:
+                    location coordinates:   First.coordinates

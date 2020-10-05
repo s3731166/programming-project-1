@@ -18,7 +18,7 @@ function search_locations() {
       results_array = data.split("|")
 
       <%# Assign location field as first in class ".location_field" %>
-      location_field = Rails.$(".location_field")[0]
+      location_field = Rails.$(".location_field")[2]
 
       <%# Create array of HTML links (<a> tags) %>
       links = [ 
@@ -28,13 +28,14 @@ function search_locations() {
       document.createElement("A")
       ]
 
+      <%# Check if child elements exist for creation or edit %>
+      if(Rails.$(".location_field")[2].childElementCount>0){
+        remove_links("location_field", "location_suggest")
+      }
+
       <%# add "suggest" class to location field (removes bottom curved corners) %>
       location_field.classList.add("suggest")
 
-      <%# Check if child elements exist for creation or edit %>
-      if(Rails.$(".location_field")[0].childElementCount>5){
-        remove_links("location_field", "location_suggest")
-      }
       for (i=0;i<4;i++) {
         links[i].className = "location_suggest-"+i
         links[i].innerHTML = results_array[i];
@@ -46,7 +47,7 @@ function search_locations() {
       
       <%# Append/create only as many that exist %>
       for (i=0;i<4&&results_array[i]!=null;i++) {
-          if (results_array[i].length > 0) { Rails.$(".location_field")[0].appendChild(links[i]); }
+          if (results_array[i].length > 0) { Rails.$(".location_field")[2].appendChild(links[i]); }
       }
     }
     <%# END Success Function %>
@@ -56,11 +57,10 @@ function search_locations() {
 
 <%# Remove Elements upon clicking one %>
 function remove_links(field, suggests) {
-    Rails.$("."+field)[1].classList.remove("suggest")
-    for(i=0;i<Rails.$("."+field)[0].childElementCount+1;++i){
+    Rails.$("."+field)[2].classList.remove("suggest")
+    for(i=0;i<4;++i){
       if (Rails.$("."+suggests+'-'+i)[0]!=null){
         Rails.$("."+suggests+'-'+i)[0].remove()
-        
       }
     }
 }
@@ -81,7 +81,7 @@ function search_species(){
         }
         
         <%# Assign species field as first in class ".species_field" %>
-        species_field = Rails.$(".species_field")[0]
+        species_field = Rails.$(".species_field")[2]
 
         <%# Create array of HTML links (<a> tags) %>
         links = [ 
@@ -91,13 +91,13 @@ function search_species(){
         document.createElement("A")
         ]
 
-        <%# add "suggest" class to species field (removes bottom curved corners) %>
-        species_field.classList.add("suggest")
-
         <%# Check if child elements exist for creation or edit %>
-        if(Rails.$(".species_field")[0].childElementCount>5){
+        if(Rails.$(".species_field")[2].childElementCount>0){
           remove_links("species_field","species_suggest")
         }
+
+        <%# add "suggest" class to species field (removes bottom curved corners) %>
+        species_field.classList.add("suggest")
         
         for (i=0;i<4&&final_array[i];++i) {
           links[i].className = "species_suggest-"+i
@@ -118,7 +118,7 @@ function search_species(){
         })
         <%# Append/create only as many that exist %>
         for (i=0;i<4&&final_array[i]!=null;i++) {
-            if (final_array[i].length > 0) { Rails.$(".species_field")[0].appendChild(links[i]); }
+            if (final_array[i].length > 0) { Rails.$(".species_field")[2].appendChild(links[i]); }
         }
       }
       <%# END Success Function %>

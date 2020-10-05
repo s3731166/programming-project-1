@@ -2,7 +2,7 @@ class User < ApplicationRecord
     include Gravtastic
         gravtastic
     include ActionView::Helpers::DateHelper
-    
+    require 'twilio-ruby'
     attr_accessor :remember_token
 
     has_many :plants
@@ -19,7 +19,15 @@ class User < ApplicationRecord
     
     # Makes sure password is present
     validates :password, presence: true
-
+    
+    # Twilio Account ID
+    @@twilio_account_id = 'AC1f9a60a66869c95de7e80492d52f3dd3'
+    # Twilio API id
+    @@twilio_api_sid = "SKa9acd53d62bbe66526c78b7bd6105c13"
+    # Twilio API secret
+    @@twilio_api_secret = "soqB2yV9co4lyJoRS0UW7HQiCom8lbEP"
+    # Twilio Phone number,The web app will use this number for sending messages to Users
+    @@twilio_phone = "+61488856462"
     
     # Creates digest for keeping a user logged in
     # Based on Michael Hartl's Rails Tutorial, Chapter 8
@@ -86,14 +94,13 @@ class User < ApplicationRecord
 
     def notify(body)
         begin
-            account_sid = 'AC1f9a60a66869c95de7e80492d52f3dd3'
-            api_sid = "SKa9acd53d62bbe66526c78b7bd6105c13"
-            api_secret = "soqB2yV9co4lyJoRS0UW7HQiCom8lbEP"
-            client = Twilio::REST::Client.new api_sid, api_secret, account_sid
-            from = '+61488856462' # Your Twilio number
-            to = "+61" + phone # Your mobile phone number ------ "+" + user.phone = "+04,d{8}"
-            client.messages.create({
-            from: from,
+            # Makes a client with above values
+            if @client.nil?
+                @client = Twilio::REST::Client.new @@twilio_api_sid, @@twilio_api_secret, @@twilio_account_id
+            end
+            to = "+61" + phone # user.phone = "+04,d{8}"
+            @client.messages.create({
+            from: @@twilio_phone,
             to: to,
             body:body
             })

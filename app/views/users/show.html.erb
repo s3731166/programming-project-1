@@ -26,21 +26,36 @@
       </p>
 
       <p>
-      <strong>Created at:</strong>
-      <%=@user.created_at%>
+        <strong>Created at:</strong>
+        <%=@user.created_at%>
       </p>
 
       <p>
-      <strong>Phone:</strong>
-      <%= @user.phone if @user.phone%>
-      </p>
-      <p>Recieving text notifications? <%=@user.recieve_texts%></p>
-      <p>
-      <strong>Points:</strong>
-      <%= @user.points if @user.points%>
+        <strong>Phone:</strong>
+        <%= @user.phone if @user.phone%>
       </p>
 
-      <p>Show in leaderboard? <%=@user.competitive%></p>
+      <p>
+      <%if @user.recieve_texts%>
+        You will receive text notifications.
+      <% else %>
+        You are not receiveing text notifications.
+      <% end %>
+      </p>
+      
+      <p>
+        <% if @user.competitive%>
+          You will appear in the leaderboard.
+        <%else%>
+          You are not appearing in the leaderboard.
+        <% end %>
+      </p>
+
+      <p>
+        <strong>Points:</strong>
+        <%= @user.points if @user.points%>
+      </p>
+
       <%# Badges for plant maintnance %>
       <strong>Badges for plant maintnance:</strong><br>
       <%# One plant for a month %>
