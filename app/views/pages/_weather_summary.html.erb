@@ -17,21 +17,21 @@
 <div id="weather-Dashboard">
     <% @json = plant.get_weather %>
     <% if @json %>
-    Temp: <div id ="Weather-temperature"><%= @json["main"]["temp"].to_d.round %>&deg;C</div>
+        Temp: <div id ="Weather-temperature"><%= @json["main"]["temp"].to_d.round %>&deg;C</div>
 
-    <div class="weather-sum">
-        <div id ="Weather-desc"><%= @json["weather"][0]["description"] %></div> 
-        <div id = "Weather-image"><img src="https://openweathermap.org/img/wn/<%= @json["weather"][0]["icon"] %>.png"></div> 
-    </div>
+        <div class="weather-sum">
+            <div id ="Weather-desc"><%= @json["weather"][0]["description"] %></div> 
+            <div id = "Weather-image"><img src="https://openweathermap.org/img/wn/<%= @json["weather"][0]["icon"] %>.png"></div> 
+        </div>
 
 
-    
-   <div class="inline-wrapper">
-        Max:<div id = "Max-temp"><%= @json["main"]["temp_max"].to_d.round %>&deg;C</div>
-   </div>
+        
     <div class="inline-wrapper">
-        Min: <div id = "Min-temp"><%= @json["main"]["temp_min"].to_d.round %>&deg;C</div>
+            Max:<div id = "Max-temp"><%= @json["main"]["temp_max"].to_d.round %>&deg;C</div>
     </div>
+        <div class="inline-wrapper">
+            Min: <div id = "Min-temp"><%= @json["main"]["temp_min"].to_d.round %>&deg;C</div>
+        </div>
     <% else %>
         <h3>NO LOCATION INFORMATION</h3>
     <% end %>

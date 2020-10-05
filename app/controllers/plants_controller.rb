@@ -30,6 +30,7 @@ class PlantsController < ApplicationController
       @plants_decoded = plantResults.parsed_response
       if @plants_decoded && @plants_decoded["data"]
         if @plants_decoded["data"]["growth"] 
+          #FURTHER SIMPLIFIY FOR CODE RESUE : @plants_decoded["data"]["growth"]  = growthResponse
           @plantDescription = @plants_decoded["data"]["growth"]["description"] 
           @plantMaxTemp = @plants_decoded["data"]["growth"]["maximum_temperature"]["deg_c"]
           @plantMinTemp = @plants_decoded["data"]["growth"]["minimum_temperature"]["deg_c"]
