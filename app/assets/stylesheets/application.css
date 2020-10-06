@@ -501,7 +501,7 @@ a.admin:hover {
 .split-container{
   display: inline-block;
   text-align: center;
-  background-color: #08080a;
+  background-color: rgba(1, 1, 1, 0.5);
   width:90%;
   height: 90%;
   
@@ -513,7 +513,7 @@ a.admin:hover {
   margin-left: 2em;
   display: inline-block;
   width: 40%;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 2em;
   height: 85%;
   overflow:hidden; 
@@ -524,7 +524,7 @@ a.admin:hover {
   display: inline-block;
   text-align: center;
   width: 40%;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 2em;
   height: 85%;
   overflow:auto; /*added this*/
