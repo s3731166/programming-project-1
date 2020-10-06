@@ -38,9 +38,31 @@ The code built referencing this tutorial can be found in:
 
 ### CODE INITIALISATION AND SETUP
 
+Ruby: https://rubygems.org/pages/download
+Rails: gem install rails
+Gem Updates: $ gem update --system
+
+- RUNNING ON LOCALHOST:
+
+\-The Caveat here is the need for Postgresql To run the local DB. 
+    - https://www.postgresql.org/download/
+
+$ cd app
+$ bundle
+$ rails db:setup
+$ rails db:migrate
+$ rails s
 
 
+Deployment To Heroku: 
 
+Heroku CLI: https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+
+$ heroku create
+$ git push heroku master
+
+
+    -- More on heroku Deployment with Git: https://devcenter.heroku.com/articles/git
 
 
 ### API CONNECTION AND REGISTRATIONS 
