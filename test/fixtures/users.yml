@@ -5,3 +5,11 @@ one:
   email: "user@example.com"
   password: "password"
   phone: "0431776542"
+  id: 101
+two:
+  name: "Second User"
+  email: "2@user.com"
+  password: "password"
+  phone: "0541235424"
+  admin: true
+  id: 100

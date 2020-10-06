@@ -102,16 +102,11 @@ class PlantsController < ApplicationController
   # PATCH/PUT /plants/1.json
   def update
     respond_to do |format|
-      # Used to handle score upon checklist waterring
-      if !plant_params[:watered].nil? && plant_params[:watered]=='1' && !@plant.watered
-        @plant.user.points+=10
-        @plant.user.save
-      end
       if @plant.update(plant_params)
         # Handle location geocoding
-        if plant_params[:location]
+        if plant_params[:locationName]
           searchResults = Geocoder.search(@plant.locationName)
-          if searchResults
+          if searchResults.first
             @plant.location = searchResults.first.coordinates
           end
         end

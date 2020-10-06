@@ -207,6 +207,7 @@ class User < ApplicationRecord
                         plant.sunlight = false
                         # Opting to not reset relocated, as one might keep a plant out/in for multiple days
                         # plant.relocated = false
+                        plant.save
                     end
                 end
             end

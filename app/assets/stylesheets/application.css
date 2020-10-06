@@ -227,7 +227,7 @@ a.admin:hover {
   border-radius: 50%;
   border:1px dashed;
   -moz-outline-radius: 50%;
-  color:lightblue;
+  color:#1313ff66;
   font-size: 12px;
   padding:1px 5px;
   cursor: help;
@@ -490,6 +490,14 @@ a.admin:hover {
 }
 
 /* Content For Split Screens */
+
+/* Style for plant form that lets it take on the appearance of the div inside it.
+ * This allows two columns while maintaining form functionality. */
+.plant-form {
+  display: contents;
+  width: 100%;
+}
+
 .split-container{
   display: inline-block;
   text-align: center;
@@ -498,10 +506,9 @@ a.admin:hover {
   height: 90%;
   
 }
-.split-container a{
+/* .split-container a{
   display: block;
-  float: left;
-}
+} */
 .right-container{
   margin-left: 2em;
   display: inline-block;
@@ -533,7 +540,8 @@ a.admin:hover {
   width: 90%;
   padding-top: 1em;
   padding-bottom: 1em;
-  color: #151515;
+  border-radius:0.5em;
+  color: #2ed;
 }
 /*chart*/
 .report{
@@ -544,4 +552,22 @@ a.admin:hover {
   margin-left: auto;
   margin-right: auto;
 
+}
+
+.user-page-badges {
+  position:relative;
+}
+
+.user-page-badges .tooltip {
+  transform: translate(calc(-50%), calc(-2px - 100%));
+  left: 50%;
+  max-width: 342px;
+  width: 100%;
+}
+
+.badge-medium {
+  width: 75px;
+  height: auto;
+  border-radius: 0;
+  border:0;
 }
