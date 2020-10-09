@@ -16,4 +16,4 @@
    end%>
    <%=line_chart @records.group_by_day(:created_at, last: count).average(@report_value), 
       messages: {empty:"No Records!"}, id: "graph-"+@plant_for_graph, xtitle: "Dates", 
-      ytitle: @report_value.to_s.gsub('_',' ').capitalize, width: width>
+      ytitle: @report_value.to_s.gsub('_',' ').capitalize, width: width %>
