@@ -65,6 +65,10 @@ $ git push heroku master
     -- More on heroku Deployment with Git: https://devcenter.heroku.com/articles/git
 
 
+
+Seeding Heroku: 
+$ heroku rake:db seed
+
 ### API CONNECTION AND REGISTRATIONS 
 
 

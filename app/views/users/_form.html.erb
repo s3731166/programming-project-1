@@ -26,14 +26,15 @@
     <%= form.text_field :phone %>
   </div>
 
-  <div class="field">
-    <%= form.label "Recieve text notifications?" %>
-    <%= form.check_box :recieve_texts %>
+  <div class="field custom-control custom-switch">
+    <%= form.check_box :recieve_texts, class:"custom-control-input", id:"customSwitch1" %>
+    <%= form.label "Recieve text notifications?", class:"custom-control-label", for:"customSwitch1" %>
+    
   </div>
 
-  <div class="field">
-    <%= form.label "Compete in leaderboard?" %>
-    <%= form.check_box :competitive %>
+  <div class="field custom-control custom-switch">
+    <%= form.check_box :competitive, class:"custom-control-input", id:"customSwitch2" %>
+    <%= form.label "Compete in leaderboard?", class: "custom-control-label", for:"customSwitch2" %>
   </div>
 
   <div class="field">

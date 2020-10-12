@@ -17,3 +17,9 @@
 //= require activestorage
 //= require turbolinks
 // = require_tree .
+
+// Intended to auto-submit on change a form with class "custom-control-input"
+// Used in show user opt changes
+$(".custom-control-input").change(function(){
+    Rails.$("form").submit();
+});

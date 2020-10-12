@@ -1,4 +1,6 @@
+
 <% content_for :title, @user.name %>
+
 <div class="wrapper">
   <div class="split-container">
     <div class="left-container">
@@ -16,104 +18,120 @@
       
 
       <h1><%= @user.get_styled_name %></h1>
-      <% if @user.admin %>
-        <h2 class="admin">This user has access to administrative privileges</h2>
-      <% end %>
-
       <p>
         <strong>Email:</strong>
         <%= @user.email %>
       </p>
 
       <p>
-        <strong>Created at:</strong>
-        <%=@user.created_at%>
+        <strong>Active:</strong>
+        <%=time_ago_in_words(@user.created_at)%>
       </p>
 
       <p>
         <strong>Phone:</strong>
         <%= @user.phone if @user.phone%>
       </p>
+      <div class= "mobile-show field">
+        <%=form_for(@user, id: "opt-edit", remote: true)  do |form|%>
+          <div class= "custom-control custom-switch">
+            
+              <%= form.check_box :recieve_texts, class: "custom-control-input", id: "customSwitch1"%>
+              <label class="custom-control-label inline" for="customSwitch1">Recieve Notifications</label>
+              <span class="tip-prompt" tabindex="0">?</span>
+              <div class = "tooltip">
+                Quick edit to opt in and out of text notifications<br>
+                Non-functional at the moment<br>
+              </div><br>
 
-      <p>
-      <%if @user.recieve_texts%>
-        You will receive text notifications.
-      <% else %>
-        You are not receiveing text notifications.
-      <% end %>
-      </p>
-      
-      <p>
-        <% if @user.competitive%>
-          You will appear in the leaderboard.
-        <%else%>
-          You are not appearing in the leaderboard.
-        <% end %>
-      </p>
-
+              <%= form.check_box :competitive, class: "custom-control-input", id: "customSwitch2"%>
+              <label class="custom-control-label inline" for="customSwitch2">Compete in Leaderboard</label>
+              <span class="tip-prompt" tabindex="0">?</span>
+              <div class = "tooltip">
+                Quick edit to opt in and out of appearing in the leaderboard<br>
+                Non-functional at the moment<br>
+              </div><br>
+            
+          </div>
+        <%end%>
+      </div>
       <p>
         <strong>Points:</strong>
         <%= @user.points if @user.points%>
       </p>
-
-      <%# Badges for plant maintnance %>
-      <strong>Badges for plant maintnance:</strong><br>
-      <%# One plant for a month %>
+      
       <div class="user-page-badges points-badges">
-        <% if @user.points && @user.points >= 46500 %>
+
+      <%#Only show points badges if one avaliable%>
+      <%if @user.points && @user.points >= 46500%>
+        <%# Badges for plant maintnance %>
+        <strong>Badges for plant maintnance:</strong><br>
+
+        <%# One plant for a month %>
+        <% if @user.points >= 46500 %>
           <%= image_tag("badge-graphic.png", alt: "Bronze badge graphic", class: "badge-medium tip-prompt") %>
           <div class = "tooltip">
             <strong>BRONZE BADGE</strong><br>
             This bronze badge is rewarded to users with 465,000 points or more.
           </div>
         <% end %>
+
         <%# One plant for half a year %>
-        <% if @user.points && @user.points >= 1665300 %>
+        <% if @user.points >= 1665300 %>
           <%= image_tag("badge-graphic2.png", alt: "Silver badge graphic", class: "badge-medium tip-prompt") %>
           <div class = "tooltip">
             <strong>SILVER BADGE</strong><br>
             This silver badge is rewarded to users with 1,665,300 points or more.
           </div>
         <% end %>
+
         <%# One plant for a year %>
-        <% if @user.points && @user.points >= 6643000 %>
+        <% if @user.points >= 6643000 %>
           <%= image_tag("badge-graphic3.png", alt: "Gold badge graphic", class: "badge-medium tip-prompt") %>
           <div class = "tooltip">
             <strong>GOLD BADGE</strong><br>
             This golden badge is rewarded to users with 6,643,000 points or more.
           </div>
         <% end %>
+
+      <% end %>
       </div>
       <div class="user-page-badges attendance-badges">
-        <%# Badges for site attendence %>
-        <br><strong>Badges for site attendence:</strong><br>
-        <%if DateTime.current-1.month >= @user.created_at %>
-          <%= image_tag("badge-graphic.png", alt: "Bronze badge graphic", class: "badge-medium tip-prompt") %>
-          <div class = "tooltip">
-            <strong>BRONZE BADGE</strong><br>
-            This bronze badge is rewarded to users who have been with us for a month.
-          </div>
-        <%end%>
-        <%if DateTime.current-6.month >= @user.created_at %>
-          <%= image_tag("badge-graphic2.png", alt: "Silver badge graphic", class: "badge-medium tip-prompt") %>
-          <div class = "tooltip">
-            <strong>SILVER BADGE</strong><br>
-            This silver badge is rewarded to users who have been with us for six months.
-          </div>
-        <%end%>
-        <%if DateTime.current-1.year >= @user.created_at %>
-          <%= image_tag("badge-graphic3.png", alt: "Gold badge graphic", class: "badge-medium tip-prompt") %>
-          <div class = "tooltip">
-            <strong>GOLD BADGE</strong><br>
-            This golden badge is rewarded to users who have been with us for a year.
-          </div>
+        <%#%>
+        <%if DateTime.current-1.month >= @user.created_at%>
+          <%# Badges for site attendence %>
+          <br><strong>Badges for site attendence:</strong><br>
+          <%# One month of attendence %>
+          <%if DateTime.current-1.month >= @user.created_at %>
+            <%= image_tag("badge-graphic.png", alt: "Bronze badge graphic", class: "badge-medium tip-prompt") %>
+            <div class = "tooltip">
+              <strong>BRONZE BADGE</strong><br>
+              This bronze badge is rewarded to users who have been with us for a month.
+            </div>
+          <%end%>
+          <%# six months of attendence %>
+          <%if DateTime.current-6.month >= @user.created_at %>
+            <%= image_tag("badge-graphic2.png", alt: "Silver badge graphic", class: "badge-medium tip-prompt") %>
+            <div class = "tooltip">
+              <strong>SILVER BADGE</strong><br>
+              This silver badge is rewarded to users who have been with us for six months.
+            </div>
+          <%end%>
+          <%# 1 year of attendence %>
+          <%if DateTime.current-1.year >= @user.created_at %>
+            <%= image_tag("badge-graphic3.png", alt: "Gold badge graphic", class: "badge-medium tip-prompt") %>
+            <div class = "tooltip">
+              <strong>GOLD BADGE</strong><br>
+              This golden badge is rewarded to users who have been with us for a year.
+            </div>
+          <%end%>
+
         <%end%>
       </div>
       <% if @user == current_user||@user.admin%>
         <%= link_to "Log out", logout_path, method: :delete %>
         <%= link_to 'Edit', edit_user_path(@user) %> 
       <% end %>
-      
     </div>
   </div>
 </div>

@@ -38,6 +38,7 @@ gem 'json', '~> 1.8', '>= 1.8.3'
 # Makes http fun! Also, makes consuming restful web services dead easy.
 gem 'httparty', '~> 0.13.7'
 
+# This gem provides jQuery and the jQuery-ujs driver for your Rails 4+ application.
 gem 'jquery-rails', '~> 4.4'
 
 #A Ruby wrapper for Gravatar URLs
@@ -92,3 +93,9 @@ gem "aws-sdk-s3", require: false
 
 # The simplest way to group temporal data
 gem 'groupdate', '~> 2.5', '>= 2.5.2'
+
+# The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. http://getbootstrap.com
+gem 'bootstrap', '~> 4.0'
+
+# https://popper.js.org/ packaged for Sprockets.
+gem 'popper_js', '~> 1.9', '>= 1.9.9'

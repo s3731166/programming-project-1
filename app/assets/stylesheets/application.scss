@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+  @import "bootstrap";
+
  html {
   /* padding-left: 8px;
   padding-right: 8px; */
@@ -572,6 +574,7 @@ a.admin:hover {
   border:0;
 }
 
+/*MOBILE*/
 @media only screen and (max-width: 600px) {
 
   *{
