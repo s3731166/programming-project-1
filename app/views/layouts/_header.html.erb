@@ -14,7 +14,7 @@
 
         <%#Start of pull-right menu used for mobile-site%>
         <nav id="menu" class="menu-away hide_in_desktop">
-        <button class="hide_in_desktop menu_button" onclick="toggle_pull_right()">Menu</button>
+            <button class="hide_in_desktop menu_button" onclick="toggle_pull_right()">Menu</button>
             <% if current_user %>
                 <p>
                     <%=link_to current_user do %>
@@ -23,6 +23,7 @@
                 </p>
                 <p><%= current_user.name %>: <%= current_user.points %></p>
                 <p><%= current_user.phone%></p>
+                <hr>
                 <%=form_for(current_user, id: "opt-edit", remote: true)  do |form|%>
                     <div class= "custom-control custom-switch">
                         <%= form.check_box :recieve_texts, class: "custom-control-input", id: "customSwitch1"%>
@@ -31,9 +32,23 @@
                         <label class="custom-control-label inline" for="customSwitch2">Compete in Leaderboard</label>
                     </div>
                 <%end%>
+                <hr>
+                <%= render partial: "users/badges", locals: {user: current_user} %>
+                <hr>
+                <% if current_user.competitive %>
+                    <h2>RANKINGS</h2>
+                    <p class="ranks">
+                        <% rank = 1; %>
+                        <% User.order(points: :desc).each do |user| %>
+                            <%if user.competitive%>
+                                <%=rank%>: <%= user.get_styled_name %> (<%= user.points %>)<br>
+                                <%rank+=1%>
+                            <%end%>
+                        <% end %>
+                    </p>
+                <% end %>
+                <hr>
                 <%= link_to "Log out", logout_path, method: :delete %>
-                <%= render partial: "users/badges" %>
-                <%# User.order(points: :desc).each do |user| %>
             <% end %>
         </nav>
         

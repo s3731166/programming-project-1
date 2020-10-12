@@ -72,6 +72,7 @@ header {
 }
 
 a,
+#menu a,
 button,
 input[type="submit"] {
   color: black;
@@ -86,6 +87,7 @@ input[type="submit"] {
 }
 
 a:hover,
+#menu a:hover,
 button:hover,
 input[type="submit"]:hover {
   color: #fff;
@@ -234,7 +236,7 @@ a.admin:hover {
   border-radius: 50%;
   border:1px dashed;
   -moz-outline-radius: 50%;
-  color:#1313ff66;
+  color:#ffc02ac7;;
   font-size: 12px;
   padding:1px 5px;
   cursor: help;
@@ -597,6 +599,12 @@ a.admin:hover {
   position:absolute;
   pointer-events: none;
 }
+#menu .badge-medium {
+  width: 50px;
+  height: auto;
+  border-radius: 0;
+  border:0;
+}
 
 /*MOBILE*/
 @media only screen and (max-width: 600px) {
@@ -683,7 +691,6 @@ a.admin:hover {
   .right-container{
     overflow:none;
     margin-bottom:0.5em;
-    margin-top:0.5em;
     height:auto;
   }
   .left-container{
@@ -703,11 +710,12 @@ a.admin:hover {
     display:inline;
   }
   #menu {
+    overflow-y: auto;
     background: rgba(144, 238, 172, 0.75);
     padding: 10px;
     color: black;
     max-width: 300px;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -724,21 +732,34 @@ a.admin:hover {
     font-weight:bold;
     z-index:1;
   }
-  #menu a {
-    padding:0;
+  #menu>p:first-of-type>a {
+    border:0;
+    background:transparent;
+  }
+  #menu h2 {
+    margin-bottom:0;
+    font-size:26px;
+  }
+  #menu h2+p {
+    margin-top:0;
+  }
+  #menu, #menu p {
+    font-size:18px !important;
   }
   #menu p {
-    font-size:1.4em;
+    margin-top:0.6em;
+    margin-bottom:0.6em;
   }
   .menu-away {
     left:-320px !important;
   }
   .menu_button{
-    position: absolute !important;
+    position: fixed !important;
     left: 6px;
     top:6px;
     background:none;
     color:white;
+    background-color: #276ba6;
     text-transform: uppercase;
     font-weight:bold;
     font-size:12px;
@@ -749,10 +770,27 @@ a.admin:hover {
   }
   #menu > .menu_button {
     color:darkgreen;
+    background:none;
+    transition: left 0.8s;
   }
   #menu > .menu_button:hover {
     background-color:darkgreen;
     color:lightgreen;
+  }
+  .menu-away > .menu_button {
+    left:-320px !important;
+  }
+  #menu .admin {
+    color: #2000ff;
+  }
+  #menu hr {
+    border-color: darkgreen
+  }
+  .ranks {
+    text-align:left;
+    display:table;
+    margin-left:auto;
+    margin-right:auto;
   }
   /* Prevent first header/paragraph margin from adding to padding from left or right container */
   .left-container h1:first-child,

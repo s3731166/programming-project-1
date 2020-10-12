@@ -36,7 +36,7 @@
 <div class="user-page-badges attendance-badges">
     <%if DateTime.current-1.month >= user.created_at%>
         <%# Badges for site attendence %>
-        <br><strong>Badges for site attendence:</strong><br>
+        <strong>Badges for site attendence:</strong><br>
         <%# One month of attendence %>
         <%if DateTime.current-1.month >= user.created_at %>
         <%= image_tag("badge-graphic.png", alt: "Bronze badge graphic", class: "badge-medium tip-prompt") %>
