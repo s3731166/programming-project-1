@@ -5,7 +5,7 @@ class User < ApplicationRecord
     require 'twilio-ruby'
     attr_accessor :remember_token
 
-    has_many :plants
+    has_many :plants, dependent: :destroy
 
     # Case insensitivity for email
     before_save { self.email = email.downcase }

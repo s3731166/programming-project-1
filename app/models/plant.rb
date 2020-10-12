@@ -1,6 +1,6 @@
 class Plant < ApplicationRecord
   belongs_to :user
-  has_many :plant_records
+  has_many :plant_records, dependent: :destroy
   has_one_attached :plant_pic
   validates :name, presence: true
   # VALID_COORD_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i # (-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)

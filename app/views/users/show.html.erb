@@ -3,17 +3,6 @@
 
 <div class="wrapper">
   <div class="split-container">
-    <div class="left-container">
-      <%= link_to 'Back', root_path %>
-      <% @user.plants.order(:created_at).each do |current_plant| %>
-        <div class="list-item">
-          <br>
-          <%= link_to  current_plant.name , current_plant %>
-          <br>
-        </div>
-      <% end %>
-    </div>
-
     <div class="right-container">
       
 
@@ -131,6 +120,17 @@
       <% if @user == current_user||@user.admin%>
         <%= link_to "Log out", logout_path, method: :delete %>
         <%= link_to 'Edit', edit_user_path(@user) %> 
+      <% end %>
+    </div>
+
+    <div class="left-container hide_in_mobile">
+      <%= link_to 'Back', root_path %>
+      <% @user.plants.order(:created_at).each do |current_plant| %>
+        <div class="list-item">
+          <br>
+          <%= link_to  current_plant.name , current_plant %>
+          <br>
+        </div>
       <% end %>
     </div>
   </div>

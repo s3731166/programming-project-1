@@ -2,22 +2,23 @@
     <%= form_with(model: plant, local: true) do |form| %>
       <h4><%= plant.name %> Checklist</h4>
 
-        <div id="plant-checklist">
+        <div class="plant-checklist">
             <div class="check-content">
                 <%= form.label :watered do %>
                     Watered? 
                     <% if plant.daily_water %>
-                        <br><%= "("+plant.daily_water.to_s+"ml)" %>
+                        <br class="hide_in_mobile"><%= "("+plant.daily_water.to_s+"ml)" %>
                     <% end %>
                 <% end %><%= form.check_box :watered, { disabled: plant.watered } %><br>
             </div>
             <div class="check-content">
-                <%= form.label :relocated %><span class="tip-prompt" tabindex="0">?</span>
+                <%= form.label :relocated %> 
+                <%= form.check_box :relocated %> 
+                <span class="tip-prompt" tabindex="0">?</span>
                 <div class = "tooltip">
                 Represents moving your plant outside/inside from its normal position.<br>
                 Used for tracking plant health for advantageous or disadvantageous weather.<br>
-                </div><br>
-                <%= form.check_box :relocated %>
+                </div>
             </div>
             <div class="check-content">
                 <%= form.label :sunlight %> <%= form.check_box :sunlight, { disabled: plant.sunlight }%><br>

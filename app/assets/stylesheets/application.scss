@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-  @import "bootstrap";
+  /*@import "bootstrap";*/
 
  html {
   /* padding-left: 8px;
@@ -29,6 +29,7 @@ body {
   margin-right: auto;
   text-align: center;
   padding: 1px; 
+  margin-top:12px;
   /* padding-bottom:21px; */
   /* border-radius: 0.5em; */
   /* /* max-width: 50%; */
@@ -64,6 +65,10 @@ header {
   /* border-radius: 0.5em 0.5em 0em 0em; */
   padding: 3em;
   text-align: center;
+}
+
+.header-center h1 a {
+  padding:0;
 }
 
 a,
@@ -352,7 +357,7 @@ a.admin:hover {
   width: calc(50% - 20px);
 }
 
-#plant-checklist {
+.plant-checklist {
   text-align: center;
 }
 .check-content {
@@ -370,7 +375,7 @@ a.admin:hover {
 /* BEGIN WEATHER CSS */
 
 /* Small css to make the image look decent */
-#Weather-image {
+.weather-image {
   background: dodgerblue;
   display: table;
   margin-left: auto;
@@ -381,7 +386,7 @@ a.admin:hover {
   border-top-color: #ecd9a9;
   border-left-color: #ecd9a9;
 }
-#Weather-image img {
+.weather-image img {
   display: block;
   border: 2px inset #dd643f;
   border-bottom-color: #ecd9a9;
@@ -398,7 +403,7 @@ a.admin:hover {
  * These class and Id are hidden and shown on
  * The weather report on the dashboard
 */
-#weather-Dashboard {
+.weather-Dashboard {
   text-align: center;
   width: 25%;
   padding-left: 10px;
@@ -417,9 +422,9 @@ a.admin:hover {
   display: inline;
 }
 
-#Max-temp,
-#Min-temp,
-#Weather-Dashboard {
+.max-temp,
+.min-temp,
+.weather-Dashboard {
   display: inline;
 }
 /* END WEATHER CSS */
@@ -508,29 +513,37 @@ a.admin:hover {
   height: 90%;
   
 }
+.split-container img {
+  max-width:100%;
+  height:auto;
+}
 /* .split-container a{
   display: block;
 } */
 .right-container{
-  margin-left: 2em;
+  margin-right: 1em;
   display: inline-block;
-  width: 40%;
+  width:36%;
+  width: calc(50% - 6em);
   background-color: rgba(255, 255, 255, 0.5);
   padding: 2em;
   height: 85%;
-  overflow:hidden; 
-
+  overflow:auto; 
+  float:right;
+  clear:right;
 }
 .left-container{
-  margin-right: 2em;
+  margin-left:1em;
   display: inline-block;
   text-align: center;
-  width: 40%;
+  width:36%;
+  width: calc(50% - 6em);
   background-color: rgba(255, 255, 255, 0.5);
   padding: 2em;
   height: 85%;
   overflow:auto; /*added this*/
-
+  float:left;
+  clear:left;
 }
 
 .list-item{
@@ -547,7 +560,7 @@ a.admin:hover {
 }
 /*chart*/
 .report{
-  background: white;
+  background: rgba(255, 255, 255, 0.8);
   padding: 10px;
   box-shadow: 0px 0px 5px black;
   max-width: 640px;
@@ -573,546 +586,215 @@ a.admin:hover {
   border-radius: 0;
   border:0;
 }
+//Default to hide, override in mobile
+.hide_in_desktop{
+  visibility:hidden;
+  position:absolute;
+}
+
+#menu {
+  visibility:hidden;
+  position:absolute;
+  pointer-events: none;
+}
 
 /*MOBILE*/
 @media only screen and (max-width: 600px) {
-
-  *{
-    margin: 0;
-    padding: 0;
-    background: none;
-
-  }
   body {
-    background-color: black;
-    color: white;
-    margin: revert;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    padding: 1px; 
-    height: 100%;
+    margin-top:0;
   }
-  .bg {
-    display: block;
-    /* background-image: url("Bkg.jpg"); */
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
-  body,
   select,
   input {
-    font-family: bahnschrift, vedana, arial, helvetica, sans-serif;
+    text-align-last: center;
+    margin:3px;
   }
-  
-  select,
-  input {
-    background-color: lightcyan;
-    color: black;
-    border: 1px solid;
-    /* border-radius: 3px; */
-    text-align: center;
-  }
-  
   header {
-    background-color: #276ba6;
-    /* display: flow-root; */
-    /* border-radius: 0.5em 0.5em 0em 0em; */
-    padding: 3em;
-    text-align: center;
+    padding: 0.25em;
+    padding-top:1em;
+    margin-bottom:0.5em;
+
   }
   
-  a,
-  button,
-  input[type="submit"] {
-    color: black;
-    padding: 0.3em;
-    background-color: lavender;
-    /* border-radius: 0.3em; */
-    border: none;
-    display: inline;
-    margin: auto;
-    text-decoration: underline;
-    border: 1px solid;
+  .head-wrapper {
+    width:100%;
   }
-  
-  a:hover,
-  button:hover,
-  input[type="submit"]:hover {
-    color: #fff;
-    background-color: #000;
-    cursor: pointer;
-  }
-  
-  header a {
-    color: black;
-    text-decoration: none;
-    background: none;
-    border: none;
-    padding: 2em;
-  }
-  
-  header a:visited {
-    color: antiquewhite;
-  }
-  
-  header a:hover {
-    text-decoration: underline;
-    background: inherit;
-  }
-  
-  .title-link {
-    background-color: none;
-  }
-  
-  hr {
-    border: none;
-    border-top: 1px dashed #fff6ea;
-  }
-  
-  .wrapper {
-    text-align: center;
-    height: 100%;
-    /* position: relative; */
-    /* display: inline-block; */
-  }
-  .wrapper h1 {
-    margin: auto;
-  }
-  
-  .table-holder {
-    display: inline-block;
-    max-width: calc(100% - 32px);
-    overflow-x: auto;
-    border: 2px inset #276ba6;
-    border-right-color: #74b2e9;
-    border-bottom-color: #74b2e9;
-  }
-  
-  table {
-    background-color: rgba(255, 255, 255, 0.3);
-    padding: 0.2em;
-    margin-left: auto;
-    margin-right: auto;
-    table-layout: fixed;
-    max-width: 100%;
-    white-space: nowrap;
-  }
-  
-  table,
-  td,
-  th {
-    border: 1px dashed #fff6ea;
-  }
-  
-  td,
-  th {
-    padding: 5px;
-    padding-top: 8px;
-    padding-bottom: 6px;
-  }
-  
-  form {
-    margin-left: auto;
-    margin-right: auto;
-    display: table;
-  
-  }
-  
-  .clear-floats {
-    clear: both;
-  }
-  
-  a.admin {
-    color: chocolate;
-    background: antiquewhite;
-  }
-  
-  a.admin:hover {
-    background: chocolate;
-    color: antiquewhite;
-  }
-  
-  .admin {
-    font-weight: bold;
-    color: gold;
-  }
-  
-  .alert-success .admin {
-    color: orangered;
-  }
-  
-  .logged-in-notice {
-    border-bottom: 1px dashed #fff6ea;
-    padding-bottom: 2px;
-  }
-  
-  .alert {
-    margin-top: 18px;
-    border: 2px solid;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 8px;
-    font-weight: bold;
-    border-radius: 2px;
-    font-size: 1.2em;
-    display: ruby-base !important;
-  }
-  
-  .alert-notice {
-    color: darkslateblue;
-    background-color: lightskyblue;
-  }
-  
-  .alert-success {
-    color: green;
-    background-color: lightgreen;
-  }
-  
-  .alert-danger {
-    color: maroon;
-    background-color: salmon;
-  }
-  
-  .field_with_errors {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  
-  /* TOOLTIP FUNCTIONALITY */
-  .tip-prompt {
-    border-radius: 50%;
-    border:1px dashed;
-    -moz-outline-radius: 50%;
-    color:#1313ff66;
-    font-size: 12px;
-    padding:1px 5px;
-    cursor: help;
-  }
-  
-  .tooltip {
-    opacity:0;
-    position: absolute;
-    transform: translate(calc(-50% - 12px), calc(-2px - 100%));
-    border: 1px solid black;
-    background:antiquewhite;
-    border-radius: 3px;
-    padding-left:6px;
-    padding-right:6px;
-    pointer-events: none;
-    font-size:small;
-    color: black;
-    display: inline;
-    transition: opacity 0.5s;
-  }
-  
-  .tip-prompt:hover+.tooltip, .tip-prompt:focus+.tooltip {
-    opacity: 1;
-  }
-  
-  .tooltip:before {
-    color:#2554C7;
-    content: "WHAT'S THIS?";
-    font-size:0.8em;
-    display:block;
-    font-weight:bold;
-  }
-  /* END TOOLTIP FUNCTIONALITY */
-  
   .header-center {
-    float:left;
-    width:60%;
-  }
-  .date-box {
-    border: 1px solid black;
-    color: black;
-    display: inline-block;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    padding-top: 4px;
-    vertical-align: top;
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-bottom: 8px;
-  }
-  .title-link {
-    float: left;
-    width: 20%;
-    text-align: left;
-  }
-  .title-link img {
-    max-width: 100%;
-    padding-left: 10px;
-  }
-  .user-info {
-    display: block;
-    float: right;
-    max-width: 20%;
-    margin-top: -15px;
-    margin-bottom: 5px;
-  }
-  .user-info a {
-    padding: 4px;
-    margin: 0.4em;
-    white-space: nowrap;
-    line-height: 2.2em;
-  }
-  .name-and-date {
-    padding: 2px;
-  }
-  .name-and-title {
-    text-align: center;
-    display: inline;
-  }
-  .name-and-title p {
-    margin: 0;
-  }
-  .name-and-title a {
-    background: none;
-    margin: 0;
-    padding: 0;
-  }
-  .nav-links {
-    width: 60%;
-    float: left;
-  }
-  .nav-links a {
-    margin: 8px;
-    white-space: nowrap;
-    line-height: 40px;
-    padding: 1em;
-    /* border-radius: 0.7em; */
-    border: 2em;
-    /* margin-bottom: auto; */
-  }
-  .nav-links a:active {
-    background-color: #151515;
-  
+    float:none;
+    width:100%;
   }
   
   /* CHECKLIST STYLING */
   .checklist {
-    width: 25%;
+    width: auto;
+    margin-left:20px;
+    margin-right:20px;
     padding-right: 10px;
     background-color: rgba(255, 255, 255, 0.8);
-    float: right;
     color: #151515;
+    float: none;
   }
   .checklist form {
+    width: auto;
+  }
+  .checklist label {
+    display:inline;
+  }
+  .center-dashboard {
+    float: none;
     width: 100%;
   }
-  
-  .center-dashboard {
-    float: left;
-    width: calc(50% - 20px);
-  }
-  
-  #plant-checklist {
+  .plant-checklist {
     text-align: center;
   }
   .check-content {
-    display: inline-block;
-  }
-  
-  .choice {
-    width: 30%;
-    padding: 0.7em;
-    text-align: center;
-  }
-  /* END CHECKLIST STYLING */
-  
-  
-  /* BEGIN WEATHER CSS */
-  
-  /* Small css to make the image look decent */
-  #Weather-image {
-    background: dodgerblue;
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: 4px outset #dd643f;
-    border-top-color: #ecd9a9;
-    border-left-color: #ecd9a9;
-  }
-  #Weather-image img {
     display: block;
-    border: 2px inset #dd643f;
-    border-bottom-color: #ecd9a9;
-    border-right-color: #ecd9a9;
+    margin-top:10px;
+  } 
+  /* BEGIN WEATHER CSS */
+  .max-temp,
+  .min-temp,
+  .weather-Dashboard {
+    display: inline;
   }
-  /* Dashboard-plant-info div class
-   * handles the hiding and showing
-   * of the two following class & id pair
-  */
-  .dashboard-plant-info {
-    margin-bottom: 1em;
-  }
-  /* Weather-Dashboard and .inline-wrapper
-   * These class and Id are hidden and shown on
-   * The weather report on the dashboard
-  */
-  #weather-Dashboard {
+  .weather-Dashboard {
     text-align: center;
-    width: 25%;
-    padding-left: 10px;
-    float: left;
+    width: 100%;
+    padding-left: 0;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    border-top: 1px dashed white;
+    border-bottom: 1px dashed white;
+    display:block;
+    float: none;
   }
   /* Keeps the weather inline with the min and max temp */
   .inline-wrapper {
-  
-    display: block;
-  }
-  .inline {
-    display: inline;
-  }
-  /* Weather sum is the weather image */
-  .weather-sum {
-    display: inline;
-  }
-  
-  #Max-temp,
-  #Min-temp,
-  #Weather-Dashboard {
-    display: inline;
-  }
+    display: none;
+  } 
   /* END WEATHER CSS */
-  
-  .gravatar {
-    height: 45px;
-    width: auto;
-    border-radius: 0.6em;
-    box-shadow: 6px 6px 6px #151515;
+  // Css for dashboard plant image and link
+  .quick-plant{
+    display: none;
   }
-  /*Makes alert errors stand out better*/
-  #error_explanation {
-    color: black;
-  }
-  
-  /* The classes below are used in the javascript for search suggestions for location/species. */
-  
-  /* Gives a border radius to elements generated by suggest. */
-  .location_field a:last-of-type,
-  .species_field a:last_of_type {
-    border-radius: 0 0 4px 4px !important;
-  }
-  
-  /* Some CSS for the search suggestion links that appear. This can be changed. */
-  .location_field a,
-  .species_field a {
-    display: block;
-    padding: 0.1em;
-    width: 163px;
-    border-radius: 0;
-  
-    border-top:0;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* Images in suggestion */
-  .species_field a img {
-    max-width: 40px;
-    max-height: 40px;
-  }
-  
-  /* This sharpens the bottom corners of a search field for dropdown suggestions. */
-  .suggest {
-    border-radius: 3px 3px 0 0;
-    width: 163px;
-    /* height: 50%; */
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* CSS FOR DYNAMIC HIDING */
-  
-  /* This hide class is used to hide unneeded plant summaries (on the dashboard).
-   * This allows for 'switching' between plants using the dropdown menu. 
-   * visibility:hidden is used instead of display:none because the graphs are drawn 
-   * from the size of the diiv they are in, and no displayed divs are not rendered
-  */
-  .hide {
-    visibility: hidden;
-    position: absolute;
-    top:0;
-    left:0;
-  }
-  
-  /* The empty class is used to hide unneeded search results. This should be left alone. */
-  .location_field a:empty,
-  .species_field a:empty {
-    display: none !important;
-  }
-  
-  /* Content For Split Screens */
-  
-  /* Style for plant form that lets it take on the appearance of the div inside it.
-   * This allows two columns while maintaining form functionality. */
-  .plant-form {
-    display: contents;
-    width: 100%;
-  }
-  
   .split-container{
-    display: inline-block;
-    text-align: center;
-    background-color: rgba(1, 1, 1, 0.5);
-    width:90%;
-    height: 90%;
-    
+    height: auto;
+    padding-top:0.5em;
   }
-  /* .split-container a{
-    display: block;
-  } */
   .right-container{
-    /* margin-left: 2em; */
-    display: inline-block;
-    /* width: 40%; */
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 2em;
-    /* height: 85%; */
-    overflow:hidden; 
-  
+    overflow:none;
+    margin-bottom:0.5em;
+    margin-top:0.5em;
+    height:auto;
   }
   .left-container{
-    /* margin-left: 2em;*/
-    display: inline-block;
-    text-align: center;
-    /* width: 40%; */
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 2em;
-    /* height: 85%; */
-    overflow:auto; /*added this*/
-  
+    overflow:none; /*added this*/
+    margin-bottom:0.5em;
+    height:auto;
   }
-  
-  .list-item{
+  .left-container, .right-container{
+    margin-right: 0.5em;
+    margin-left:0.5em;
     display: block;
+    float:none;
+    clear:none;
+    width:auto;
   }
-  .list-item a{
-    display: block;
-    background-color: green;
-    width: 90%;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    border-radius:0.5em;
-    color: #2ed;
+  .dashboard-plant-info{
+    display:inline;
   }
-  /*chart*/
-  .report{
-    background: white;
+  #menu {
+    background: rgba(144, 238, 172, 0.75);
     padding: 10px;
-    box-shadow: 0px 0px 5px black;
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-    display: inline-block;
+    color: black;
+    max-width: 300px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    // height: auto+10%;
+    left: 0;
+    transition: left 0.8s;
+    border: 1px solid black;
+    border-top: 0;
+    border-left: 0;
+    pointer-events:all;
+    visibility:visible;
+    padding-top:20px;
+    font-weight:bold;
+    z-index:1;
   }
-  
+  #menu a {
+    padding:0;
+  }
+  #menu p {
+    font-size:1.4em;
+  }
+  .menu-away {
+    left:-320px !important;
+  }
+  .menu_button{
+    position: absolute !important;
+    left: 6px;
+    top:6px;
+    background:none;
+    color:white;
+    text-transform: uppercase;
+    font-weight:bold;
+    font-size:12px;
+  }
+  .menu_button:hover {
+    color:#276ba6;
+    background-color: white;
+  }
+  #menu > .menu_button {
+    color:darkgreen;
+  }
+  #menu > .menu_button:hover {
+    background-color:darkgreen;
+    color:lightgreen;
+  }
+  /* Prevent first header/paragraph margin from adding to padding from left or right container */
+  .left-container h1:first-child,
+  .right-container h1:first-child,
+  .left-container h2:first-child,
+  .right-container h2:first-child,
+  .left-container h3:first-child,
+  .right-container h3:first-child,
+  .left-container h4:first-child,
+  .right-container h4:first-child,
+  .left-container h5:first-child,
+  .right-container h5:first-child,
+  .right-container p:first-child,
+  .right-container p:first-child {
+    margin-top:0 !important;
+  }
+  .report{
+    max-width: 100%;
+    width: calc(100% - 60px);
+    margin-bottom:0.5em;
+  }
+  /* Horizontal graph scrolling for mobile */
+  .report>div {
+    overflow-x:auto;
+    overflow-y:hidden;
+  }
+
+  .report>div>div {
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  // define as invisible
+  .hide_in_mobile{
+    display: none;
+  }
+  .hide_in_desktop{
+    visibility:visible;
+    position:static;
+  }
+  .hide .hide_in_desktop {
+    visibility:hidden;
+    position:absolute;
+  }
 }

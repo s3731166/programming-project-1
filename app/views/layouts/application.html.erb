@@ -3,7 +3,7 @@
 <html>
   <head>
     <title><%= yield :title %></title>
-    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,8 +11,7 @@
   </head>
 
   <body class="bg" >
-
-    <%= render 'layouts/header' %>
+  <%= render 'layouts/header' %>
     <% flash.each do |message_type, message| %>
       <%= content_tag(:div, message.html_safe, class: "alert alert-#{message_type}")%>
     <% end %>

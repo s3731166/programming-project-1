@@ -7,9 +7,6 @@
         <%# Currently avergaing a records value per day %>
         <%# The average of one number is itself, but this does mean it can handle multiple entries for a day %>
         <%# <% dataToDisplay = params["toDisplay"] %>
-        
-        <%# <% chart = line_chart @records.group_by_day(:created_at).average(dataToDisplay),
-        messages: {empty:"No Records!"}, id: "graph-"+plant.id.to_s %>
 
         <% valueChoices = options_for_select( [ ["Water", ":water_recorded"], ["Tempature", ":temp_recorded"] ] ) %>
         <% timeChoices = options_for_select( [ ["Week", "week"], ["Month", "month"], ["Year","year"] ] ) %>
@@ -22,15 +19,12 @@
             <%=dataSelect%>
             <%=timeSelect%>
         </div>
-
-        
-
-         <div id="chart-plant-<%= plant.id %>">
+    <% end %>
+    <div id="chart-plant-<%= plant.id %>">
          </div>
          
          <%# Automatically call change_graph to populate screen with initial graph if there are any records %>
          <% if plant.plant_records.any? %>
             <script>change_graph(<%=plant.id.to_s%>)</script>
-         <% end %>
     <% end %>
 </div>

@@ -1,17 +1,44 @@
 <header> 
-    <div class="wrapper">
+    <div class="wrapper head-wrapper">
         <div class="title-link">
-            <%=  image_tag("big-logo.png", width: "150px") %>
+            <%= image_tag("big-logo.png", width: "150px", class: "hide_in_mobile") %>
+            <button class="hide_in_desktop menu_button" onclick="toggle_pull_right()">Menu</button>
+            
         </div>
         <div class="header-center">
             <h1>
                 <%= link_to "Plant Monitor", root_path %>
             </h1>
-            <%= link_to "Leaderboard", leaderboard_path %>
+            <%= link_to "Leaderboard", leaderboard_path, class: "hide_in_mobile" %>
         </div>
+
+        <%#Start of pull-right menu used for mobile-site%>
+        <nav id="menu" class="menu-away hide_in_desktop">
+        <button class="hide_in_desktop menu_button" onclick="toggle_pull_right()">Menu</button>
+            <% if current_user %>
+                <p>
+                    <%=link_to current_user do %>
+                        <%= image_tag current_user.gravatar_url , :class => "gravatar" %>
+                    <% end %>
+                </p>
+                <p><%= current_user.name %>: <%= current_user.points %></p>
+                <p><%= current_user.phone%></p>
+                <%=form_for(current_user, id: "opt-edit", remote: true)  do |form|%>
+                    <div class= "custom-control custom-switch">
+                        <%= form.check_box :recieve_texts, class: "custom-control-input", id: "customSwitch1"%>
+                        <label class="custom-control-label inline" for="customSwitch1">Recieve Notifications</label><br>
+                        <%= form.check_box :competitive, class: "custom-control-input", id: "customSwitch2"%>
+                        <label class="custom-control-label inline" for="customSwitch2">Compete in Leaderboard</label>
+                    </div>
+                <%end%>
+                <%= link_to "Log out", logout_path, method: :delete %>
+                <%= render partial: "users/badges" %>
+                <%# User.order(points: :desc).each do |user| %>
+            <% end %>
+        </nav>
         
         <%# OPEN RIGHT DIV %>
-        <div class="user-info">
+        <div class="user-info hide_in_mobile">
             <div class="name-and-date">
             <% if current_user%>
              <%= if current_user.admin then link_to "Users", users_path end %> 
