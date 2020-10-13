@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:certbot_key]
 
   # The following require is used to include the required libraries to work on json. 
   require 'json'
@@ -11,6 +12,10 @@ class PagesController < ApplicationController
     if current_user
       @plants = current_user.plants 
     end
+  end
+
+  def certbot_key
+    render file: "pages/certbot_key", layout: false, content_type: 'text/plain'
   end
 
   def plant_graph
