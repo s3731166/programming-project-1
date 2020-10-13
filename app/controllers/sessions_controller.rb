@@ -29,6 +29,7 @@ class SessionsController < ApplicationController
   # Code based on Michael Hartl's Rails Tutorial, Chapter 8
   # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-destroy_session
   def destroy
-    log_out if logged_in?
+    puts("he dead bro")
+    log_out if current_user 
   end
 end

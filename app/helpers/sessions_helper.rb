@@ -50,6 +50,7 @@ module SessionsHelper
     # Code based on Michael Hartl's Rails Tutorial, Chapter 8
     # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-log_out_with_forget
     def log_out
+       puts("HIT LOG_OUT")
        update_last_active
        log_out_no_redirect
        redirect_to root_path
@@ -59,6 +60,7 @@ module SessionsHelper
     # Code based on Michael Hartl's Rails Tutorial, Chapter 8
     # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-log_out_with_forget
     def log_out_no_redirect
+        puts("HIT LOG_OUT_NO_REDIRECT")
         forget(current_user)
         session.delete(:user_id)
         @current_user = nil

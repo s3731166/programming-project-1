@@ -344,11 +344,10 @@ a.admin:hover {
 }
 
 .dash_plant_link_big {
-  width: calc(25% - 0.5em);
+  width: calc(25% - 0.5em - 3px);
   float: right;
   background: rgba(255, 255, 255, 0.5);
-  padding-right: 10px;
-  padding-top: 10px;
+  padding:0.5em;
   margin-bottom:0.5em;
 }
 
@@ -531,7 +530,8 @@ a.admin:hover {
   
 }
 .split-container img {
-  max-width:100%;
+  max-width:80%;
+  width:200px;
   height:auto;
 }
 /* .split-container a{
@@ -634,8 +634,18 @@ a.admin:hover {
   border:0;
 }
 
+#plant_plant_id {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  max-width: 300px;
+  width: 100%;
+}
+
 /*MOBILE*/
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 650px) {
   body {
     margin-top:0;
   }
@@ -659,6 +669,7 @@ a.admin:hover {
     width:100%;
   }
 
+  
   /* CHECKLIST STYLING */
   .checklist {
     width: auto;
