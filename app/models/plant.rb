@@ -49,9 +49,9 @@ class Plant < ApplicationRecord
   
 
   def Plant.record_values
-    @plants = Plant.all
+    plants = Plant.all
     # loop through all plants
-    @plants.each do |plant|
+    plants.each do |plant|
       # Build a plant record for this plant if there is a water level, and add if has been watered
       record = PlantRecord.new()
       if plant.daily_water and plant.watered
@@ -70,6 +70,23 @@ class Plant < ApplicationRecord
       if record
         plant.plant_records << record
         record.save
+      end
+    end
+  end
+
+  # Removes all plant records over 1 year old
+  def Plant.remove_old_records
+    plants = Plant.all
+    # puts(plants)
+    plants.each do |plant|
+      records = plant.plant_records
+      records.order(created_at: :asc).each do |record|
+        if record.created_at<1.year.ago
+          PlantRecord.delete(record.id)
+        else
+          # Small optimisation due to ordering
+          break
+        end
       end
     end
   end

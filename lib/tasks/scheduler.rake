@@ -18,3 +18,7 @@ end
 task :calculate_score => :environment do
     User.calculate_score
 end
+
+task :delete_old_records=> :environment do
+    Plant.remove_old_records
+end

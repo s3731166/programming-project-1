@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-      protect_from_forgery
+      protect_from_forgery with: :reset_session
       helper_method :current_user
       before_action :authenticate_user!  
   
