@@ -611,8 +611,8 @@ a.admin:hover {
 }
 
 .badge-medium {
-  width: 75px;
-  height: auto;
+  width: 75px !important;
+  height: auto !important;
   border-radius: 0;
   border:0;
 }
