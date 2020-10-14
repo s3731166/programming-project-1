@@ -126,3 +126,8 @@ $ heroku rake:db seed
     - Json Format Required/Sanitisied:      
                    From search:
                     location coordinates:   First.coordinates
+
+
+## HOW TO RUN TESTS 
+-filepath
+$command

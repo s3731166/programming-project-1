@@ -57,7 +57,7 @@
         <div class="user-info hide_in_mobile">
             <div class="name-and-date">
             <% if current_user%>
-             <%= if current_user.admin then link_to "Users", users_path end %> 
+                <%= if current_user.admin then link_to "Users", users_path end %> 
                 <div class="date-box" title="Today is the <%= Date.today.strftime("#{Date.today.day.ordinalize} of %B, %Y") %>.">
                     <div class="day"><%= Date.today.strftime("%d") %></div>
                     <div class="month"><%= Date.today.strftime("%b").upcase %></div>
@@ -66,6 +66,7 @@
                     <%=link_to current_user do %>
                         <%= image_tag current_user.gravatar_url , :class => "gravatar" %>
                     <% end %>
+                    
                     </div>
                 </div>
             <% end %> 

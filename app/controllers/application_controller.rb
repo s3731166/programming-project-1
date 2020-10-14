@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-      protect_from_forgery with: :reset_session
+      skip_forgery_protection
       helper_method :current_user
       before_action :authenticate_user!  
   

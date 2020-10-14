@@ -2,6 +2,7 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
 # Users
+puts("Creating users...")
 User.create(name: "admin", email: "admin@thissite.com", password: "Password", phone: "0413060331", admin: true, recieve_texts: true, competitive: true, points: 0)
 count = 1
 until count>4 do
@@ -10,7 +11,8 @@ until count>4 do
          admin: false, recieve_texts: false, competitive: true, points: 0)
 end
 
-# Plants
+puts("Created users!")
+puts("Creating plants...")
 User.all.each do |user|
     count=1
     Plant.create(name: "Plant "+count.to_s, locationName: "Melbourne, Australia", location: "[-37.8142176, 144.9631608]",
@@ -29,9 +31,11 @@ User.all.each do |user|
         species: "Bonsai crassula", daily_water:100, min_temp:15, max_temp:27, treffleID: 123808,
          outside:false, user_id:user.id)
 end
+puts("Created plants!")
 
-# Plant Records
+puts("Creating records...")
 Plant.all.each do |plant|
+    puts("Creating history for id: "+plant.id.to_s+"...")
     365.times do |i|
         if rand()>0.2
             PlantRecord.create(temp_recorded:rand(-10..30), water_recorded: plant.daily_water, plant_id: plant.id, created_at: i.days.ago)
@@ -39,4 +43,6 @@ Plant.all.each do |plant|
             PlantRecord.create(temp_recorded:rand(-10..30), water_recorded: nil, plant_id: plant.id, created_at: i.days.ago)
         end
     end
+    puts("Created history for id: "+plant.id.to_s)
 end
+puts("Created records!")

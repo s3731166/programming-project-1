@@ -59,7 +59,7 @@ module SessionsHelper
     # Code based on Michael Hartl's Rails Tutorial, Chapter 8
     # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-log_out_with_forget
     def log_out_no_redirect
-        forget(current_user)
+        forget(@current_user)
         session.delete(:user_id)
         @current_user = nil
     end

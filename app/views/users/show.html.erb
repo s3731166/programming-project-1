@@ -48,8 +48,9 @@
       </p>
       
       <%= render partial: "badges", locals: { user: @user } %>
-      <% if @user == current_user||@user.admin%>
-        <%= link_to "Log out", logout_path, method: :delete %>
+      <% if @user == @current_user||@current_user.admin%>
+        <%puts("is a user!")%>
+        <%= link_to "Log out", logout_path(@current_user), method: :delete if @user==@current_user%>
         <%= link_to 'Edit', edit_user_path(@user) %> 
       <% end %>
     </div>

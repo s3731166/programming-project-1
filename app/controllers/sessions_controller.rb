@@ -9,9 +9,11 @@ class SessionsController < ApplicationController
   # Code based on Michael Hartl's Rails Tutorial, Chapter 8
   # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-login_upon_signup
   def create
+    puts("Session create called")
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       if !current_user
+        puts("logged in")
         log_in(user)
         remember(user)
       end
@@ -29,6 +31,7 @@ class SessionsController < ApplicationController
   # Code based on Michael Hartl's Rails Tutorial, Chapter 8
   # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-destroy_session
   def destroy
-    log_out if logged_in?
+    # puts(@current_user.name)
+    log_out if !current_user.nil?
   end
 end
