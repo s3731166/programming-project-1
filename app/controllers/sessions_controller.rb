@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   include SessionsHelper
-  skip_before_action :authenticate_user!, only: [:new, :create]
+  skip_before_action :authenticate_user!, only: [:new, :create, :destroy]
 
   def new
   end
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   # https://3rd-edition.railstutorial.org/book/log_in_log_out#code-login_upon_signup
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.password == params[:session][:password]
+    if user && user.authenticate(params[:session][:password])
       if !current_user
         log_in(user)
         remember(user)

@@ -18,6 +18,7 @@ class User < ApplicationRecord
     validates :phone, length: { is: 10 }, format: { with: /04\d{8}/, message: "number must be a correctly formatted Victorian number (10 digits, 04...)" }, uniqueness: true
     
     # Makes sure password is present
+    has_secure_password
     validates :password, presence: true
     
     # Twilio Account ID
