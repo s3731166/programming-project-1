@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   get 'leaderboard', to: 'pages#leaderboard'
   delete 'logout', to: 'sessions#destroy'
-  get '/.well-known/acme-challenge/cj0Qnu0H7PMjRvGQxkzrcUvF3VwzjG8nM7uosKk7W88', to: 'pages#certbot_key'
+  get '/.well-known/acme-challenge/M07Vfx66cOZKwYaSmjzUBXtZSvanu-QCJZFhMD9NZnc', to: 'pages#certbot_key'
   resources :users
 end
