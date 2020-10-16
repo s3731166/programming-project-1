@@ -87,7 +87,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'geocoder', '~> 1.6', '>= 1.6.3'
 
 # Create beautiful Javascript charts with one line of Ruby
-gem 'chartkick', '~> 1.4', '>= 1.4.1'
+gem 'chartkick', '~> 3.4'
 
 gem "aws-sdk-s3", require: false
 
