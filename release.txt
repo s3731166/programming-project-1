@@ -1,1 +1,3 @@
 Session doesn't start when new user is created so loging is required.
+Issues with unferivief plant access
+Phone number verification and email control: no verification for emails 
