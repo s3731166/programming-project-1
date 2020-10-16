@@ -69,7 +69,7 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user
+        format.html { redirect_to root_path
                       flash[:success] = 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
         @user.notify("Welcome to the plant monitoring system "+@user.name+"!\n Get started by adding a plant.")
