@@ -1,0 +1,69 @@
+
+<% content_for :title, @user.name %>
+
+<div class="wrapper">
+  <div class="split-container">
+    <div class="right-container">
+      
+
+      <h1><%= @user.get_styled_name %></h1>
+      <p>
+        <strong>Email:</strong>
+        <%= @user.email %>
+      </p>
+
+      <p>
+        <strong>Active:</strong>
+        <%=time_ago_in_words(@user.created_at)%>
+      </p>
+
+      <p>
+        <strong>Phone:</strong>
+        <%= @user.phone if @user.phone%>
+      </p>
+      <div class= "mobile-show field">
+        <%=form_for(@user, id: "opt-edit", remote: true)  do |form|%>
+          <div class= "custom-control custom-switch">
+            
+              <%= form.check_box :recieve_texts, class: "custom-control-input", id: "customSwitch1"%>
+              <label class="custom-control-label inline" for="customSwitch1">Recieve Notifications</label>
+              <span class="tip-prompt" tabindex="0">?</span>
+              <div class = "tooltip">
+                Quick edit to opt in and out of text notifications<br>
+              </div><br>
+
+              <%= form.check_box :competitive, class: "custom-control-input", id: "customSwitch2"%>
+              <label class="custom-control-label inline" for="customSwitch2">Compete in Leaderboard</label>
+              <span class="tip-prompt" tabindex="0">?</span>
+              <div class = "tooltip">
+                Quick edit to opt in and out of appearing in the leaderboard<br>
+              </div><br>
+            
+          </div>
+        <%end%>
+      </div>
+      <p>
+        <strong>Points:</strong>
+        <%= @user.points if @user.points%>
+      </p>
+      
+      <%= render partial: "badges", locals: { user: @user } %>
+      <% if @user == @current_user||@current_user.admin%>
+        <%puts("is a user!")%>
+        <%= link_to "Log out", logout_path(@current_user), method: :delete if @user==@current_user%>
+        <%= link_to 'Edit', edit_user_path(@user) %> 
+      <% end %>
+    </div>
+
+    <div class="left-container hide_in_mobile">
+      <%= link_to 'Back', root_path %>
+      <% @user.plants.order(:created_at).each do |current_plant| %>
+        <div class="list-item">
+          <br>
+          <%= link_to  current_plant.name , current_plant %>
+          <br>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

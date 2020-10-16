@@ -1,0 +1,31 @@
+function change_plant(dropdown_menu) {
+    var checklist_divs = document.getElementsByClassName("dashboard-plant-info");
+    for (var i = 0; i<checklist_divs.length; i++) {
+        checklist_divs[i].classList.add("hide");
+    }
+    if (dropdown_menu.value) {
+        document.getElementById("plant-"+dropdown_menu.value).classList.remove("hide");
+    }
+}
+
+function change_graph(plant_id){
+    
+    <%# Get values of selected dropdowns via ID %>
+    dataValue = Rails.$("#dataSelect_selectValue-"+plant_id)[0].value
+    timeValue = Rails.$("#timeSelect_selectTime-"+plant_id)[0].value
+    Rails.ajax({
+        <%# Call generate_graph controller method and parse values %>
+        url: "/generate_graph?plant="+plant_id+"&report_value="+dataValue+"&report_time="+timeValue,
+        type: "get"
+        <%# END Success Function %>
+    })
+    <%# END Ajax %>
+}
+
+function toggle_pull_right(){
+    if(Rails.$("#menu")[0].classList.contains("menu-away")){
+         Rails.$("#menu")[0].classList.remove("menu-away");
+    }else{
+         Rails.$("#menu")[0].classList.add("menu-away");
+    }
+}

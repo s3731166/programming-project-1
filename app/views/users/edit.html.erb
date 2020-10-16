@@ -1,0 +1,6 @@
+<% content_for :title, "Editing #{@user.name}" %>
+<h1>Editing <%= @user.get_styled_name %></h1>
+
+<%= render 'form', user: @user %>
+<%= link_to 'Show', @user %>  
+<%= link_to 'Back', root_path %>

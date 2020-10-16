@@ -1,0 +1,180 @@
+
+<% 
+# This file is for displaying search results from user input in plant creation.
+# Should update a text_fields suggestions with displayed names from a search.
+# This allows the following searches first result to be the intended location.
+
+# https://nominatim.openstreetmap.org/search/<query>?<params>
+# https://nominatim.openstreetmap.org/search?q=17+Strada+Pictor+Alexandru+Romano%2C+Bukarest&format=geojson
+%>
+
+function search_locations() {
+  Rails.ajax({
+    <%# Ajax request from controller method get_gecode%>
+    url: "/get_geocode_results?string=" + Rails.$(".location_field")[1].value,
+    type: "get",
+    success:  function retData(data){
+      <%# Split returned array %>
+      results_array = data.split("|")
+
+      <%# Assign location field as first in class ".location_field" %>
+      location_field = Rails.$(".location_field")[2]
+
+      <%# Create array of HTML links (<a> tags) %>
+      links = [ 
+      document.createElement("A"), 
+      document.createElement("A"), 
+      document.createElement("A"), 
+      document.createElement("A")
+      ]
+
+      <%# Check if child elements exist for creation or edit %>
+      if(Rails.$(".location_field")[2].childElementCount>0){
+        remove_links("location_field", "location_suggest")
+      }
+
+      <%# add "suggest" class to location field (removes bottom curved corners) %>
+      location_field.classList.add("suggest")
+
+      for (i=0;i<4;i++) {
+        links[i].className = "location_suggest-"+i
+        links[i].innerHTML = results_array[i];
+        links[i].onclick = function() { 
+          Rails.$(".location_field")[1].value = this.innerHTML;
+          remove_links("location_field", "location_suggest")
+           }
+      }
+      
+      <%# Append/create only as many that exist %>
+      for (i=0;i<4&&results_array[i]!=null;i++) {
+          if (results_array[i].length > 0) { Rails.$(".location_field")[2].appendChild(links[i]); }
+      }
+    }
+    <%# END Success Function %>
+  })
+  <%# END Ajax %>
+} 
+
+<%# Remove Elements upon clicking one %>
+function remove_links(field, suggests) {
+    Rails.$("."+field)[2].classList.remove("suggest")
+    for(i=0;i<4;++i){
+      if (Rails.$("."+suggests+'-'+i)[0]!=null){
+        Rails.$("."+suggests+'-'+i)[0].remove()
+      }
+    }
+}
+
+function search_species(){
+  if(Rails.$(".species_field")[1].value!=""){
+    Rails.ajax({
+      <%# Ajax request from controller method get_spec %>
+      url: "/get_spec_results?toSearch=" + Rails.$(".species_field")[1].value,
+      type: "get",
+      success:  function retData(data){
+        <%# Split returned array %>
+        hold_array = data.split("|")
+        final_array = []
+        for(i=0;i<hold_array.length;++i){
+          check_array = hold_array[i].split(',')
+          final_array[i] = check_array
+        }
+        
+        <%# Assign species field as first in class ".species_field" %>
+        species_field = Rails.$(".species_field")[2]
+
+        <%# Create array of HTML links (<a> tags) %>
+        links = [ 
+        document.createElement("A"), 
+        document.createElement("A"), 
+        document.createElement("A"), 
+        document.createElement("A")
+        ]
+
+        <%# Check if child elements exist for creation or edit %>
+        if(Rails.$(".species_field")[2].childElementCount>0){
+          remove_links("species_field","species_suggest")
+        }
+
+        <%# add "suggest" class to species field (removes bottom curved corners) %>
+        species_field.classList.add("suggest")
+        
+        for (i=0;i<4&&final_array[i];++i) {
+          links[i].className = "species_suggest-"+i
+          links[i].innerHTML = final_array[i][0]
+          links[i].innerHTML+="<br><img src="+final_array[i][1]+">"
+        }
+        links[0].addEventListener("click" , function(){
+          delegate(0, final_array[0][2], final_array[0][0])
+        })
+        links[1].addEventListener("click" , function(){
+          delegate(1, final_array[1][2], final_array[1][0])
+        })
+        links[2].addEventListener("click" , function(){
+          delegate(2, final_array[2][2], final_array[2][0])
+        })
+        links[3].addEventListener("click" , function(){
+          delegate(3, final_array[3][2], final_array[3][0])
+        })
+        <%# Append/create only as many that exist %>
+        for (i=0;i<4&&final_array[i]!=null;i++) {
+            if (final_array[i].length > 0) { Rails.$(".species_field")[2].appendChild(links[i]); }
+        }
+      }
+      <%# END Success Function %>
+    })
+    <%# END Ajax %>
+  }else{
+    remove_links("species_field", "species_suggest")
+  }
+}
+
+function delegate(clickedId, plantId, textToFill){
+  Rails.$(".species_field")[1].value =  textToFill
+  remove_links("species_field", "species_suggest")
+  fillFields(plantId)
+}
+
+function fillFields(id){
+  Rails.ajax({
+    <%# Ajax request from controller method get_plant %>
+    url: "/species_fill?id="+ id,
+    type: "get",
+    success:  function retData(data){
+      result = data.split('|')
+      if(result[0]!=null){
+        document.getElementById("plant_daily_water").value = result[0]
+      }else{
+        document.getElementById("plant_daily_water").value - ""
+      }
+      if(result[1]!=null){
+        if (result[1]>10000){
+          document.getElementById("outsideSet").checked = true
+        }else{
+          document.getElementById("outsideSet").checked = false
+        }
+      }
+      if(result[2]!=null){
+        tempArr = result[2].split(",")
+        if(tempArr[0]!=""){
+          document.getElementById("plant_minimum_temp").value = Number(tempArr[0])
+        }else{
+          document.getElementById("plant_minimum_temp").value = null
+        }
+        
+        if(tempArr[1]!=""){
+          document.getElementById("plant_maximum_temp").value = Number(tempArr[1])
+        }else{
+          document.getElementById("plant_maximum_temp").value = null
+        }
+      }else{
+        document.getElementById("plant_minimum_temp").value = null
+        document.getElementById("plant_maximum_temp").value = null
+      }
+
+
+      <%# END Success Function %>
+    }
+    <%# END Ajax %>
+  })
+  }

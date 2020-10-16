@@ -1,0 +1,66 @@
+<div class="user-page-badges points-badges">
+    <%#Only show points badges if one avaliable%>
+    <%if user.points && user.points >= 46500%>
+    <%# Badges for plant maintnance %>
+    <strong>Badges for plant maintnance:</strong><br>
+
+    <%# One plant for a month %>
+    <% if user.points >= 46500 %>
+        <%= image_tag("badge-graphic.png", alt: "Bronze badge graphic", class: "badge-medium tip-prompt") %>
+        <div class = "tooltip">
+        <strong>BRONZE BADGE</strong><br>
+        This bronze badge is rewarded to users with 465,000 points or more.
+        </div>
+    <% end %>
+
+    <%# One plant for half a year %>
+    <% if user.points >= 1665300 %>
+        <%= image_tag("badge-graphic2.png", alt: "Silver badge graphic", class: "badge-medium tip-prompt") %>
+        <div class = "tooltip">
+        <strong>SILVER BADGE</strong><br>
+        This silver badge is rewarded to users with 1,665,300 points or more.
+        </div>
+    <% end %>
+
+    <%# One plant for a year %>
+    <% if user.points >= 6643000 %>
+        <%= image_tag("badge-graphic3.png", alt: "Gold badge graphic", class: "badge-medium tip-prompt") %>
+        <div class = "tooltip">
+        <strong>GOLD BADGE</strong><br>
+        This golden badge is rewarded to users with 6,643,000 points or more.
+        </div>
+    <% end %>
+
+    <% end %>
+</div>
+<div class="user-page-badges attendance-badges">
+    <%if DateTime.current-1.month >= user.created_at%>
+        <%# Badges for site attendence %>
+        <strong>Badges for site attendence:</strong><br>
+        <%# One month of attendence %>
+        <%if DateTime.current-1.month >= user.created_at %>
+        <%= image_tag("badge-graphic.png", alt: "Bronze badge graphic", class: "badge-medium tip-prompt") %>
+        <div class = "tooltip">
+            <strong>BRONZE BADGE</strong><br>
+            This bronze badge is rewarded to users who have been with us for a month.
+        </div>
+        <%end%>
+        <%# six months of attendence %>
+        <%if DateTime.current-6.month >= user.created_at %>
+        <%= image_tag("badge-graphic2.png", alt: "Silver badge graphic", class: "badge-medium tip-prompt") %>
+        <div class = "tooltip">
+            <strong>SILVER BADGE</strong><br>
+            This silver badge is rewarded to users who have been with us for six months.
+        </div>
+        <%end%>
+        <%# 1 year of attendence %>
+        <%if DateTime.current-1.year >= user.created_at %>
+        <%= image_tag("badge-graphic3.png", alt: "Gold badge graphic", class: "badge-medium tip-prompt") %>
+        <div class = "tooltip">
+            <strong>GOLD BADGE</strong><br>
+            This golden badge is rewarded to users who have been with us for a year.
+        </div>
+        <%end%>
+
+    <%end%>
+</div>

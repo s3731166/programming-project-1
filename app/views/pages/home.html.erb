@@ -1,0 +1,35 @@
+   <% # Until an admin account is made, load the _noadmin page
+   # After that, if user is logged in, then load the _loggedin page, or else load the _loggedout page 
+%>
+   
+<h1 class="hide_in_mobile">Dashboard</h1>
+<%= link_to "All Plants", plants_path, class: "hide_in_mobile" %> 
+<%= collection_select(:plant, :plant_id, @plants.order(:created_at), :id, :name,
+ { selected: @plants.first }, { onchange: "change_plant(this)", :selected => @plants.first }) %>
+<script>document.getElementById("plant_plant_id").selectedIndex = 0;</script>
+
+<% @plants.order(:created_at).each do |current_plant| %>
+   <div id="plant-<%= current_plant.id %>" class="dashboard-plant-info<% if current_plant != @plants.first %> hide <% end %>">
+      <div class="dash_plant_link">
+         <%= link_to current_plant.name, current_plant, class: "hide_in_desktop" %>
+      </div>
+      <%= render "weather_summary", plant: current_plant %>
+      <%#Keeps the set width for report%>
+      <div class="center-dashboard">
+         <%= render "report", plant: current_plant %>
+      </div>
+      
+      <div class="hide_in_mobile dash_plant_link_big">
+         <%= link_to current_plant.name, current_plant %>
+         <br>
+         <% if current_plant.plant_pic.attached? %>
+            <%= image_tag current_plant.plant_pic, size: "75" %>
+         <% end %>
+      </div>
+      <%= render "checklist", plant: current_plant %>      
+      <div class="clear-floats"></div>
+   </div>
+<% end %>
+
+
+

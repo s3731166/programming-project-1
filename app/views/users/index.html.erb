@@ -1,0 +1,29 @@
+<%= content_for :title, "Users" %>
+<h1>Users</h1>
+<p><%= link_to 'New User', signup_path %></p>
+<div class="table-holder">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Last Active</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% User.order(last_active: :desc).each do |user| %>
+        <tr>
+          <td><%= link_to user.name, user, {class: user.get_styled_class } %></td>
+          <td><%= user.email %></td>
+          <td><%= user.phone if user.phone %>
+          <td><%= user.last_active_in_words_or_never %></td>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

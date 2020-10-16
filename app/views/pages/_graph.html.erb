@@ -1,0 +1,18 @@
+<% #This html file is rendered by plant_graph.js.erb inside class #chart-plant-[id].
+   #It takes the value of the provided plant id and choice of water or temperature
+   #and uses these to create a line chart. %>
+<% toGraph = Plant.find_by(id: Integer(@plant_for_graph)) %>
+<%@records = toGraph.plant_records %>
+<%case @report_time
+   when "week" 
+      count = 7
+      width = "320px"
+   when "month"
+      count = 31
+      width = "480px"
+   when "year"
+      count = 365
+      width = "640px"
+   end%>
+   <%=line_chart @records.group_by_day(:created_at, last: count).average(@report_value), 
+      messages: {empty:"No Records!"}, id: "graph-"+@plant_for_graph, class: "graph", legend: false, width: width %>

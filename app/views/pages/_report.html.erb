@@ -1,0 +1,30 @@
+<%# This partial is for the reporting of plant values%>
+<%# Will make use of chartkick gem and groupdate gem%>
+
+<div class = "report">
+    <%= form_with(model: plant, local: true) do |form| %>
+        
+        <%# Currently avergaing a records value per day %>
+        <%# The average of one number is itself, but this does mean it can handle multiple entries for a day %>
+        <%# <% dataToDisplay = params["toDisplay"] %>
+
+        <% valueChoices = options_for_select( [ ["Water", ":water_recorded"], ["Tempature", ":temp_recorded"] ] ) %>
+        <% timeChoices = options_for_select( [ ["Week", "week"], ["Month", "month"], ["Year","year"] ] ) %>
+        <%dataSelect = select("dataSelect", "selectValue-"+plant.id.to_s, valueChoices,
+            {}, onchange: "change_graph("+plant.id.to_s+")" ) %>
+        <%timeSelect = select("timeSelect", "selectTime-"+plant.id.to_s, timeChoices,
+            {}, onchange: "change_graph("+plant.id.to_s+")" ) %>
+
+        <div class=report-select-<%=plant.id.to_s%>>
+            <%=dataSelect%>
+            <%=timeSelect%>
+        </div>
+    <% end %>
+    <div id="chart-plant-<%= plant.id %>">
+         </div>
+         
+         <%# Automatically call change_graph to populate screen with initial graph if there are any records %>
+         <% if plant.plant_records.any? %>
+            <script>change_graph(<%=plant.id.to_s%>)</script>
+    <% end %>
+</div>
