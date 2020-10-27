@@ -16,13 +16,11 @@ class PlantsController < ApplicationController
     else
       @plants = current_user.plants
     end
-
   end
 
   # GET /plants/1
   # GET /plants/1.json
   def show
-
     if @plant.treffleID
       # Retirve plant details
       # plantResults = HTTParty.get(
