@@ -233,7 +233,7 @@ class User < ApplicationRecord
                 end
             end
             user.points = points
-            user.save
+            user.save(validate: false)
         end
     end
 end
