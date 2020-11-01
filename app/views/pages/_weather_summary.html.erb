@@ -1,31 +1,12 @@
-<%# WORK HERE WITH WEATHER SUMMARY  %>
-
-<%# {"coord":{"lon":-80.61,"lat":28.08},
-        "weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03d"}],
-        "base":"stations",
-        "main":{"temp":302.64,"feels_like":308.05,"temp_min":302.04,"temp_max":303.15,"pressure":1015,"humidity":81},
-        "visibility":10000,
-        "wind":{"speed":2.24,"deg":70,"gust":5.36},
-        "clouds":{"all":37},"dt":1598398715,
-        "sys":{"type":3,"id":2010199,
-        "country":"AU","sunrise":1598353080,"sunset":1598399472},
-        "timezone":-14400,
-        "id":4163971,
-        "name":"Melbourne",
-        "cod":200} %>
 
 <div class="weather-Dashboard">
     <% @json = plant.get_weather %>
     <% if @json %>
         <div class ="weather-temperature"><%= @json["main"]["temp"].to_d.round %>&deg;C</div>
-
         <div class="weather-sum">
             <div class ="weather-desc"><%= @json["weather"][0]["description"] %></div> 
             <div class = "weather-image"><img src="https://openweathermap.org/img/wn/<%= @json["weather"][0]["icon"] %>.png"></div> 
         </div>
-
-
-        
     <div class="inline-wrapper hide_in_mobile">
             Max:<div class = "max-temp"><%= @json["main"]["temp_max"].to_d.round %>&deg;C</div>
     </div>

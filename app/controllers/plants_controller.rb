@@ -160,7 +160,6 @@ class PlantsController < ApplicationController
 
   def geo_results 
     results = Geocoder.search(params['string'])
-    # toSend = results.first.city+", "+results.first.country
     toSend = ""
     4.times do |i|
       if results[i] != nil
@@ -176,7 +175,6 @@ class PlantsController < ApplicationController
       end
      
     end
-    #toSend = "{ \"city\":\""+results[0].city+"\", \"country\":\""+results[0].country+"\"}"
     render json: toSend, status: :ok
   end
 

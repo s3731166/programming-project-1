@@ -3,7 +3,8 @@
 
 # Users
 puts("Creating users...")
-User.create(name: "admin", email: "admin@thissite.com", password: "Password", phone: "0413060331", admin: true, recieve_texts: true, competitive: true, points: 0)
+User.create(name: "admin", email: "admin@thissite.com", password: "Password", phone: "0413060331",
+ admin: true, recieve_texts: true, competitive: true, points: 0)
 count = 1
 until count>4 do
     count+=1

@@ -12,16 +12,11 @@ class Plant < ApplicationRecord
   @@treffle_token = "1EuNspuzlsLWfDRrSfNIMpAUqcWNGvb3M0IQ__GxGTs"
 
   def get_weather
-    #ActiveSupport::JSON.decode(open('http://api.openweathermap.org/data/2.5/weather?q=melbourne,au&APPID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&units=metric'
-    #@json = ActiveSupport::JSON.decode(open('http://api.openweathermap.org/data/2.5/weather?lat='+splitLoc[0][1:]+'lon='+splitLoc[1][:-1]+'&APPID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&units=metric').read)
-    # splitLoc = location.split(',')
     lon=location.split(', ')[1]
-    #lon=lon[:-1]
     if lon 
       lon=lon.tr(']','')
     end
     lat=location.split(', ')[0]
-    #lat=lat[1:]
     if lat
       lat=lat.tr('[','')
     end
@@ -34,15 +29,12 @@ class Plant < ApplicationRecord
   def get_forecast
     splitLoc = location.split(',')
     lon=location.split(', ')[1]
-    #lon=lon[:-1]
     if lon then lon=lon.tr(']','') end
     lat=location.split(', ')[0]
-    #lat=lat[1:]
     if lat then lat=lat.tr('[','') end
     # Returns the next 7 days forecast inclusive of current day
     # format is JSON in daily serperators
     # example: http://api.openweathermap.org/data/2.5/onecall?
-    # lat=51.5073219&lon=-0.1276474&APPID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&units=metric&exclude=current,minutely,hourly,alerts  
     if lat && lon then ActiveSupport::JSON.decode(open("http://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&APPID="+@@weatherKey+"&units=metric&exclude=current,minutely,hourly,alerts").read)
     end
   end
@@ -50,7 +42,6 @@ class Plant < ApplicationRecord
 
   def Plant.record_values
     plants = Plant.all
-    # loop through all plants
     plants.each do |plant|
       # Build a plant record for this plant if there is a water level, and add if has been watered
       record = PlantRecord.new()
@@ -66,7 +57,6 @@ class Plant < ApplicationRecord
         averageWeather = (weatherJson["main"]["temp_max"]+weatherJson["main"]["temp_min"]) / 2
         record.temp_recorded = averageWeather
       end
-      # If the record has a value, save the record
       if record
         plant.plant_records << record
         record.save
@@ -77,7 +67,6 @@ class Plant < ApplicationRecord
   # Removes all plant records over 1 year old
   def Plant.remove_old_records
     plants = Plant.all
-    # puts(plants)
     plants.each do |plant|
       records = plant.plant_records
       records.order(created_at: :asc).each do |record|
