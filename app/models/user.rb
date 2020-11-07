@@ -16,7 +16,6 @@ class User < ApplicationRecord
     validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
     # Ensures phone number fits correct format (+110000000000) and is unique
     validates :phone, length: { is: 10 }, format: { with: /04\d{8}/, message: "number must be a correctly formatted Victorian number (10 digits, 04...)" }, uniqueness: true
-    
     # Makes sure password is present
     has_secure_password
     validates :password, presence: true

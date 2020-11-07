@@ -6,7 +6,6 @@
         
         <%# Currently avergaing a records value per day %>
         <%# The average of one number is itself, but this does mean it can handle multiple entries for a day %>
-        <%# <% dataToDisplay = params["toDisplay"] %>
 
         <% valueChoices = options_for_select( [ ["Water", ":water_recorded"], ["Tempature", ":temp_recorded"] ] ) %>
         <% timeChoices = options_for_select( [ ["Week", "week"], ["Month", "month"], ["Year","year"] ] ) %>
