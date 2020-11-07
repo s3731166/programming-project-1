@@ -1,5 +1,3 @@
 <% content_for :title, "Editing #{@plant.name}" %>
 <h1>Editing <%= @plant.name %></h1>
 <%= render 'form', plant: @plant %>
-<%= link_to 'Show', @plant %> |
-<%= link_to 'Back', plants_path %>
