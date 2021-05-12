@@ -2,7 +2,7 @@
   "name": "PP1-development",
   "private": true,
   "dependencies": {
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "chartkick": "^3.2.1",
     "js-autocomplete": "^1.0.4"
   }
