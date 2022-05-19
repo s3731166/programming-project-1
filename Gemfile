@@ -30,7 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'twilio-ruby', '~> 5.40.0'
 
 # Nokogiri gem is used to parse the XML format into the rails application
-gem 'nokogiri', '~> 1.10', '>= 1.10.10'
+gem 'nokogiri', '~> 1.13'
 
 # Json gem is used to parse the json format into the rails application
 gem 'json', '~> 1.8', '>= 1.8.3'
