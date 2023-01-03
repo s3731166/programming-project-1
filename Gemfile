@@ -36,7 +36,7 @@ gem 'nokogiri', '~> 1.10', '>= 1.10.10'
 gem 'json', '~> 1.8', '>= 1.8.3'
 
 # Makes http fun! Also, makes consuming restful web services dead easy.
-gem 'httparty', '~> 0.13.7'
+gem 'httparty', '~> 0.21.0'
 
 # This gem provides jQuery and the jQuery-ujs driver for your Rails 4+ application.
 gem 'jquery-rails', '~> 4.4'
