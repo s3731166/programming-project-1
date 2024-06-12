@@ -16,13 +16,11 @@ class PlantsController < ApplicationController
     else
       @plants = current_user.plants
     end
-
   end
 
   # GET /plants/1
   # GET /plants/1.json
   def show
-
     if @plant.treffleID
       # Retirve plant details
       # plantResults = HTTParty.get(
@@ -160,7 +158,6 @@ class PlantsController < ApplicationController
 
   def geo_results 
     results = Geocoder.search(params['string'])
-    # toSend = results.first.city+", "+results.first.country
     toSend = ""
     4.times do |i|
       if results[i] != nil
@@ -176,7 +173,6 @@ class PlantsController < ApplicationController
       end
      
     end
-    #toSend = "{ \"city\":\""+results[0].city+"\", \"country\":\""+results[0].country+"\"}"
     render json: toSend, status: :ok
   end
 
